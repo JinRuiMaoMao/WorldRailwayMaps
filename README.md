@@ -1,6 +1,8 @@
-# 中国铁路 · 动态发展史
+# World Railway Maps
 
-交互式时间轴可视化：从 1876 淞沪铁路到 2025 高铁突破 5 万公里，示意干线、高铁走廊与城轨城市的生长过程。
+全球地铁 · 铁路 · 公交静态线路图（OpenStreetMap 线位）。按国家 / 城市浏览，切换地铁、铁路、公交图层。
+
+在线版：[https://jinruimaomao.github.io/WorldRailwayMaps/](https://jinruimaomao.github.io/WorldRailwayMaps/)（GitHub Pages，push `main` 后自动构建）。
 
 ## 运行
 
@@ -18,15 +20,23 @@ npm run preview
 
 ## 操作
 
-- 拖动底部时间轴，或点击 **播放**
-- 空格键播放/暂停；左右方向键逐年微调
-- 点击右侧里程碑列表可跳转到对应年份
+- 左侧选择国家 / 城市，或搜索线路
+- 顶部切换 **地铁 / 铁路 / 公交**
+- 地图拖拽缩放；铁路层按视口加载轨位
 
-## 说明
+## 数据
 
-- 北京地铁线位：**OpenStreetMap**（`npm run osm:beijing` 更新 → `public/geo/beijing-osm-lines.json`）
-- 底图：Esri 街道图（演示放大后可见街道）
-- 高铁走廊仍为枢纽站序示意
-- 里程等指标综合公开统计，部分年份为插值
+- 城轨 / 铁路轨位：OpenStreetMap（及 OpenRailwayMap 基础设施层）
+- 公交：OSM `route=bus` 等
+- 中国铁路全网：`public/geo/china-rail-network.json`
+- 世界各国 ORM 轨位：`public/geo/world/{cc}-orm-rails.json`
+
+更新示例：
+
+```bash
+npm run osm:cities
+npm run osm:china-network
+npm run osm:orm-rails -- de fr jp
+```
 
 数据版权：© OpenStreetMap contributors（ODbL）

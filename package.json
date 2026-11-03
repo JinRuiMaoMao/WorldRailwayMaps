@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "homepage": "https://jinruimaomao.github.io/WorldRailwayMaps/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -18,6 +19,8 @@
     "osm:world-rail": "node scripts/fetch-osm-world-rail.js",
     "osm:world-rail-network": "node scripts/fetch-osm-world-rail-network.js",
     "osm:world-bus": "node scripts/fetch-osm-world-bus.js",
+    "osm:orm-rails": "node scripts/fetch-osm-orm-rails.js",
+    "gtfs:cities": "node scripts/fetch-gtfs-city-transit.js",
     "stations:amap": "node scripts/fetch-amap-stations.js",
     "stations:amap:cities": "node scripts/fetch-amap-city-stations.js all",
     "gen:cities": "node scripts/gen-city-metro-from-jianban.js"

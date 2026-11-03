@@ -1,3 +1,4 @@
+import { assetUrl } from '../assetUrl.js';
 /** OpenStreetMap 线位工具：切段、找站、挂到各城分镜 */
 import { mapKindToPath } from './guideway.js';
 
@@ -105,7 +106,7 @@ export const OSM_CITY_IDS = [
 
 export async function loadBeijingOsm() {
   if (cache) return cache;
-  const res = await fetch('/geo/beijing-osm-lines.json');
+  const res = await fetch(assetUrl('geo/beijing-osm-lines.json'));
   cache = await res.json();
   return cache;
 }
@@ -118,7 +119,7 @@ export async function loadCityOsm(cityId) {
     return data;
   }
   try {
-    const res = await fetch(`/geo/${cityId}-osm-lines.json`);
+    const res = await fetch(assetUrl(`geo/${cityId}-osm-lines.json`));
     if (!res.ok) {
       cityCache.set(cityId, null);
       return null;
@@ -135,7 +136,7 @@ export async function loadCityOsm(cityId) {
 export async function loadChinaRailOsm() {
   if (railCache) return railCache;
   try {
-    const res = await fetch('/geo/china-rail-osm-lines.json');
+    const res = await fetch(assetUrl('geo/china-rail-osm-lines.json'));
     if (!res.ok) {
       railCache = null;
       return null;
@@ -569,7 +570,8 @@ export function pickOsmLine(osmData, lineName, from, to) {
 }
 
 /**
- * 把 OSM 真实轨道挂到分镜（已有 path 的段不覆盖：港铁手画 / 北京一期等）
+ * 把 OSM 真实轨道挂到分镜。
+ * 有可靠 OSM 匹配时覆盖简办折线；匹配失败才保留已有 path（港铁手画等）。
  */
 export function bindOsmToScenes(scenes, osmData) {
   if (!osmData?.lines || !scenes?.length) return scenes;
@@ -578,7 +580,7 @@ export function bindOsmToScenes(scenes, osmData) {
     if (sc.lineHandoff?.segment) segs.push(sc.lineHandoff.segment);
     if (sc.lineHandoff?.alsoGrow) segs.push(sc.lineHandoff.alsoGrow);
     for (const seg of segs) {
-      if (seg.path?.length >= 2) continue;
+      if (seg.keepHandPath) continue;
       const st = (seg.stations || []).filter((s) => s?.name && !s.silent && s.lat != null);
       const from = st[0];
       const to = st[st.length - 1];
@@ -586,6 +588,7 @@ export function bindOsmToScenes(scenes, osmData) {
       if (!line?.path?.length) continue;
       if (st.length < 2) {
         seg.path = thinPath(line.path, st);
+        seg.osmFull = true;
         if (line.kind) seg.kind = mapKindToPath(line.path, line.kind, seg.path);
         continue;
       }
@@ -594,6 +597,7 @@ export function bindOsmToScenes(scenes, osmData) {
       const sliced = via ? sliceVia(line.path, from, to, via) : sliceOsmPath(line.path, from, to);
       if (sliced?.length >= 2) {
         seg.path = thinPath(sliced, st);
+        seg.osmFull = true;
         if (line.kind) seg.kind = mapKindToPath(line.path, line.kind, seg.path);
       }
     }

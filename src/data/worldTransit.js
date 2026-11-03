@@ -1,13 +1,17 @@
 /** 世界城轨 / 铁路 OSM 现势层：按国/城懒加载，不进中国时间轴 */
 
+import { assetUrl } from '../assetUrl.js';
 import { WORLD_CITIES, WORLD_COUNTRIES, WORLD_RAIL_REGIONS, citiesOfCountry } from './worldCatalog.js';
 
 const metroBound = new Set();
 const railBound = new Set();
 const networkBound = new Set();
+const ormBound = new Set();
 const metroSegs = new Map();
 const railSegs = new Map();
 const networkSegs = new Map();
+const ormRailSegs = new Map();
+const ormUrbanSegs = new Map();
 const inflight = new Map();
 
 const PALETTE = ['#003399', '#CC0000', '#009933', '#FF6600', '#660099', '#0099CC', '#222222', '#C4A35A'];
@@ -15,6 +19,17 @@ const HSR_PALETTE = ['#C0392B', '#1A5276', '#117A65', '#6C3483', '#B9770E', '#92
 const RAIL_COLOR = '#5D6D7E';
 const HSR_PLAN = '#5DADE2';
 const RAIL_PLAN = '#8E9AAF';
+const URBAN_RAIL = new Set(['subway', 'light_rail', 'tram', 'monorail', 'funicular']);
+const ORM_RAIL_COLOR = {
+  rail: '#5D6D7E',
+  narrow_gauge: '#7D6B5D',
+  subway: '#2E86C1',
+  light_rail: '#1ABC9C',
+  tram: '#E67E22',
+  monorail: '#8E44AD',
+  funicular: '#A569BD',
+  highspeed: '#C0392B',
+};
 
 function colorOf(name, tagged) {
   if (tagged && /^#?[0-9A-Fa-f]{6}$/.test(tagged)) {
@@ -39,18 +54,27 @@ function metroSegments(cityId, data) {
   const list = Array.isArray(lines) ? lines : Object.values(lines);
   return list
     .filter((l) => l?.path?.length >= 2 && l.status !== 'planned')
-    .map((l) => ({
-      id: `world-metro-${cityId}-${l.key || l.name || l.id}`,
-      line: l.name || l.key || '地铁',
-      color: colorOf(l.name || l.key, l.color),
-      style: l.status && l.status !== 'open' ? 'planned' : undefined,
-      osmFull: true,
-      path: l.path,
-      cityId,
-      kind: l.kind,
-      skipLabels: true,
-      stations: [],
-    }));
+    .map((l) => {
+      const routeKind = String(
+        l.routeKind || (typeof l.kind === 'string' ? l.kind : '') || ''
+      ).toLowerCase();
+      return {
+        id: `world-metro-${cityId}-${l.key || l.name || l.id}`,
+        line: l.name || l.key || '地铁',
+        color: colorOf(l.name || l.key, l.color),
+        style: l.status && l.status !== 'open' ? 'planned' : undefined,
+        osmFull: true,
+        path: l.path,
+        cityId,
+        kind: l.kind,
+        routeKind: routeKind || 'subway',
+        railway: ['tram', 'light_rail', 'monorail', 'funicular'].includes(routeKind)
+          ? routeKind
+          : undefined,
+        skipLabels: true,
+        stations: [],
+      };
+    });
 }
 
 function hsrRailSegments(regionId, data) {
@@ -99,6 +123,60 @@ function networkRailSegments(countryId, data) {
     });
 }
 
+function ormWeight(railway, { highspeed, planned }) {
+  if (planned) return highspeed ? 3.2 : 2;
+  if (highspeed || railway === 'highspeed') return 5;
+  if (railway === 'subway' || railway === 'light_rail') return 3.2;
+  if (railway === 'tram' || railway === 'monorail' || railway === 'funicular') return 2.6;
+  if (railway === 'narrow_gauge') return 2.2;
+  return 2.4;
+}
+
+function ormInfrastructureSegments(countryId, data) {
+  const list = data?.segments;
+  if (!list?.length) return { rail: [], urban: [] };
+  const rail = [];
+  const urban = [];
+  for (const s of list) {
+    if (!s?.path?.length || s.path.length < 2) continue;
+    const railway = String(s.railway || 'rail');
+    const highspeed = !!s.highspeed || railway === 'highspeed';
+    const planned = s.status === 'planned' || s.status === 'construction';
+    const label = s.name || (highspeed ? '高铁' : URBAN_RAIL.has(railway) ? railway : '铁路');
+    const color =
+      ORM_RAIL_COLOR[railway] ||
+      (highspeed ? '#C0392B' : planned ? RAIL_PLAN : RAIL_COLOR);
+    const base = {
+      id: `world-orm-${countryId}-${s.id}`,
+      line: label,
+      color,
+      style: planned ? 'planned' : highspeed ? 'hsr' : URBAN_RAIL.has(railway) ? undefined : 'rail',
+      osmFull: true,
+      skipLabels: true,
+      highspeed,
+      railway,
+      railStatus: s.status,
+      path: s.path,
+      cityId: countryId,
+      stations: [],
+      weight: ormWeight(railway, { highspeed, planned }),
+      ormRail: true,
+    };
+    if (URBAN_RAIL.has(railway)) {
+      urban.push({
+        ...base,
+        kind: railway === 'tram' ? 'tram' : railway === 'light_rail' ? 'light_rail' : 'subway',
+        networkRail: false,
+      });
+      // 铁路模式下也画城轨轨位（细线）
+      rail.push({ ...base, networkRail: true, weight: Math.min(2.8, base.weight) });
+    } else {
+      rail.push({ ...base, networkRail: true });
+    }
+  }
+  return { rail, urban };
+}
+
 async function fetchJson(url) {
   try {
     const res = await fetch(url);
@@ -115,7 +193,7 @@ export async function ensureWorldMetro(cityId) {
   const key = `m:${cityId}`;
   if (inflight.has(key)) return inflight.get(key);
   const job = (async () => {
-    const data = await fetchJson(`/geo/world/${cityId}-metro.json`);
+    const data = await fetchJson(assetUrl(`geo/world/${cityId}-metro.json`));
     const segs = metroSegments(cityId, data);
     metroSegs.set(cityId, segs);
     metroBound.add(cityId);
@@ -135,7 +213,7 @@ export async function ensureWorldRail(regionId) {
   const key = `r:${regionId}`;
   if (inflight.has(key)) return inflight.get(key);
   const job = (async () => {
-    const data = await fetchJson(`/geo/world/${regionId}-rail.json`);
+    const data = await fetchJson(assetUrl(`geo/world/${regionId}-rail.json`));
     const segs = hsrRailSegments(regionId, data);
     railSegs.set(regionId, segs);
     railBound.add(regionId);
@@ -155,7 +233,7 @@ export async function ensureWorldRailNetwork(countryId) {
   const key = `n:${countryId}`;
   if (inflight.has(key)) return inflight.get(key);
   const job = (async () => {
-    const data = await fetchJson(`/geo/world/${countryId}-rail-network.json`);
+    const data = await fetchJson(assetUrl(`geo/world/${countryId}-rail-network.json`));
     const segs = networkRailSegments(countryId, data);
     networkSegs.set(countryId, segs);
     networkBound.add(countryId);
@@ -169,13 +247,56 @@ export async function ensureWorldRailNetwork(countryId) {
   }
 }
 
+async function loadOrmBundle(countryId) {
+  if (!countryId || countryId === 'cn') return { rail: [], urban: [] };
+  if (ormBound.has(countryId)) {
+    return {
+      rail: ormRailSegs.get(countryId) || [],
+      urban: ormUrbanSegs.get(countryId) || [],
+    };
+  }
+  const key = `o:${countryId}`;
+  if (inflight.has(key)) return inflight.get(key);
+  const job = (async () => {
+    const data = await fetchJson(assetUrl(`geo/world/${countryId}-orm-rails.json`));
+    const split = ormInfrastructureSegments(countryId, data);
+    ormRailSegs.set(countryId, split.rail);
+    ormUrbanSegs.set(countryId, split.urban);
+    ormBound.add(countryId);
+    return split;
+  })();
+  inflight.set(key, job);
+  try {
+    return await job;
+  } finally {
+    inflight.delete(key);
+  }
+}
+
+/** OpenRailwayMap 风格轨位（铁路模式） */
+export async function ensureWorldOrmRails(countryId) {
+  const { rail } = await loadOrmBundle(countryId);
+  return rail;
+}
+
+/** 城轨/有轨等基础设施子集（地铁模式） */
+export async function ensureWorldOrmUrban(countryId) {
+  const { urban } = await loadOrmBundle(countryId);
+  return urban;
+}
+
 export async function loadWorldMetroForCountry(countryId, skipIds = new Set()) {
   const cities = citiesOfCountry(countryId).filter((c) => !skipIds.has(c.id));
   const chunks = await Promise.all(cities.map((c) => ensureWorldMetro(c.id)));
-  return chunks.flat();
+  const named = chunks.flat();
+  const urban = await ensureWorldOrmUrban(countryId);
+  // 有命名城轨时仍叠 ORM 城轨轨位，避免只剩简办折线空洞
+  return urban.length ? [...named, ...urban] : named;
 }
 
 export async function loadWorldRailForCountry(countryId) {
+  const orm = await ensureWorldOrmRails(countryId);
+  if (orm.length) return orm;
   const net = await ensureWorldRailNetwork(countryId);
   if (net.length) return net;
   const regions = WORLD_RAIL_REGIONS.filter((r) => r.id === countryId || r.id.startsWith(`${countryId}-`));
@@ -219,16 +340,56 @@ export function worldCityIds() {
   return WORLD_CITIES.map((c) => c.id);
 }
 
+/** 批量挂世界城轨缓存（可带进度） */
+export async function loadAllWorldMetros(cityIds, onProgress) {
+  const ids = cityIds?.length ? cityIds : worldCityIds();
+  const BATCH = 6;
+  let done = 0;
+  const out = [];
+  for (let i = 0; i < ids.length; i += BATCH) {
+    const chunk = ids.slice(i, i + BATCH);
+    const parts = await Promise.all(chunk.map((id) => ensureWorldMetro(id)));
+    for (const segs of parts) out.push(...segs);
+    done += chunk.length;
+    onProgress?.(done, ids.length);
+  }
+  return out;
+}
+
+/** 批量挂各国 ORM / 路网轨位 */
+export async function loadAllWorldOrmRails(countryIds, onProgress) {
+  const ids = (countryIds?.length ? countryIds : WORLD_COUNTRIES.map((c) => c.id)).filter((id) => id !== 'cn');
+  const BATCH = 3;
+  let done = 0;
+  const out = [];
+  for (let i = 0; i < ids.length; i += BATCH) {
+    const chunk = ids.slice(i, i + BATCH);
+    const parts = await Promise.all(
+      chunk.map(async (id) => {
+        const orm = await ensureWorldOrmRails(id);
+        if (orm.length) return orm;
+        return ensureWorldRailNetwork(id);
+      })
+    );
+    for (const segs of parts) out.push(...segs);
+    done += chunk.length;
+    onProgress?.(done, ids.length);
+  }
+  return out;
+}
+
 export function allBoundWorldSegments() {
   const out = [];
   for (const segs of metroSegs.values()) for (const s of segs) out.push(s);
   for (const segs of railSegs.values()) for (const s of segs) out.push(s);
   for (const segs of networkSegs.values()) for (const s of segs) out.push(s);
+  for (const segs of ormUrbanSegs.values()) for (const s of segs) out.push(s);
   return out;
 }
 
 export function allBoundNetworkRailSegments() {
   const out = [];
   for (const segs of networkSegs.values()) for (const s of segs) out.push(s);
+  for (const segs of ormRailSegs.values()) for (const s of segs) out.push(s);
   return out;
 }

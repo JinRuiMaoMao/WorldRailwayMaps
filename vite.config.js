@@ -88,11 +88,18 @@ function handleExportTile(req, res, next) {
     });
 }
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  // GitHub project Pages: https://jinruimaomao.github.io/WorldRailwayMaps/
+  base: command === 'serve' ? '/' : '/WorldRailwayMaps/',
   plugins: [osmTileCache()],
   server: {
     port: 5173,
     open: true,
   },
   preview: {},
-});
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    chunkSizeWarningLimit: 2000,
+  },
+}));

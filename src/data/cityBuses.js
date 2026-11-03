@@ -1,6 +1,8 @@
+import { assetUrl } from '../assetUrl.js';
 /** 各城公交 OSM 线位：挂到分镜，并按城懒加载 */
 
-const SKIP = /快速公交|^BRT|西郊|亦庄有轨|有轨电车|有軌電車/i;
+/** 有轨进地铁层；BRT/无轨/渡轮保留在公交层 */
+const SKIP = /西郊|亦庄有轨|有轨电车|有軌電車/i;
 const bound = new Set();
 const inflight = new Map();
 
@@ -34,17 +36,23 @@ export function cityBusSegments(data, cityId) {
   if (!data?.lines?.length) return [];
   return data.lines
     .filter((l) => l.path?.length >= 2 && !SKIP.test(l.name || l.ref || ''))
-    .map((l) => ({
-      id: `${cityId}-bus-${l.id || l.ref}`,
-      line: l.name,
-      color: l.color,
-      style: 'bus',
-      osmFull: true,
-      path: l.path,
-      skipLabels: true,
-      cityId,
-      stations: l.stations || [],
-    }));
+    .map((l) => {
+      const routeKind = String(l.routeKind || '').toLowerCase();
+      const style =
+        routeKind === 'ferry' ? 'ferry' : routeKind === 'trolleybus' ? 'trolleybus' : 'bus';
+      return {
+        id: `${cityId}-bus-${l.id || l.ref}`,
+        line: l.name,
+        color: l.color,
+        style,
+        routeKind: routeKind || (style === 'ferry' ? 'ferry' : 'bus'),
+        osmFull: true,
+        path: l.path,
+        skipLabels: true,
+        cityId,
+        stations: l.stations || [],
+      };
+    });
 }
 
 export function bindCityBuses(cityId, data) {
@@ -63,7 +71,7 @@ export function cityBusesBound(cityId) {
 
 export async function loadBusManifest() {
   try {
-    const res = await fetch('/geo/bus-cities.json');
+    const res = await fetch(assetUrl('geo/bus-cities.json'));
     if (!res.ok) return ['beijing'];
     const json = await res.json();
     return Array.isArray(json?.cities) ? json.cities : ['beijing'];
@@ -83,7 +91,7 @@ export function bindWorldBuses(cityId, data) {
 
 export async function fetchCityBusData(cityId) {
   if (!cityId) return null;
-  for (const url of [`/geo/${cityId}-bus-lines.json`, `/geo/world/${cityId}-bus.json`]) {
+  for (const url of [assetUrl(`geo/${cityId}-bus-lines.json`), assetUrl(`geo/world/${cityId}-bus.json`)]) {
     try {
       const res = await fetch(url);
       if (!res.ok) continue;

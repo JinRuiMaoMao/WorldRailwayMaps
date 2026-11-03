@@ -1,3 +1,4 @@
+import { assetUrl } from '../assetUrl.js';
 /** 中国铁路 OSM 现势层：已开通 + 在建/规划，不进时间轴骨架 */
 
 import { PLACES } from './network.js';
@@ -71,7 +72,7 @@ export async function ensureChinaRailNetwork() {
   if (inflight) return inflight;
   inflight = (async () => {
     try {
-      const res = await fetch('/geo/china-rail-network.json');
+      const res = await fetch(assetUrl('geo/china-rail-network.json'));
       if (!res.ok) {
         bound = [];
         ready = true;

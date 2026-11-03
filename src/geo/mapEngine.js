@@ -1,3 +1,4 @@
+import { assetUrl } from '../assetUrl.js';
 import { geoConicEqualArea, geoPath } from 'd3-geo';
 
 const WIDTH = 1000;
@@ -36,7 +37,7 @@ export function getMapSize() {
 export async function initMap() {
   if (ready) return ready;
   ready = (async () => {
-    const nation = await fetch('/geo/china-nation-simple.json').then((r) => r.json());
+    const nation = await fetch(assetUrl('geo/china-nation-simple.json')).then((r) => r.json());
 
     projection = geoConicEqualArea()
       .parallels([25, 47])
