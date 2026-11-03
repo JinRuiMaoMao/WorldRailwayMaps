@@ -27,7 +27,7 @@ import { growDurationSec } from './exportVideo.js';
 import { warmupTile } from './tileCache.js';
 import { thinPath } from './data/osmUtil.js';
 import { spansFromKind, kindFromNamedSpans, mapKindToPath } from './data/guideway.js';
-import { classifyTransitMode } from './data/transitMode.js';
+import { classifyTransitMode, classifyTransitBucket, TRANSIT_BUCKET_LABEL } from './data/transitMode.js';
 import { PLACES } from './data/network.js';
 import { worldCityById } from './data/worldCatalog.js';
 
@@ -45,8 +45,12 @@ export function createLeafletView(container) {
     markerZoomAnimation: false,
   });
 
-  // 跟地图自带 canvas（preferCanvas），避免再叠一块 8K 画布
+  // 线路共用一块 Canvas：缩放时可整体冻结重绘；站标另用 markerPane
   let dotRenderer = null;
+  let lineRenderer = null;
+  let mapZoomFrozen = false;
+  let zoomThawTimer = 0;
+
   function getDotRenderer() {
     if (!dotRenderer) {
       dotRenderer = L.canvas({ padding: 0.12, tolerance: 0, pane: 'markerPane' });
@@ -54,14 +58,49 @@ export function createLeafletView(container) {
     return dotRenderer;
   }
 
+  function getLineRenderer() {
+    if (!lineRenderer) {
+      lineRenderer = L.canvas({ padding: 0.45, pane: 'overlayPane' });
+      const rawUpdate = lineRenderer._update.bind(lineRenderer);
+      lineRenderer._update = function updateLineCanvas() {
+        if (mapZoomFrozen) return;
+        return rawUpdate();
+      };
+    }
+    return lineRenderer;
+  }
+
   function lineStyle(extra = {}) {
+    const { renderer: _r, ...rest } = extra;
     return {
       interactive: false,
       bubblingMouseEvents: false,
-      lineCap: extra.lineCap || 'round',
+      lineCap: rest.lineCap || 'round',
       lineJoin: 'round',
-      ...extra,
+      ...rest,
+      renderer: getLineRenderer(),
     };
+  }
+
+  function thinLatLngs(ll, minM) {
+    if (!minM || !ll?.length || ll.length < 3) return ll;
+    if (Array.isArray(ll[0]?.[0])) return ll.map((ring) => thinLatLngs(ring, minM));
+    const out = [ll[0]];
+    for (let i = 1; i < ll.length - 1; i++) {
+      const p = out[out.length - 1];
+      const c = ll[i];
+      if (Math.hypot((c[0] - p[0]) * 111000, (c[1] - p[1]) * 85000) >= minM) out.push(c);
+    }
+    out.push(ll[ll.length - 1]);
+    return out.length >= 2 ? out : ll;
+  }
+
+  function drawLatLngsFor(rec, { bus = false } = {}) {
+    const src = rec.drawLatLngs || rec.latlngs;
+    if (!busFullLoad && !railFullLoad) return src;
+    const z = map.getZoom();
+    const minM = z < 6 ? 420 : z < 8 ? 220 : z < 10 ? 110 : bus ? 55 : 40;
+    return thinLatLngs(src, minM);
   }
 
   // 同源 OSM 代理：浏览和导出都能画进 canvas；外网回退 Esri 浅色底
@@ -69,18 +108,19 @@ export function createLeafletView(container) {
   let baseLayer = L.tileLayer(
     localHost
       ? `${location.origin}/export-tiles/{z}/{x}/{y}.png`
-      : 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+      : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
     {
       maxZoom: 19,
       maxNativeZoom: 19,
       crossOrigin: true,
+      subdomains: 'abcd',
       keepBuffer: 8,
       updateWhenIdle: false,
       updateWhenZooming: false,
       updateInterval: 0,
       attribution: localHost
         ? '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        : '&copy; Esri',
+        : '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; CARTO',
     }
   ).addTo(map);
 
@@ -145,7 +185,7 @@ export function createLeafletView(container) {
       keepBuffer: 14,
       updateWhenIdle: false,
       updateWhenZooming: false,
-      attribution: local ? '&copy; OpenStreetMap' : '&copy; Esri',
+      attribution: local ? '&copy; OpenStreetMap' : '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; CARTO',
     });
   }
 
@@ -342,20 +382,41 @@ export function createLeafletView(container) {
   let editSceneYear = 1988;
   let editSceneDate = '1988-09-18';
   let stampCityId = null;
-  let modeFilter = 'metro';
+  /** 可叠加：地铁 / 高铁 / 公交 */
+  let modeFilters = new Set(['metro']);
+  const modeAllows = (m) => !modeFilters.size || modeFilters.has(m);
+  const primaryMode = () =>
+    (modeFilters.has('bus') && 'bus') ||
+    (modeFilters.has('hsr') && 'hsr') ||
+    (modeFilters.has('metro') && 'metro') ||
+    '';
   let focusLineNames = new Set();
   let onLinePick = null;
   let onViewportChange = null;
   const BUS_MIN_ZOOM = 9;
   const BUS_LAYER_BUDGET = 1100;
+  const BUS_FULL_MIN_ZOOM = 5.2;
+  const BUS_FULL_LAYER_BUDGET = 9000;
   const RAIL_LAYER_BUDGET = 2800;
+  const RAIL_FULL_LAYER_BUDGET = 6000;
+  let busFullLoad = false;
+  let railFullLoad = false;
   const busIndex = new Map();
   const busLayers = new Map();
+  const busRoot = L.layerGroup().addTo(map);
   const busEndLayer = L.layerGroup();
   let busSyncTimer = null;
+  let busPaintToken = 0;
   const railIndex = new Map();
   const railLayers = new Map();
+  const railRoot = L.layerGroup().addTo(map);
   let railSyncTimer = null;
+  let railPaintToken = 0;
+  /** 合并 zoom/move 后的公交+铁路视口同步，避免滚轮连发卡顿 */
+  let viewportSyncTimer = null;
+  let lastViewportSyncKey = '';
+  let mapZooming = false;
+  let relayoutTimer = 0;
   let inspectRaf = 0;
   let inspectLastEv = null;
   let inspectHoverKey = '';
@@ -389,10 +450,36 @@ export function createLeafletView(container) {
     });
   }
 
-  function repaintAllGuideways() {
+  function scheduleRelayoutDebounced(ms = 120) {
+    if (relayoutRaf) {
+      cancelAnimationFrame(relayoutRaf);
+      relayoutRaf = 0;
+    }
+    clearTimeout(relayoutTimer);
+    relayoutTimer = setTimeout(() => {
+      relayoutTimer = 0;
+      scheduleRelayout();
+    }, ms);
+  }
+
+  function needsGuidewayRepaint(rec) {
+    if (!rec?.seg) return false;
+    if (rec.line?._guidewaySplit) return true;
+    return /有轨|tram|导轨|西郊线/i.test(rec.seg.line || '');
+  }
+
+  function recCum(rec) {
+    if (rec.cum?.length) return rec.cum;
+    rec.cum = buildCumDist(rec.latlngs);
+    return rec.cum;
+  }
+
+  /** 仅重绘缩放敏感的有轨双轨偏移；普通地铁线跳过 */
+  function repaintZoomSensitiveGuideways() {
     if (!segments.size) return;
     for (const rec of segments.values()) {
-      paintBridgeRails(rec.bridgeLayer, rec.seg, rec.latlngs, buildCumDist(rec.latlngs), rec.stations, {
+      if (!needsGuidewayRepaint(rec)) continue;
+      paintBridgeRails(rec.bridgeLayer, rec.seg, rec.latlngs, recCum(rec), rec.stations, {
         color: rec.line?._ghost ? '#8A8E94' : rec.seg.color,
         opacity: rec.line?._guidewayOpacity ?? (rec.line?._segActive ? 1 : 0.55),
         line: rec.line,
@@ -405,23 +492,95 @@ export function createLeafletView(container) {
     const showNames = namesVisibleAtZoom();
     const showDots = dotsVisibleAtZoom();
     container.classList.toggle('zoom-global', !showNames);
-    if (!growing.size) repaintAllGuideways();
-    if (showNames !== lastNamesVisible || showDots !== lastDotsVisible) {
-      lastNamesVisible = showNames;
-      lastDotsVisible = showDots;
-      if (segments.size && !growing.size) scheduleRelayout();
-    } else if (showDots && segments.size >= 12 && !growing.size) {
-      scheduleRelayout();
+    if (!growing.size) repaintZoomSensitiveGuideways();
+    const namesChanged = showNames !== lastNamesVisible;
+    const dotsChanged = showDots !== lastDotsVisible;
+    lastNamesVisible = showNames;
+    lastDotsVisible = showDots;
+    if (!segments.size || growing.size) return;
+    // 站名/圆点显隐档位变化 → 立刻重排
+    if (namesChanged || dotsChanged) {
+      scheduleRelayoutDebounced(40);
+      return;
     }
+    // 全量/海量线段：缩放后不做站名碰撞重算（圆点够用）；非全量近景才重排
+    if (busFullLoad || railFullLoad || segments.size > 280) return;
+    if (showNames) scheduleRelayoutDebounced(140);
   }
 
-  map.on('zoomend', () => {
+  function viewportSyncKey() {
+    const modes = [...modeFilters].sort().join(',');
+    // 全量：缩放不触发重挂，只跟索引规模/模式走
+    if (busFullLoad && railFullLoad) {
+      return `full|${busIndex.size}|${railIndex.size}|${modes}`;
+    }
+    const z = Math.round(map.getZoom() * 2) / 2;
+    const b = map.getBounds();
+    const r = (n) => Math.round(n * 80) / 80;
+    return `${z}|${r(b.getSouth())}|${r(b.getWest())}|${r(b.getNorth())}|${r(b.getEast())}|${busFullLoad ? 1 : 0}|${railFullLoad ? 1 : 0}|${modes}`;
+  }
+
+  function scheduleViewportLayers(delay = 160) {
+    if (mapZoomFrozen) return;
+    clearTimeout(busSyncTimer);
+    clearTimeout(railSyncTimer);
+    clearTimeout(viewportSyncTimer);
+    viewportSyncTimer = setTimeout(() => {
+      viewportSyncTimer = null;
+      if (mapZoomFrozen) return;
+      const key = viewportSyncKey();
+      if (key === lastViewportSyncKey) return;
+      lastViewportSyncKey = key;
+      syncViewportBuses();
+      syncViewportRails();
+    }, delay);
+  }
+
+  function invalidateViewportSync() {
+    lastViewportSyncKey = '';
+  }
+
+  function freezeZoomPaint() {
+    mapZooming = true;
+    mapZoomFrozen = true;
+    container.classList.add('map-zoom-busy');
+    clearTimeout(viewportSyncTimer);
+    clearTimeout(relayoutTimer);
+    if (relayoutRaf) {
+      cancelAnimationFrame(relayoutRaf);
+      relayoutRaf = 0;
+    }
+    hideInspectTip();
+  }
+
+  function thawZoomPaint() {
+    mapZooming = false;
+    mapZoomFrozen = false;
+    container.classList.remove('map-zoom-busy');
+    try {
+      getLineRenderer()._update();
+    } catch {
+      /* */
+    }
     syncZoomChrome();
-    scheduleBusSync();
-    scheduleRailSync();
+    // 当前开启的公交/铁路若已全量钉住，缩放不再重挂
+    const needBus = !modeFilters.size || modeAllows('bus');
+    const needRail = !modeFilters.size || modeAllows('hsr');
+    const pinned = (!needBus || busFullLoad) && (!needRail || railFullLoad);
+    if (!pinned) scheduleViewportLayers(60);
     onViewportChange?.();
+  }
+
+  map.on('zoomstart', () => {
+    clearTimeout(zoomThawTimer);
+    freezeZoomPaint();
   });
-  map.on('zoomstart dragstart', hideInspectTip);
+  map.on('zoomend', () => {
+    clearTimeout(zoomThawTimer);
+    // 滚轮连级：停稳后再解冻，缩放过程只动底图
+    zoomThawTimer = setTimeout(thawZoomPaint, 160);
+  });
+  map.on('dragstart', hideInspectTip);
   map.on('mousemove', onInspectMove);
   map.on('click', onInspectClick);
   map.getContainer().addEventListener('pointerdown', (ev) => {
@@ -433,12 +592,17 @@ export function createLeafletView(container) {
   });
   map.getContainer().addEventListener('mouseleave', hideInspectTip);
   map.on('moveend', () => {
-    scheduleBusSync();
-    scheduleRailSync();
+    if (mapZooming || mapZoomFrozen) return;
+    // 全量模式平移也不反复重挂公交/铁路
+    const needBusM = !modeFilters.size || modeAllows('bus');
+    const needRailM = !modeFilters.size || modeAllows('hsr');
+    const pinnedMove = (!needBusM || busFullLoad) && (!needRailM || railFullLoad);
+    if (!pinnedMove) scheduleViewportLayers(160);
     onViewportChange?.();
     if (exportFast || growing.size) return;
     if (!dotsVisibleAtZoom()) return;
-    if (segments.size >= 12) scheduleRelayout();
+    if (namesVisibleAtZoom()) scheduleRelayoutDebounced(180);
+    else if (segments.size >= 24) scheduleRelayoutDebounced(240);
   });
   container.classList.toggle('zoom-global', !namesVisibleAtZoom());
 
@@ -1241,8 +1405,8 @@ export function createLeafletView(container) {
 
   function recModeVisible(rec) {
     if (!rec?.seg) return false;
-    if (!modeFilter) return true;
-    return classifyTransitMode(rec.seg) === modeFilter;
+    if (!modeFilters.size) return true;
+    return modeAllows(classifyTransitMode(rec.seg));
   }
 
   function hasLineFocus() {
@@ -1262,7 +1426,7 @@ export function createLeafletView(container) {
 
   function recFocusOpacity(rec) {
     if (!hasLineFocus() || recMatchesFocus(rec)) return recNaturalOpacity(rec);
-    return modeFilter === 'bus' ? 0.05 : 0.25;
+    return modeAllows('bus') && !modeAllows('metro') && !modeAllows('hsr') ? 0.05 : 0.25;
   }
 
   function applyRecLineOpacity(rec) {
@@ -1305,8 +1469,10 @@ export function createLeafletView(container) {
       if (on && !has) rec.group.addTo(map);
       if (!on && has) map.removeLayer(rec.group);
     }
+    invalidateViewportSync();
     syncViewportBuses();
     syncViewportRails();
+    lastViewportSyncKey = viewportSyncKey();
     relayoutAllLabels();
   }
 
@@ -1368,7 +1534,7 @@ export function createLeafletView(container) {
         focused: hasLineFocus() && recMatchesFocus(rec),
       });
     }
-    if (!modeFilter || modeFilter === 'bus') {
+    if (!modeFilters.size || modeAllows('bus')) {
       for (const [id, line] of busLayers) {
         const rec = busIndex.get(id);
         const name = rec?.seg?.line;
@@ -1403,7 +1569,7 @@ export function createLeafletView(container) {
         });
       }
     }
-    if (!modeFilter || modeFilter === 'hsr') {
+    if (!modeFilters.size || modeAllows('hsr')) {
       for (const [id, line] of railLayers) {
         const rec = railIndex.get(id);
         const name = rec?.seg?.line;
@@ -1675,10 +1841,11 @@ export function createLeafletView(container) {
   /** 框住某城（或该城某条线）的线网 */
   function flyToCityNetwork(cityId, opts = {}) {
     let pts = collectNetworkPts({ cityId, lineName: opts.lineName || '' });
-    if (!opts.lineName && (modeFilter === 'bus' || modeFilter === 'hsr' || opts.core === true)) {
-      pts = trimFlyPts(pts, cityId, modeFilter === 'hsr' ? 62 : 38);
+    if (!opts.lineName && (modeAllows('bus') || modeAllows('hsr') || opts.core === true)) {
+      pts = trimFlyPts(pts, cityId, modeAllows('hsr') && !modeAllows('metro') ? 62 : 38);
     }
-    const maxZoom = opts.maxZoom ?? (opts.lineName ? 13.2 : modeFilter === 'bus' ? 12.4 : 12);
+    const maxZoom =
+      opts.maxZoom ?? (opts.lineName ? 13.2 : modeAllows('bus') && !modeAllows('metro') ? 12.4 : 12);
     return flyToBoundsPts(pts, { pad: opts.pad ?? 64, maxZoom, duration: opts.duration ?? 0.9 });
   }
 
@@ -2523,6 +2690,7 @@ export function createLeafletView(container) {
       seg,
       latlngs,
       stations,
+      cum,
       meters: cum[cum.length - 1] || 0,
       snapped: !!(stations.length && stations[0].dist != null),
     });
@@ -2534,7 +2702,9 @@ export function createLeafletView(container) {
     if (!rec) return;
     const { line, bridgeLayer, seg, latlngs, stations } = rec;
     line.setLatLngs(latlngs);
-    paintBridgeRails(bridgeLayer, seg, latlngs, buildCumDist(latlngs), stations, {
+    rec.cum = buildCumDist(latlngs);
+    rec.meters = rec.cum[rec.cum.length - 1] || 0;
+    paintBridgeRails(bridgeLayer, seg, latlngs, rec.cum, stations, {
       color: seg.style === 'ghost' ? '#8A8E94' : seg.color,
       opacity: line.options?.opacity ?? (line._segActive ? 1 : 0.55),
       line,
@@ -3332,16 +3502,42 @@ export function createLeafletView(container) {
   }
 
   function clearBusLayers() {
-    for (const line of busLayers.values()) map.removeLayer(line);
+    busRoot.clearLayers();
     busLayers.clear();
     busEndLayer.clearLayers();
     if (map.hasLayer(busEndLayer)) map.removeLayer(busEndLayer);
+    busPaintToken = 0;
+    invalidateViewportSync();
+  }
+
+  function busMinZoom() {
+    return busFullLoad ? BUS_FULL_MIN_ZOOM : BUS_MIN_ZOOM;
+  }
+
+  function busLayerBudget() {
+    return busFullLoad ? BUS_FULL_LAYER_BUDGET : BUS_LAYER_BUDGET;
+  }
+
+  function setBusFullLoad(on) {
+    busFullLoad = !!on;
+    busPaintToken = 0;
+    invalidateViewportSync();
+    scheduleBusSync();
+    return busFullLoad;
+  }
+
+  function setRailFullLoad(on) {
+    railFullLoad = !!on;
+    railPaintToken = 0;
+    invalidateViewportSync();
+    scheduleRailSync();
+    return railFullLoad;
   }
 
   function paintBusTermini() {
     busEndLayer.clearLayers();
-    if (map.getZoom() < BUS_MIN_ZOOM) return;
-    if (modeFilter && modeFilter !== 'bus') return;
+    if (map.getZoom() < busMinZoom()) return;
+    if (modeFilters.size && !modeAllows('bus')) return;
     if (!namesVisibleAtZoom() && !hasLineFocus()) return;
     if (!map.hasLayer(busEndLayer)) busEndLayer.addTo(map);
     const placed = [];
@@ -3409,22 +3605,76 @@ export function createLeafletView(container) {
       busIndex.set(seg.id, {
         seg,
         latlngs,
+        drawLatLngs: thinLatLngs(latlngs, 48),
         bbox: latlngsBBox(latlngs),
         meters: cum[cum.length - 1] || 0,
       });
     }
+    busPaintToken = 0;
     scheduleBusSync();
   }
 
+  function makeBusPolyline(rec) {
+    const smooth = busFullLoad ? 2.8 : 1.4;
+    const line = L.polyline(
+      drawLatLngsFor(rec, { bus: true }),
+      lineStyle({
+        color: rec.seg.color || '#E85D04',
+        weight: rec.seg.weight ?? 3.4,
+        opacity: 1,
+        smoothFactor: smooth,
+      })
+    );
+    line._bus = true;
+    line._busId = rec.seg.id;
+    line.options._baseWeight = rec.seg.weight ?? 3.4;
+    line.options._baseOpacity = 1;
+    return line;
+  }
+
   function syncViewportBuses() {
-    if (modeFilter && modeFilter !== 'bus') {
-      clearBusLayers();
+    if (modeFilters.size && !modeAllows('bus')) {
+      if (busLayers.size) clearBusLayers();
       return;
     }
-    if (map.getZoom() < BUS_MIN_ZOOM) {
-      clearBusLayers();
+    if (map.getZoom() < busMinZoom()) {
+      if (busLayers.size) clearBusLayers();
       return;
     }
+
+    // 全量：按里程挂一次，缩放不再裁剪/重挂
+    if (busFullLoad) {
+      const token = busIndex.size;
+      if (busPaintToken === token && busLayers.size) {
+        applyBusLineOpacity();
+        if (!mapZoomFrozen) paintBusTermini();
+        return;
+      }
+      const scored = [];
+      for (const rec of busIndex.values()) {
+        scored.push({ rec, meters: rec.meters || 0 });
+      }
+      scored.sort((a, b) => b.meters - a.meters);
+      const budget = busLayerBudget();
+      const keep = new Set(scored.slice(0, budget).map((x) => x.rec.seg.id));
+      for (const [id, line] of [...busLayers]) {
+        if (keep.has(id)) continue;
+        busRoot.removeLayer(line);
+        busLayers.delete(id);
+      }
+      for (const { rec } of scored.slice(0, budget)) {
+        const id = rec.seg.id;
+        if (busLayers.has(id)) continue;
+        const line = makeBusPolyline(rec);
+        line.addTo(busRoot);
+        busLayers.set(id, line);
+      }
+      busPaintToken = token;
+      applyBusLineOpacity();
+      if (!mapZoomFrozen) paintBusTermini();
+      return;
+    }
+
     const bounds = map.getBounds().pad(0.2);
     const c = bounds.getCenter();
     const scored = [];
@@ -3432,45 +3682,39 @@ export function createLeafletView(container) {
       if (!bboxHits(rec.bbox, bounds)) continue;
       const midLat = (rec.bbox.s + rec.bbox.n) / 2;
       const midLng = (rec.bbox.w + rec.bbox.e) / 2;
-      scored.push({ rec, d: Math.hypot(midLat - c.lat, midLng - c.lng) });
+      scored.push({ rec, d: Math.hypot(midLat - c.lat, midLng - c.lng), meters: rec.meters || 0 });
     }
     scored.sort((a, b) => a.d - b.d);
-    const keep = new Set(scored.slice(0, BUS_LAYER_BUDGET).map((x) => x.rec.seg.id));
-    for (const [id, line] of [...busLayers]) {
-      if (keep.has(id)) continue;
-      map.removeLayer(line);
-      busLayers.delete(id);
-    }
-    for (const { rec } of scored) {
-      const id = rec.seg.id;
-      if (!keep.has(id) || busLayers.has(id)) continue;
-      const line = L.polyline(
-        rec.latlngs,
-        lineStyle({
-          color: rec.seg.color || '#E85D04',
-          weight: rec.seg.weight ?? 3.4,
-          opacity: 1,
-          smoothFactor: 0,
-        })
-      ).addTo(map);
-      line._bus = true;
-      line._busId = id;
-      line.options._baseWeight = rec.seg.weight ?? 3.4;
-      line.options._baseOpacity = 1;
-      busLayers.set(id, line);
+    const keep = new Set(scored.slice(0, busLayerBudget()).map((x) => x.rec.seg.id));
+    const same = keep.size === busLayers.size && [...keep].every((id) => busLayers.has(id));
+    if (!same) {
+      for (const [id, line] of [...busLayers]) {
+        if (keep.has(id)) continue;
+        busRoot.removeLayer(line);
+        busLayers.delete(id);
+      }
+      for (const { rec } of scored) {
+        const id = rec.seg.id;
+        if (!keep.has(id) || busLayers.has(id)) continue;
+        const line = makeBusPolyline(rec);
+        line.addTo(busRoot);
+        busLayers.set(id, line);
+      }
     }
     applyBusLineOpacity();
-    paintBusTermini();
+    if (!mapZoomFrozen) paintBusTermini();
   }
 
   function scheduleBusSync() {
-    clearTimeout(busSyncTimer);
-    busSyncTimer = setTimeout(syncViewportBuses, 100);
+    invalidateViewportSync();
+    scheduleViewportLayers(80);
   }
 
   function clearRailLayers() {
-    for (const line of railLayers.values()) map.removeLayer(line);
+    railRoot.clearLayers();
     railLayers.clear();
+    railPaintToken = 0;
+    invalidateViewportSync();
   }
 
   function applyRailLineOpacity() {
@@ -3481,6 +3725,28 @@ export function createLeafletView(container) {
       line.setStyle({ opacity: op });
       if (hasLineFocus() && recMatchesFocus({ seg: rec.seg })) line.bringToFront?.();
     }
+  }
+
+  function makeRailPolyline(rec) {
+    const planned = rec.seg.style === 'planned';
+    const highspeed = rec.seg.highspeed || rec.seg.style === 'hsr';
+    const weight = rec.seg.weight ?? (planned ? (highspeed ? 3.6 : 2.2) : highspeed ? 5.2 : 2.5);
+    const line = L.polyline(
+      drawLatLngsFor(rec),
+      lineStyle({
+        color: rec.seg.color || (highspeed ? '#C0392B' : '#5D6D7E'),
+        weight,
+        opacity: planned ? 0.78 : 0.92,
+        dashArray: planned ? '12 9' : null,
+        lineCap: planned ? 'butt' : 'round',
+        smoothFactor: railFullLoad ? 2.6 : 1.5,
+      })
+    );
+    line._rail = true;
+    line._railId = rec.seg.id;
+    line.options._baseWeight = weight;
+    line.options._baseOpacity = planned ? 0.78 : 0.92;
+    return line;
   }
 
   function registerRails(segs) {
@@ -3494,18 +3760,53 @@ export function createLeafletView(container) {
       railIndex.set(seg.id, {
         seg,
         latlngs,
+        drawLatLngs: thinLatLngs(Array.isArray(latlngs[0]?.[0]) ? latlngs : latlngs, 80),
         bbox: latlngsBBox(latlngs),
         meters: cum[cum.length - 1] || 0,
       });
     }
+    railPaintToken = 0;
     scheduleRailSync();
   }
 
   function syncViewportRails() {
-    if (modeFilter && modeFilter !== 'hsr') {
-      clearRailLayers();
+    if (modeFilters.size && !modeAllows('hsr')) {
+      if (railLayers.size) clearRailLayers();
       return;
     }
+
+    if (railFullLoad) {
+      const token = railIndex.size;
+      if (railPaintToken === token && railLayers.size) {
+        applyRailLineOpacity();
+        return;
+      }
+      const scored = [];
+      for (const rec of railIndex.values()) {
+        const hs = rec.seg.highspeed || rec.seg.style === 'hsr' ? 0 : 1;
+        const plan = rec.seg.style === 'planned' ? 1 : 0;
+        scored.push({ rec, hs, plan, meters: rec.meters || 0 });
+      }
+      scored.sort((a, b) => a.hs - b.hs || a.plan - b.plan || b.meters - a.meters);
+      const budget = RAIL_FULL_LAYER_BUDGET;
+      const keep = new Set(scored.slice(0, budget).map((x) => x.rec.seg.id));
+      for (const [id, line] of [...railLayers]) {
+        if (keep.has(id)) continue;
+        railRoot.removeLayer(line);
+        railLayers.delete(id);
+      }
+      for (const { rec } of scored.slice(0, budget)) {
+        const id = rec.seg.id;
+        if (railLayers.has(id)) continue;
+        const line = makeRailPolyline(rec);
+        line.addTo(railRoot);
+        railLayers.set(id, line);
+      }
+      railPaintToken = token;
+      applyRailLineOpacity();
+      return;
+    }
+
     const z = map.getZoom();
     const bounds = map.getBounds().pad(z >= 8 ? 0.18 : 0.04);
     const c = bounds.getCenter();
@@ -3521,40 +3822,27 @@ export function createLeafletView(container) {
     scored.sort((a, b) => a.hs - b.hs || a.plan - b.plan || b.meters - a.meters || a.d - b.d);
     const budget = z < 6 ? RAIL_LAYER_BUDGET : z < 8 ? 2200 : 1600;
     const keep = new Set(scored.slice(0, budget).map((x) => x.rec.seg.id));
-    for (const [id, line] of [...railLayers]) {
-      if (keep.has(id)) continue;
-      map.removeLayer(line);
-      railLayers.delete(id);
-    }
-    for (const { rec } of scored) {
-      const id = rec.seg.id;
-      if (!keep.has(id) || railLayers.has(id)) continue;
-      const planned = rec.seg.style === 'planned';
-      const highspeed = rec.seg.highspeed || rec.seg.style === 'hsr';
-      const weight = rec.seg.weight ?? (planned ? (highspeed ? 3.6 : 2.2) : highspeed ? 5.2 : 2.5);
-      const line = L.polyline(
-        rec.latlngs,
-        lineStyle({
-          color: rec.seg.color || (highspeed ? '#C0392B' : '#5D6D7E'),
-          weight,
-          opacity: planned ? 0.78 : 0.92,
-          dashArray: planned ? '12 9' : null,
-          lineCap: planned ? 'butt' : 'round',
-          smoothFactor: 0,
-        })
-      ).addTo(map);
-      line._rail = true;
-      line._railId = id;
-      line.options._baseWeight = weight;
-      line.options._baseOpacity = planned ? 0.78 : 0.92;
-      railLayers.set(id, line);
+    const same = keep.size === railLayers.size && [...keep].every((id) => railLayers.has(id));
+    if (!same) {
+      for (const [id, line] of [...railLayers]) {
+        if (keep.has(id)) continue;
+        railRoot.removeLayer(line);
+        railLayers.delete(id);
+      }
+      for (const { rec } of scored) {
+        const id = rec.seg.id;
+        if (!keep.has(id) || railLayers.has(id)) continue;
+        const line = makeRailPolyline(rec);
+        line.addTo(railRoot);
+        railLayers.set(id, line);
+      }
     }
     applyRailLineOpacity();
   }
 
   function scheduleRailSync() {
-    clearTimeout(railSyncTimer);
-    railSyncTimer = setTimeout(syncViewportRails, 90);
+    invalidateViewportSync();
+    scheduleViewportLayers(80);
   }
 
   function addSegmentStatic(seg, { deferLabels = false } = {}) {
@@ -3587,7 +3875,7 @@ export function createLeafletView(container) {
         opacity: isGhost ? 0.85 : isPlanned ? 0.72 : seg.opacity ?? 1,
         lineCap: isShuttle || isPlanned ? 'butt' : 'round',
         dashArray: isShuttle ? '10 8' : isPlanned ? '14 10' : null,
-        smoothFactor: 1.35,
+        smoothFactor: segments.size > 400 || busFullLoad || railFullLoad ? 2.2 : 1.35,
       })
     ).addTo(group);
     line._ghost = isGhost;
@@ -3600,7 +3888,7 @@ export function createLeafletView(container) {
 
     rememberSegment(seg, { group, line, labelLayer, bridgeLayer, latlngs, stations });
     applyRecLineOpacity(segments.get(seg.id));
-    if (modeFilter && classifyTransitMode(seg) !== modeFilter) {
+    if (modeFilters.size && !modeAllows(classifyTransitMode(seg))) {
       map.removeLayer(group);
     }
     if (!deferLabels) relayoutAllLabels();
@@ -3611,8 +3899,24 @@ export function createLeafletView(container) {
   }
 
   function invalidate() {
-    map.invalidateSize();
+    map.invalidateSize({ pan: false });
   }
+
+  function bindMobileMapSize() {
+    const bump = () => {
+      try {
+        map.invalidateSize({ pan: false });
+      } catch {
+        /* */
+      }
+    };
+    window.addEventListener('resize', bump, { passive: true });
+    window.addEventListener('orientationchange', () => setTimeout(bump, 200));
+    window.visualViewport?.addEventListener('resize', bump, { passive: true });
+    setTimeout(bump, 60);
+    setTimeout(bump, 320);
+  }
+  bindMobileMapSize();
 
   function notifyEdit() {
     onEditChange?.({
@@ -4344,6 +4648,10 @@ export function createLeafletView(container) {
     addSegmentStatic,
     registerBuses,
     syncViewportBuses,
+    setBusFullLoad,
+    setRailFullLoad,
+    isBusFullLoad: () => busFullLoad,
+    isRailFullLoad: () => railFullLoad,
     registerRails,
     syncViewportRails,
     onViewportChange: (fn) => {
@@ -4372,13 +4680,23 @@ export function createLeafletView(container) {
       scheduleBusSync();
     },
     setModeFilter: (mode) => {
-      const next = mode === 'metro' || mode === 'hsr' || mode === 'bus' ? mode : '';
-      if (next === modeFilter) return modeFilter;
-      modeFilter = next;
+      let next;
+      if (Array.isArray(mode) || mode instanceof Set) {
+        next = new Set([...mode].filter((m) => m === 'metro' || m === 'hsr' || m === 'bus'));
+      } else if (mode === 'metro' || mode === 'hsr' || mode === 'bus') {
+        next = new Set([mode]);
+      } else {
+        next = new Set();
+      }
+      const same =
+        next.size === modeFilters.size && [...next].every((m) => modeFilters.has(m));
+      if (same) return [...modeFilters];
+      modeFilters = next;
       applyModeFilter();
-      return modeFilter;
+      return [...modeFilters];
     },
-    getModeFilter: () => modeFilter,
+    getModeFilter: () => primaryMode(),
+    getModeFilters: () => [...modeFilters],
     listLines({ cityId = '', mode = '' } = {}) {
       const seen = new Map();
       const eat = (seg, color) => {
@@ -4472,20 +4790,70 @@ export function createLeafletView(container) {
         paths,
       };
     },
-    nationHud() {
+    nationHud({
+      countryId = '',
+      cityIds = null,
+      highspeedOnly = false,
+    } = {}) {
       let meters = 0;
+      let lines = 0;
+      let metroMeters = 0;
+      let busMeters = 0;
+      let hsMeters = 0;
+      let railMeters = 0;
+      const byBucket = {};
+      const citySet = cityIds instanceof Set ? cityIds : cityIds?.length ? new Set(cityIds) : null;
       const seen = new Set();
+      const inScope = (seg) => {
+        if (!countryId && !citySet) return true;
+        if (seg?.networkRail || seg?.ormRail) {
+          // 中国全网 id 前缀；ORM/世界网以 cityId=国码
+          if (countryId === 'cn') {
+            if (String(seg.id || '').startsWith('cn-rail-')) return true;
+            if (seg.cityId && citySet?.has(seg.cityId)) return true;
+            return false;
+          }
+          return seg.cityId === countryId;
+        }
+        if (citySet) {
+          if (seg.cityId && citySet.has(seg.cityId)) return true;
+          if (Array.isArray(seg.cityIds) && seg.cityIds.some((id) => citySet.has(id))) return true;
+          return false;
+        }
+        return !countryId || seg.cityId === countryId;
+      };
       const eat = (rec) => {
         if (!rec?.seg) return;
         if (!recModeVisible(rec)) return;
         if (rec.seg.style === 'planned' || rec.seg.style === 'ghost') return;
+        if (!inScope(rec.seg)) return;
+        if (highspeedOnly && !(rec.seg.highspeed || rec.seg.style === 'hsr')) return;
         if (seen.has(rec.seg.id)) return;
         seen.add(rec.seg.id);
+        lines += 1;
         const latlngs = rec.latlngs || [];
-        meters += rec.meters ?? (buildCumDist(latlngs)[latlngs.length ? latlngs.length - 1 : 0] || 0);
+        const m = rec.meters ?? (buildCumDist(latlngs)[latlngs.length ? latlngs.length - 1 : 0] || 0);
+        meters += m;
+        const mode = classifyTransitMode(rec.seg);
+        if (mode === 'bus') busMeters += m;
+        else if (mode === 'hsr') {
+          if (rec.seg.highspeed || rec.seg.style === 'hsr') hsMeters += m;
+          else railMeters += m;
+        } else metroMeters += m;
+        const bucket = classifyTransitBucket(rec.seg);
+        if (!byBucket[bucket]) byBucket[bucket] = { km: 0, lines: 0 };
+        byBucket[bucket].km += m / 1000;
+        byBucket[bucket].lines += 1;
       };
       for (const rec of segments.values()) eat(rec);
       for (const rec of growing.values()) eat(rec);
+      for (const rec of busIndex.values()) {
+        eat({
+          seg: rec.seg,
+          latlngs: rec.latlngs,
+          meters: rec.meters,
+        });
+      }
       for (const rec of railIndex.values()) {
         eat({
           seg: rec.seg,
@@ -4493,7 +4861,16 @@ export function createLeafletView(container) {
           meters: rec.meters,
         });
       }
-      return { km: meters / 1000 };
+      return {
+        km: meters / 1000,
+        lines,
+        metroKm: metroMeters / 1000,
+        busKm: busMeters / 1000,
+        hsKm: hsMeters / 1000,
+        railKm: railMeters / 1000,
+        buckets: byBucket,
+        bucketLabels: TRANSIT_BUCKET_LABEL,
+      };
     },
     snapCamera: (sc) => {
       if (!sc) return;

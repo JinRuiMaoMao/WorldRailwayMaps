@@ -5,7 +5,12 @@ import { createLeafletView } from './leafletView.js';
 import { loadAllCityOsm, loadChinaRailOsm, bindOsmToScenes, bindOsmToRailScenes } from './data/osmUtil.js';
 import { CHINA_RAIL_SCENES } from './data/chinaRail.js';
 import { bindOsmToBeijingScenes } from './data/beijingMetro.js';
-import { ensureCityBuses, loadBusManifest, allBoundCityBusSegments } from './data/cityBuses.js';
+import {
+  ensureCityBuses,
+  loadBusManifest,
+  loadAllCityBuses,
+  allBoundCityBusSegments,
+} from './data/cityBuses.js';
 import { DETAILED_CITIES } from './data/scenes.js';
 import {
   WORLD_CITIES,
@@ -19,8 +24,13 @@ import {
   allBoundWorldSegments,
   ensureWorldMetro,
   ensureWorldRailNetwork,
+  ensureWorldOrmRails,
+  ensureWorldOrmUrban,
+  loadAllWorldMetros,
+  loadAllWorldOrmRails,
   countriesIntersectingView,
   citiesNearView,
+  worldCityIds,
 } from './data/worldTransit.js';
 import {
   ensureChinaRailNetwork,
@@ -82,10 +92,20 @@ const state = {
   pickerLevel: 'world',
   atlasNavGen: 0,
   atlasReady: false,
+  /** 可叠加图层 */
+  modeFilters: new Set(['metro']),
+  /** 全量按钮聚焦的图层（最近点亮的） */
   modeFilter: 'metro',
   focusLine: '',
   busCities: ['beijing'],
+  /** 当前图层是否已点过全量：metro | hsr | bus */
+  layerFullLoad: { metro: false, hsr: false, bus: false },
+  layerFullLoading: false,
 };
+
+function modeOn(mode) {
+  return state.modeFilters.has(mode);
+}
 
 function scenes() {
   return CHAPTERS[state.chapter].scenes;
@@ -189,15 +209,29 @@ function buildApp() {
   document.getElementById('app').innerHTML = `
     <div class="demo atlas" id="demo">
       <header class="hud-top">
-        <div class="brand-mini" id="brand-mini">中国铁路 · 线路图</div>
+        <div class="brand-mini" id="brand-mini">World Railway Maps</div>
         <button type="button" class="city-picker-toggle" id="city-picker-toggle">国家</button>
         <div class="mode-filter" id="mode-filter">
           <button type="button" data-mode="metro" class="active">地铁</button>
           <button type="button" data-mode="hsr">高铁</button>
           <button type="button" data-mode="bus">公交</button>
+          <button type="button" class="bus-full-btn" id="layer-full-btn" title="开启后切换地铁/高铁/公交都会全量加载">全量</button>
         </div>
         <div class="atlas-count" id="atlas-count"></div>
       </header>
+
+      <div class="atlas-confirm" id="layer-full-confirm" hidden>
+        <div class="atlas-confirm-card" role="dialog" aria-labelledby="layer-full-title">
+          <h3 id="layer-full-title">全量加载？</h3>
+          <p id="layer-full-text">
+            会把已下载缓存一次挂上。数据量大，可能明显卡顿、发热、耗电；OSM 本身不全，全量也不会变成官方总里程。
+          </p>
+          <div class="atlas-confirm-actions">
+            <button type="button" class="atlas-confirm-cancel" id="layer-full-cancel">取消</button>
+            <button type="button" class="atlas-confirm-ok" id="layer-full-ok">仍然加载</button>
+          </div>
+        </div>
+      </div>
 
       <section class="map-stage">
         <aside class="city-picker" id="city-picker">
@@ -277,10 +311,8 @@ function ensureMap() {
     if (!state.atlasReady) return;
     clearTimeout(state.busViewTimer);
     state.busViewTimer = setTimeout(() => {
-      if (state.modeFilter === 'bus') loadViewportBuses();
-      else if (state.modeFilter === 'metro') loadViewportMetros();
-      else if (state.modeFilter === 'hsr') loadViewportWorldRails();
-    }, 140);
+      void loadActiveModeLayers();
+    }, 280);
   });
 }
 
@@ -401,11 +433,36 @@ function bindEvents() {
   document.getElementById('mode-filter')?.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-mode]');
     if (!btn) return;
-    setAtlasMode(btn.dataset.mode);
+    void toggleAtlasMode(btn.dataset.mode);
+  });
+
+  document.getElementById('layer-full-btn')?.addEventListener('click', () => {
+    const modes = activeModes();
+    if (!modes.length) return;
+    if (modes.every((m) => state.layerFullLoad[m])) {
+      setLayersFullLoad(modes, false);
+      return;
+    }
+    openLayerFullConfirm(modes);
+  });
+  document.getElementById('layer-full-cancel')?.addEventListener('click', closeLayerFullConfirm);
+  document.getElementById('layer-full-ok')?.addEventListener('click', () => {
+    const raw = document.getElementById('layer-full-confirm')?.dataset.modes || '';
+    const modes = raw.split(',').filter((m) => m === 'metro' || m === 'hsr' || m === 'bus');
+    closeLayerFullConfirm();
+    void enableLayersFullLoad(modes.length ? modes : activeModes());
+  });
+  document.getElementById('layer-full-confirm')?.addEventListener('click', (e) => {
+    if (e.target?.id === 'layer-full-confirm') closeLayerFullConfirm();
   });
 
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
+      const confirm = document.getElementById('layer-full-confirm');
+      if (confirm && !confirm.hidden) {
+        closeLayerFullConfirm();
+        return;
+      }
       const lineBox = document.getElementById('line-search');
       if (lineBox?.value) {
         lineBox.value = '';
@@ -614,7 +671,7 @@ async function openSearchedLine(hit) {
     .filter(Boolean);
   document.getElementById('city-picker')?.classList.remove('open');
   if (cityId && cityId !== state.atlasCityId) await selectAtlasCity(cityId);
-  if (mode && mode !== state.modeFilter) await setAtlasMode(mode);
+  if (mode && !modeOn(mode)) await toggleAtlasMode(mode, { forceOn: true });
   const badge = {
     dataset: {
       name: display || raw,
@@ -630,17 +687,35 @@ async function openSearchedLine(hit) {
 function updateModeLegend() {
   const legend = document.getElementById('guideway-legend');
   if (!legend) return;
-  const mode = state.modeFilter;
   const tram = legend.querySelector('.gw-elev')?.parentElement;
   const hsr = legend.querySelector('.gw-hsr')?.parentElement;
   const rail = legend.querySelector('.gw-rail')?.parentElement;
   const bus = legend.querySelector('.gw-bus')?.parentElement;
   const plan = legend.querySelector('.gw-plan')?.parentElement;
-  if (tram) tram.hidden = mode === 'bus' || mode === 'hsr';
-  if (hsr) hsr.hidden = mode !== 'hsr' && mode !== '';
-  if (rail) rail.hidden = mode !== 'hsr' && mode !== '';
-  if (bus) bus.hidden = mode !== 'bus' && mode !== '';
-  if (plan) plan.hidden = mode === 'bus';
+  if (tram) tram.hidden = !modeOn('metro');
+  if (hsr) hsr.hidden = !modeOn('hsr');
+  if (rail) rail.hidden = !modeOn('hsr');
+  if (bus) bus.hidden = !modeOn('bus');
+  if (plan) plan.hidden = modeOn('bus') && !modeOn('metro') && !modeOn('hsr');
+}
+
+function syncModeFilterUi() {
+  document.querySelectorAll('#mode-filter [data-mode]').forEach((b) => {
+    b.classList.toggle('active', modeOn(b.dataset.mode));
+  });
+  syncLayerFullBtn();
+  updateModeLegend();
+}
+
+async function loadActiveModeLayers() {
+  const jobs = [];
+  if (modeOn('metro')) jobs.push(loadViewportMetros());
+  if (modeOn('hsr')) {
+    if (chinaRailNetworkReady()) state.view?.registerRails?.(chinaRailNetworkSegments());
+    jobs.push(loadViewportWorldRails());
+  }
+  if (modeOn('bus')) jobs.push(loadViewportBuses());
+  await Promise.all(jobs);
 }
 
 function paintWorldSegs(segs) {
@@ -656,7 +731,7 @@ async function loadCountryTransit(countryId, preferCity) {
   const skip = chinaCityIds();
   if (preferCity && !skip.has(preferCity)) {
     paintWorldSegs(await ensureWorldMetro(preferCity));
-    state.view?.setModeFilter?.(state.modeFilter);
+    state.view?.setModeFilter?.([...state.modeFilters]);
   }
   const metro = await loadWorldMetroForCountry(countryId, skip);
   const rail = await loadWorldRailForCountry(countryId);
@@ -667,28 +742,87 @@ async function loadCountryTransit(countryId, preferCity) {
     state.view?.registerRails?.(netRails);
     state.view?.syncViewportRails?.();
   }
-  state.view?.setModeFilter?.(state.modeFilter);
+  state.view?.setModeFilter?.([...state.modeFilters]);
 }
 
+/** 低缩放世界总览时先挂的一批大城市，避免「只有灰底图」 */
+const OVERVIEW_METRO_CITIES = [
+  'beijing',
+  'shanghai',
+  'guangzhou',
+  'shenzhen',
+  'tokyo',
+  'osaka',
+  'seoul',
+  'singapore',
+  'hongkong',
+  'delhi',
+  'mumbai',
+  'bangkok',
+  'jakarta',
+  'manila',
+  'moscow',
+  'london',
+  'paris',
+  'berlin',
+  'madrid',
+  'nyc',
+  'chicago',
+  'mexico_city',
+  'sao_paulo',
+  'cairo',
+  'istanbul',
+  'tehran',
+  'sydney',
+  'melbourne',
+];
+
 async function loadViewportMetros() {
-  if (!state.atlasReady || !state.view || state.modeFilter !== 'metro') return;
+  if (!state.atlasReady || !state.view || !modeOn('metro')) return;
+  if (state.layerFullLoad.metro) {
+    paintWorldSegs(allBoundWorldSegments());
+    state.view?.setModeFilter?.([...state.modeFilters]);
+    refreshAtlasHud({ live: true });
+    return;
+  }
   const z = state.view.getZoom?.() ?? 0;
-  if (z < 6.5) return;
   const center = state.view.getCenter?.();
   if (!center) return;
-  const ids = new Set(citiesNearView(center, z));
+  const ids = new Set();
+  if (z < 6.5) {
+    for (const id of OVERVIEW_METRO_CITIES) ids.add(id);
+  } else {
+    for (const id of citiesNearView(center, z)) ids.add(id);
+  }
   if (state.atlasCityId) ids.add(state.atlasCityId);
   if (state.atlasCountryId && state.atlasCountryId !== 'cn') {
     for (const c of atlasCities().filter((x) => x.country === state.atlasCountryId)) ids.add(c.id);
   }
   const chunks = await Promise.all([...ids].map((id) => ensureWorldMetro(id)));
   paintWorldSegs(chunks.flat());
-  state.view?.setModeFilter?.(state.modeFilter);
+  // 视口国家 ORM 城轨轨位（地铁/轻轨/有轨）
+  const bounds = state.view.getBounds?.();
+  if (bounds && z >= 7.2) {
+    let cids = countriesIntersectingView(bounds, { pad: 0.6 });
+    if (state.atlasCountryId && state.atlasCountryId !== 'cn') {
+      cids = [state.atlasCountryId, ...cids.filter((x) => x !== state.atlasCountryId)];
+    }
+    if (cids.length > 8) cids = cids.slice(0, 8);
+    const urban = await Promise.all(cids.map((id) => ensureWorldOrmUrban(id)));
+    paintWorldSegs(urban.flat());
+  }
+  state.view?.setModeFilter?.([...state.modeFilters]);
 }
 
 async function loadViewportWorldRails() {
-  if (!state.atlasReady || !state.view || state.modeFilter !== 'hsr') {
+  if (!state.atlasReady || !state.view || !modeOn('hsr')) {
     state.view?.syncViewportRails?.();
+    return;
+  }
+  if (state.layerFullLoad.hsr) {
+    if (chinaRailNetworkReady()) state.view?.registerRails?.(chinaRailNetworkSegments());
+    state.view?.syncViewportRails?.();
+    refreshAtlasHud({ live: true });
     return;
   }
   const z = state.view.getZoom?.() ?? 0;
@@ -702,41 +836,181 @@ async function loadViewportWorldRails() {
   if (state.atlasCountryId && state.atlasCountryId !== 'cn') ids = [state.atlasCountryId, ...ids.filter((x) => x !== state.atlasCountryId)];
   // 视口国家过多时优先当前国 + 面积较小者，避免一次打爆
   if (ids.length > 12) ids = ids.slice(0, 12);
-  const chunks = await Promise.all(ids.map((id) => ensureWorldRailNetwork(id)));
-  const segs = chunks.flat();
+  const segs = (
+    await Promise.all(
+      ids.map(async (id) => {
+        const orm = await ensureWorldOrmRails(id);
+        if (orm.length) return orm;
+        return ensureWorldRailNetwork(id);
+      })
+    )
+  ).flat();
   if (segs.length) state.view?.registerRails?.(segs);
   // 中国全网始终可叠
   if (chinaRailNetworkReady()) state.view?.registerRails?.(chinaRailNetworkSegments());
   state.view?.syncViewportRails?.();
 }
 
+function busCityIds() {
+  const ids = new Set(state.busCities || []);
+  for (const c of atlasCities()) ids.add(c.id);
+  return [...ids];
+}
+
+function activeModes() {
+  return ['metro', 'hsr', 'bus'].filter((m) => modeOn(m));
+}
+
+function modesLabel(modes) {
+  return (modes || activeModes()).map((m) => MODE_LABEL[m]).join('+');
+}
+
+function syncLayerFullBtn() {
+  const btn = document.getElementById('layer-full-btn');
+  if (!btn) return;
+  const modes = activeModes();
+  btn.hidden = !modes.length;
+  const on = modes.length > 0 && modes.every((m) => state.layerFullLoad[m]);
+  btn.classList.toggle('active', on);
+  btn.disabled = !!state.layerFullLoading;
+  const tag = modesLabel(modes);
+  btn.textContent = state.layerFullLoading ? '加载中…' : on ? '已全量' : '全量';
+  btn.title = on
+    ? `关闭 ${tag} 全量，恢复视口懒加载`
+    : `全量加载当前叠加图层：${tag}`;
+}
+
+function openLayerFullConfirm(modes) {
+  const list = (modes?.length ? modes : activeModes()).filter(
+    (m) => m === 'metro' || m === 'hsr' || m === 'bus'
+  );
+  const el = document.getElementById('layer-full-confirm');
+  const title = document.getElementById('layer-full-title');
+  const text = document.getElementById('layer-full-text');
+  if (!el || !list.length) return;
+  el.dataset.modes = list.join(',');
+  const label = modesLabel(list);
+  if (title) title.textContent = `全量加载${label}？`;
+  if (text) {
+    text.textContent = `会把当前已叠加的「${label}」已缓存数据一次挂上。数据量大，可能明显卡顿、发热、耗电；OSM 本身不全，全量也不会变成官方总里程。`;
+  }
+  el.hidden = false;
+}
+
+function closeLayerFullConfirm() {
+  const el = document.getElementById('layer-full-confirm');
+  if (el) el.hidden = true;
+}
+
+function setLayersFullLoad(modes, on) {
+  const list = (modes?.length ? modes : activeModes()).filter(
+    (m) => m === 'metro' || m === 'hsr' || m === 'bus'
+  );
+  for (const mode of list) state.layerFullLoad[mode] = !!on;
+  if (list.includes('bus')) state.view?.setBusFullLoad?.(!!on);
+  if (list.includes('hsr')) state.view?.setRailFullLoad?.(!!on);
+  syncLayerFullBtn();
+  if (!on) {
+    void loadActiveModeLayers();
+    refreshAtlasHud({ live: true });
+  }
+}
+
+async function enableLayersFullLoad(modes) {
+  if (state.layerFullLoading) return;
+  const list = (modes?.length ? modes : activeModes()).filter(
+    (m) => m === 'metro' || m === 'hsr' || m === 'bus'
+  );
+  if (!list.length) return;
+  state.layerFullLoading = true;
+  syncLayerFullBtn();
+  const label = modesLabel(list);
+  setAtlasLoading(true, `正在全量加载${label}…`);
+  try {
+    if (list.includes('metro')) {
+      setAtlasLoading(true, `全量地铁…`);
+      const segs = await loadAllWorldMetros(worldCityIds(), (done, total) => {
+        setAtlasLoading(true, `全量地铁 ${done}/${total}`);
+      });
+      paintWorldSegs(segs);
+      paintWorldSegs(allBoundWorldSegments());
+      state.layerFullLoad.metro = true;
+    }
+    if (list.includes('hsr')) {
+      setAtlasLoading(true, `全量铁路…`);
+      if (chinaRailNetworkReady()) state.view?.registerRails?.(chinaRailNetworkSegments());
+      const segs = await loadAllWorldOrmRails(null, (done, total) => {
+        setAtlasLoading(true, `全量铁路 ${done}/${total}`);
+      });
+      if (segs.length) state.view?.registerRails?.(segs);
+      state.view?.setRailFullLoad?.(true);
+      state.view?.syncViewportRails?.();
+      state.layerFullLoad.hsr = true;
+    }
+    if (list.includes('bus')) {
+      setAtlasLoading(true, `全量公交…`);
+      await loadAllCityBuses(busCityIds(), (done, total) => {
+        setAtlasLoading(true, `全量公交 ${done}/${total}`);
+      });
+      state.view?.registerBuses?.(allBoundCityBusSegments());
+      state.view?.setBusFullLoad?.(true);
+      state.view?.syncViewportBuses?.();
+      state.layerFullLoad.bus = true;
+    }
+    state.view?.setModeFilter?.([...state.modeFilters]);
+    refreshAtlasHud({ live: true });
+  } finally {
+    state.layerFullLoading = false;
+    setAtlasLoading(false);
+    syncLayerFullBtn();
+  }
+}
+
 async function loadViewportBuses() {
-  if (!state.atlasReady || !state.view || state.modeFilter !== 'bus') {
+  if (!state.atlasReady || !state.view || !modeOn('bus')) {
     state.view?.syncViewportBuses?.();
     return;
   }
+  if (state.layerFullLoad.bus) {
+    state.view?.registerBuses?.(allBoundCityBusSegments());
+    state.view?.syncViewportBuses?.();
+    refreshAtlasHud({ live: true });
+    return;
+  }
   const z = state.view.getZoom?.() ?? 0;
-  if (z < 9) {
+  // 公交线极密：全球/大洲视口不拉全量；选中国家可略早加载
+  const minZ = state.atlasCityId ? 8 : state.atlasCountryId ? 7.5 : 9;
+  if (z < minZ) {
     state.view.syncViewportBuses?.();
+    refreshAtlasHud({ live: true });
     return;
   }
   const center = state.view.getCenter?.();
   if (!center) return;
   const ids = new Set();
   if (state.atlasCityId) ids.add(state.atlasCityId);
-  const deg = z >= 12 ? 0.35 : z >= 10 ? 0.7 : 1.2;
+  const deg = z >= 12 ? 0.35 : z >= 10 ? 0.7 : state.atlasCountryId ? 1.8 : 1.2;
   const lngScale = Math.max(0.4, Math.cos((center.lat * Math.PI) / 180));
-  for (const c of atlasCities()) {
+  const pool =
+    state.atlasCountryId && !state.atlasCityId
+      ? atlasCities().filter((c) => c.country === state.atlasCountryId)
+      : atlasCities();
+  for (const c of pool) {
     if (c.lat == null || c.lng == null) continue;
     if (Math.abs(c.lat - center.lat) <= deg && Math.abs(c.lng - center.lng) <= deg / lngScale) {
       ids.add(c.id);
     }
+  }
+  // 国家全境：视口内无点时仍拉本国前几城，避免公里数一直为 0
+  if (!ids.size && state.atlasCountryId && !state.atlasCityId) {
+    for (const c of pool.slice(0, 6)) ids.add(c.id);
   }
   for (const id of ids) {
     const segs = await ensureCityBuses(id);
     state.view.registerBuses?.(segs);
   }
   state.view.syncViewportBuses?.();
+  refreshAtlasHud({ live: true });
 }
 
 async function loadCityBusesOntoMap(cityId) {
@@ -749,39 +1023,43 @@ async function loadCityBusesOntoMap(cityId) {
   state.view?.syncViewportBuses?.();
 }
 
+/** 切换图层：可叠加；至少保留一个 */
+async function toggleAtlasMode(mode, { forceOn = false } = {}) {
+  const next = mode === 'metro' || mode === 'hsr' || mode === 'bus' ? mode : '';
+  if (!next) return;
+  if (forceOn) {
+    state.modeFilters.add(next);
+    state.modeFilter = next;
+  } else if (state.modeFilters.has(next)) {
+    if (state.modeFilters.size <= 1) return;
+    state.modeFilters.delete(next);
+    if (state.modeFilter === next) {
+      state.modeFilter = [...state.modeFilters][0];
+    }
+  } else {
+    state.modeFilters.add(next);
+    state.modeFilter = next;
+  }
+  clearLineFocus();
+  state.view?.setModeFilter?.([...state.modeFilters]);
+  state.hudLineKey = '';
+  syncModeFilterUi();
+  await loadActiveModeLayers();
+  refreshAtlasHud();
+  state.view?.relayoutAllLabels?.();
+}
+
+/** 兼容：单选切到某一模式（搜索定位等） */
 async function setAtlasMode(mode) {
   const next = mode === 'metro' || mode === 'hsr' || mode === 'bus' ? mode : 'metro';
+  state.modeFilters = new Set([next]);
   state.modeFilter = next;
-  document.querySelectorAll('#mode-filter [data-mode]').forEach((b) => {
-    b.classList.toggle('active', b.dataset.mode === next);
-  });
   clearLineFocus();
-  state.view?.setModeFilter?.(next);
+  state.view?.setModeFilter?.([next]);
   state.hudLineKey = '';
-  updateModeLegend();
-  if (next === 'bus') await loadViewportBuses();
-  else if (next === 'metro') await loadViewportMetros();
-  else if (next === 'hsr') {
-    if (chinaRailNetworkReady()) state.view?.registerRails?.(chinaRailNetworkSegments());
-    await loadViewportWorldRails();
-  }
+  syncModeFilterUi();
+  await loadActiveModeLayers();
   refreshAtlasHud();
-  if (!state.view) return;
-  if (state.atlasCityId) {
-    await state.view.flyToCityNetwork?.(state.atlasCityId, {
-      maxZoom: next === 'bus' ? 12.4 : 12.2,
-    });
-    state.view.relayoutAllLabels?.();
-    return;
-  }
-  if (state.atlasCountryId) {
-    const co = worldCountryById(state.atlasCountryId);
-    if (co?.bbox) await state.view.flyToBBox?.(co.bbox, { maxZoom: 6.4 });
-    else if (state.atlasCountryId === 'cn') await state.view.flyChina?.();
-    state.view.relayoutAllLabels?.();
-    return;
-  }
-  await state.view.flyTo?.(10, 22, 2.2);
 }
 
 function markAtlasCity() {
@@ -806,14 +1084,18 @@ async function selectAtlasWorld() {
   clearLineFocus();
   if (!state.view) return;
   state.view.setStampCity?.('');
-  await state.view.flyTo?.(10, 22, 2.2);
+  // 以欧亚为中心的世界总览（旧坐标 10,22 落在大西洋，手机上看起来像「没地图」）
+  await state.view.flyTo?.(95, 28, 3.2);
   if (!atlasNavAlive(gen)) return;
-  if (state.modeFilter === 'hsr') await loadViewportWorldRails();
-  else if (state.modeFilter === 'metro') await loadViewportMetros();
-  else if (state.modeFilter === 'bus') await loadViewportBuses();
+  await loadActiveModeLayers();
   if (!atlasNavAlive(gen)) return;
   state.view.relayoutAllLabels?.();
   refreshAtlasHud();
+  // 移动端首屏布局晚于 Leaflet 初始化，补一次尺寸
+  requestAnimationFrame(() => {
+    state.view?.invalidate?.();
+    setTimeout(() => state.view?.invalidate?.(), 280);
+  });
 }
 
 async function selectAtlasCountry(id) {
@@ -832,9 +1114,7 @@ async function selectAtlasCountry(id) {
   if (co?.bbox) await state.view.flyToBBox?.(co.bbox, { maxZoom: 6.4 });
   else await state.view.flyChina?.();
   if (!atlasNavAlive(gen)) return;
-  if (state.modeFilter === 'bus') await loadViewportBuses();
-  else if (state.modeFilter === 'metro') await loadViewportMetros();
-  else if (state.modeFilter === 'hsr') await loadViewportWorldRails();
+  await loadActiveModeLayers();
   if (!atlasNavAlive(gen)) return;
   state.view.relayoutAllLabels?.();
   refreshAtlasHud();
@@ -856,9 +1136,9 @@ async function selectAtlasCity(cityId, countryHint) {
   await loadCountryTransit(state.atlasCountryId, cityId);
   if (!atlasNavAlive(gen)) return;
   state.view.setStampCity?.(cityId);
-  const busP = loadCityBusesOntoMap(cityId);
+  const layersP = loadActiveModeLayers();
   const flew = await state.view.flyToCityNetwork?.(cityId, {
-    maxZoom: state.modeFilter === 'bus' ? 12.4 : 12.2,
+    maxZoom: modeOn('bus') && !modeOn('metro') ? 12.4 : 12.2,
   });
   if (!atlasNavAlive(gen)) return;
   if (!flew) {
@@ -866,7 +1146,7 @@ async function selectAtlasCity(cityId, countryHint) {
     if (place) await state.view.flyTo(place.lng, place.lat, 11.2);
   }
   if (!atlasNavAlive(gen)) return;
-  await busP;
+  await layersP;
   if (!atlasNavAlive(gen)) return;
   state.view.relayoutAllLabels?.();
   refreshAtlasHud();
@@ -906,7 +1186,7 @@ function badgeLineAliases(badge) {
 async function focusAtlasMapLine(info) {
   if (!info?.line || state.editing || state.exporting || !state.view) return;
   if (info.cityId && info.cityId !== state.atlasCityId) await selectAtlasCity(info.cityId);
-  if (info.mode && info.mode !== state.modeFilter) await setAtlasMode(info.mode);
+  if (info.mode && !modeOn(info.mode)) await toggleAtlasMode(info.mode, { forceOn: true });
   const display = displayLineName(info.line, 2026);
   const aliases = new Set([info.line, display]);
   const badge = [...document.querySelectorAll('.city-line-badge')].find(
@@ -947,13 +1227,65 @@ function refreshAtlasHud({ live = false } = {}) {
   if (!kmWrap || !stWrap || !linesEl) return;
 
   if (!cityId) {
-    const nation = state.view?.nationHud?.() || { km: 0 };
+    const scopeCities =
+      state.atlasCountryId === 'cn'
+        ? chinaAtlasCities().map((c) => c.id)
+        : state.atlasCountryId
+          ? atlasCities().filter((c) => c.country === state.atlasCountryId).map((c) => c.id)
+          : null;
+    const nation =
+      state.view?.nationHud?.({
+        countryId: state.atlasCountryId || '',
+        cityIds: scopeCities,
+      }) || {
+        km: 0,
+        lines: 0,
+        metroKm: 0,
+        busKm: 0,
+        hsKm: 0,
+        railKm: 0,
+      };
     if (placeEl) {
       placeEl.textContent = scopeLabel();
       placeEl.hidden = false;
     }
     kmWrap.hidden = false;
-    document.getElementById('city-km').textContent = formatCityKm(nation.km);
+    // 目标口径：全球运营公共交通线路总长（相加、不去重）；主数字=当前可见已加载合计
+    const onlyHsr = modeOn('hsr') && !modeOn('metro') && !modeOn('bus');
+    const showKm = onlyHsr && nation.hsKm > 0 ? nation.hsKm : nation.km;
+    document.getElementById('city-km').textContent = formatCityKm(showKm);
+    const kmLab = kmWrap.querySelector('.city-stat-lab');
+    if (kmLab) {
+      const order = [
+        'subway',
+        'light_rail',
+        'tram',
+        'monorail',
+        'hsr',
+        'commuter',
+        'rail',
+        'brt',
+        'trolleybus',
+        'bus',
+        'ferry',
+        'funicular',
+      ];
+      const labels = nation.bucketLabels || {};
+      const buckets = nation.buckets || {};
+      const parts = [];
+      for (const key of order) {
+        const b = buckets[key];
+        if (!b?.km) continue;
+        parts.push(`${labels[key] || key} ${formatCityKm(b.km)}`);
+      }
+      const n = nation.lines || 0;
+      const head = '运营线路公里·未去重·已加载';
+      kmLab.textContent = parts.length
+        ? `${head} · ${parts.join(' · ')}${n ? ` · ${n.toLocaleString('zh-CN')} 条` : ''}`
+        : head;
+      kmLab.title =
+        '目标：全球实际运营公共交通线路总长（公交/BRT/无轨/地铁/轻轨/有轨/单轨/高铁/普铁/通勤城际/渡轮等），线路里程相加、共用段不去重。此数为当前图上已加载部分。';
+    }
     state.hudCityId = null;
     state.hudLineKey = '';
     stWrap.hidden = true;
@@ -978,6 +1310,8 @@ function refreshAtlasHud({ live = false } = {}) {
   }
   kmWrap.hidden = false;
   document.getElementById('city-km').textContent = formatCityKm(stats.km);
+  const kmLabCity = kmWrap.querySelector('.city-stat-lab');
+  if (kmLabCity) kmLabCity.textContent = '公里';
   document.getElementById('city-st').textContent = String(stats.stations);
   stWrap.hidden = false;
   const legendOn = document.getElementById('guideway-legend');
@@ -996,7 +1330,7 @@ function refreshAtlasHud({ live = false } = {}) {
   const merged = new Map();
   const rawsByDisplay = new Map();
   const linesRaw = [...stats.lines].sort((a, b) => compareLineNames(a.name, b.name));
-  const lines = state.modeFilter === 'bus' || state.modeFilter === 'hsr' ? linesRaw.slice(0, 80) : linesRaw;
+  const lines = modeOn('bus') || modeOn('hsr') ? linesRaw.slice(0, 80) : linesRaw;
   for (const ln of lines) {
     const name = displayLineName(ln.name, 2026);
     if (!merged.has(name)) merged.set(name, ln.color);
@@ -1043,7 +1377,8 @@ async function openAtlas() {
   state.atlasReady = true;
   paintWorldSegs(allBoundWorldSegments());
   setAtlasLoading(false);
-  state.view?.setModeFilter?.(state.modeFilter);
+  state.view?.setModeFilter?.([...state.modeFilters]);
+  syncModeFilterUi();
   if (state.atlasCityId) await selectAtlasCity(state.atlasCityId, state.atlasCountryId);
   else if (state.atlasCountryId) await selectAtlasCountry(state.atlasCountryId);
   else await selectAtlasWorld();
@@ -1060,7 +1395,7 @@ function switchChapter(id) {
 
 function updateChapterChrome() {
   const brand = document.getElementById('brand-mini');
-  if (brand) brand.textContent = '中国铁路 · 线路图';
+  if (brand) brand.textContent = 'World Railway Maps';
 }
 
 function resetLayers(bag) {
@@ -1461,13 +1796,7 @@ async function rebuildStaticUpTo(index, bag, want) {
     paintWorldSegs(allBoundWorldSegments());
     state.view?.registerBuses?.(allBoundCityBusSegments());
     state.view?.registerRails?.(chinaRailNetworkSegments());
-    if (state.modeFilter === 'hsr') await loadViewportWorldRails();
-    else {
-      state.view?.syncViewportBuses?.();
-      state.view?.syncViewportRails?.();
-    }
-    if (state.modeFilter === 'metro') await loadViewportMetros();
-    if (state.modeFilter === 'bus') await loadViewportBuses();
+    await loadActiveModeLayers();
   }
 }
 
@@ -1548,7 +1877,7 @@ function fadeToastOut() {
 
 function showEnd() {
   document.getElementById('end-text').textContent =
-    '地铁、高铁与规划已在同一张地图演示完毕。可重新播放或导出视频。';
+    '地铁、铁路与公交线网已加载完毕。';
   document.getElementById('end-card').classList.add('show');
 }
 
