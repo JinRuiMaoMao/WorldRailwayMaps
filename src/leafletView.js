@@ -103,12 +103,12 @@ export function createLeafletView(container) {
     return thinLatLngs(src, minM);
   }
 
-  // 同源 OSM 代理：浏览和导出都能画进 canvas；外网回退 Esri 浅色底
+  // 本地用同源 OSM 代理；线上也用 OSM（Esri Light Gray 放大后会出 Map Data Not Yet Available）
   const localHost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
   let baseLayer = L.tileLayer(
     localHost
       ? `${location.origin}/export-tiles/{z}/{x}/{y}.png`
-      : 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+      : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     {
       maxZoom: 19,
       maxNativeZoom: 19,
@@ -117,9 +117,7 @@ export function createLeafletView(container) {
       updateWhenIdle: false,
       updateWhenZooming: false,
       updateInterval: 0,
-      attribution: localHost
-        ? '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        : '&copy; Esri',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }
   ).addTo(map);
 
