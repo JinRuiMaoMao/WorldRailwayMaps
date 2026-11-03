@@ -1,0 +1,15 @@
+{
+  "city": "ziyang",
+  "source": "OpenStreetMap path ends + Chengdu Amap 福田",
+  "generatedAt": "2026-10-21T06:55:00.000Z",
+  "stations": {
+    "福田": [104.384875, 30.280656],
+    "资阳北站": [104.678613, 30.129489]
+  },
+  "lines": {
+    "S3资阳线: 福田 → 资阳北站": {
+      "color": "#9D9D9E",
+      "stations": ["福田", "资阳北站"]
+    }
+  }
+}

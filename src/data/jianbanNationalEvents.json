@@ -1,0 +1,9837 @@
+{
+  "beijing": [
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地下铁道401",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1971-01-15",
+      "demo": "北京站-立新",
+      "stations": [
+        {
+          "name": "北京站",
+          "deferred": false
+        },
+        {
+          "name": "崇文门",
+          "deferred": false
+        },
+        {
+          "name": "前门",
+          "deferred": false
+        },
+        {
+          "name": "新华街",
+          "deferred": false
+        },
+        {
+          "name": "宣武门",
+          "deferred": false
+        },
+        {
+          "name": "长椿街",
+          "deferred": false
+        },
+        {
+          "name": "南礼士路",
+          "deferred": false
+        },
+        {
+          "name": "木樨地",
+          "deferred": false
+        },
+        {
+          "name": "军事博物馆",
+          "deferred": false
+        },
+        {
+          "name": "立新",
+          "deferred": false
+        },
+        {
+          "name": "（北京站-立新）开始售票试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地下铁道401",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1971-08-15",
+      "demo": "立新-玉泉路",
+      "stations": [
+        {
+          "name": "立新",
+          "deferred": true
+        },
+        {
+          "name": "万寿路",
+          "deferred": false
+        },
+        {
+          "name": "五棵松",
+          "deferred": false
+        },
+        {
+          "name": "玉泉路",
+          "deferred": false
+        },
+        {
+          "name": "（立新-玉泉路）对外开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地下铁道401",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1971-11-07",
+      "demo": "玉泉路-古城路",
+      "stations": [
+        {
+          "name": "玉泉路",
+          "deferred": true
+        },
+        {
+          "name": "八宝山",
+          "deferred": false
+        },
+        {
+          "name": "八角村",
+          "deferred": false
+        },
+        {
+          "name": "古城路",
+          "deferred": false
+        },
+        {
+          "name": "（玉泉路-古城路）对外开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地下铁道402",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1973-04-23",
+      "demo": "古城-苹果园",
+      "stations": [
+        {
+          "name": "古城路",
+          "deferred": true
+        },
+        {
+          "name": "苹果园",
+          "deferred": false
+        },
+        {
+          "name": "古城车辆段",
+          "deferred": false
+        },
+        {
+          "name": "（古城路-苹果园）对外开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地铁二期 （环线）",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1984-09-20",
+      "demo": "建国门-复兴门",
+      "stations": [
+        {
+          "name": "复兴门",
+          "deferred": false
+        },
+        {
+          "name": "阜成门",
+          "deferred": false
+        },
+        {
+          "name": "车公庄",
+          "deferred": false
+        },
+        {
+          "name": "西直门",
+          "deferred": false
+        },
+        {
+          "name": "积水潭",
+          "deferred": false
+        },
+        {
+          "name": "鼓楼大街",
+          "deferred": false
+        },
+        {
+          "name": "安定门",
+          "deferred": false
+        },
+        {
+          "name": "雍和宫",
+          "deferred": false
+        },
+        {
+          "name": "东直门",
+          "deferred": false
+        },
+        {
+          "name": "东四十条",
+          "deferred": false
+        },
+        {
+          "name": "（复兴门-建国门）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地铁一线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "*/1985年",
+      "demo": "立新站更名为公主坟站",
+      "stations": [
+        {
+          "name": "公主坟",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地铁环线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "1987-12-28",
+      "demo": "二期更名为环线",
+      "stations": [
+        {
+          "name": "环线",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地铁2号线 （环线）",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "新华街更名和平门",
+      "stations": [
+        {
+          "name": "和平门",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地铁一线",
+      "alias": null,
+      "status": "线路拆分",
+      "date": null,
+      "demo": "北京站-南礼士路",
+      "stations": [
+        {
+          "name": "南礼士路",
+          "deferred": true
+        },
+        {
+          "name": "长椿街",
+          "deferred": false
+        },
+        {
+          "name": "宣武门",
+          "deferred": false
+        },
+        {
+          "name": "新华街",
+          "deferred": false
+        },
+        {
+          "name": "前门",
+          "deferred": false
+        },
+        {
+          "name": "崇文门",
+          "deferred": false
+        },
+        {
+          "name": "北京站",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地铁环线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1987-12-28",
+      "demo": "建国门-复兴门",
+      "stations": [
+        {
+          "name": "建国门",
+          "deferred": true
+        },
+        {
+          "name": "北京站",
+          "deferred": false
+        },
+        {
+          "name": "崇文门",
+          "deferred": false
+        },
+        {
+          "name": "前门",
+          "deferred": false
+        },
+        {
+          "name": "和平门",
+          "deferred": false
+        },
+        {
+          "name": "宣武门",
+          "deferred": false
+        },
+        {
+          "name": "长椿街",
+          "deferred": false
+        },
+        {
+          "name": "复兴门",
+          "deferred": true
+        },
+        {
+          "name": "（建国门-复兴门）形成闭环运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地铁一线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "南礼士路-复兴门",
+      "stations": [
+        {
+          "name": "南礼士路",
+          "deferred": true
+        },
+        {
+          "name": "复兴门",
+          "deferred": false
+        },
+        {
+          "name": "延长至复兴门站站后折返运行",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地铁复八线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1992-12-12",
+      "demo": "复兴门-西单",
+      "stations": [
+        {
+          "name": "复兴门",
+          "deferred": true
+        },
+        {
+          "name": "西单",
+          "deferred": false
+        },
+        {
+          "name": "（复兴门-西单）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地铁一线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "*/1996年",
+      "demo": "八角村站更名为八角游乐园站",
+      "stations": [
+        {
+          "name": "八角游乐园",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地铁复八线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1999-09-28",
+      "demo": "天安门西-四惠东",
+      "stations": [
+        {
+          "name": "天安门西",
+          "deferred": false
+        },
+        {
+          "name": "天安门东",
+          "deferred": false
+        },
+        {
+          "name": "王府井",
+          "deferred": false
+        },
+        {
+          "name": "东单",
+          "deferred": false
+        },
+        {
+          "name": "建国门",
+          "deferred": false
+        },
+        {
+          "name": "永安里",
+          "deferred": false
+        },
+        {
+          "name": "国贸",
+          "deferred": false
+        },
+        {
+          "name": "大望路",
+          "deferred": false
+        },
+        {
+          "name": "四惠",
+          "deferred": false
+        },
+        {
+          "name": "四惠东",
+          "deferred": false
+        },
+        {
+          "name": "（天安门西-四惠东）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "北京",
+      "line": "北京地铁一线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2000-06-28",
+      "demo": "复八线并入一线",
+      "stations": [
+        {
+          "name": "西单",
+          "deferred": true
+        },
+        {
+          "name": "天安门西",
+          "deferred": true
+        },
+        {
+          "name": "与复八线合并贯通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁2号线",
+      "alias": "环线",
+      "status": "车站更名",
+      "date": "2002-01-01",
+      "demo": "重新命名为2号线",
+      "stations": [
+        {
+          "name": "2号线",
+          "deferred": true
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁1号线",
+      "alias": "1号线",
+      "status": "车站更名",
+      "date": "2002-07-24",
+      "demo": "一线更名为1号线",
+      "stations": [
+        {
+          "name": "1号线",
+          "deferred": true
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "城铁西线 (北京城市轻轨铁路)",
+      "alias": "西线",
+      "status": "线路开通",
+      "date": "2002-09-28",
+      "demo": "西直门-霍营",
+      "stations": [
+        {
+          "name": "西直门",
+          "deferred": false
+        },
+        {
+          "name": "大钟寺",
+          "deferred": false
+        },
+        {
+          "name": "知春路",
+          "deferred": false
+        },
+        {
+          "name": "五道口",
+          "deferred": false
+        },
+        {
+          "name": "上地",
+          "deferred": false
+        },
+        {
+          "name": "西二旗",
+          "deferred": false
+        },
+        {
+          "name": "龙泽",
+          "deferred": false
+        },
+        {
+          "name": "回龙观",
+          "deferred": false
+        },
+        {
+          "name": "霍营",
+          "deferred": false
+        },
+        {
+          "name": "回龙观车辆段",
+          "deferred": false
+        },
+        {
+          "name": "（西直门-霍营）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁13号线 (北京城市轻轨铁路)",
+      "alias": "东线",
+      "status": "线路开通",
+      "date": "2003-01-28",
+      "demo": "霍营-东直门",
+      "stations": [
+        {
+          "name": "霍营",
+          "deferred": true
+        },
+        {
+          "name": "立水桥",
+          "deferred": false
+        },
+        {
+          "name": "北苑",
+          "deferred": false
+        },
+        {
+          "name": "望京西",
+          "deferred": false
+        },
+        {
+          "name": "芍药居",
+          "deferred": false
+        },
+        {
+          "name": "光熙门",
+          "deferred": false
+        },
+        {
+          "name": "柳芳",
+          "deferred": false
+        },
+        {
+          "name": "东直门",
+          "deferred": false
+        },
+        {
+          "name": "东段（霍营-东直门）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁八通线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2003-12-27",
+      "demo": "四惠-土桥",
+      "stations": [
+        {
+          "name": "四惠",
+          "deferred": false
+        },
+        {
+          "name": "四惠东",
+          "deferred": false
+        },
+        {
+          "name": "高碑店",
+          "deferred": false
+        },
+        {
+          "name": "广播学院",
+          "deferred": false
+        },
+        {
+          "name": "双桥",
+          "deferred": false
+        },
+        {
+          "name": "管庄",
+          "deferred": false
+        },
+        {
+          "name": "八里桥",
+          "deferred": false
+        },
+        {
+          "name": "通州北苑",
+          "deferred": false
+        },
+        {
+          "name": "果园",
+          "deferred": false
+        },
+        {
+          "name": "九棵树",
+          "deferred": false
+        },
+        {
+          "name": "一期（四惠-土桥）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁八通线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2007-04-11",
+      "demo": "广播学院站更名为传媒大学站",
+      "stations": [
+        {
+          "name": "传媒大学",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁13号线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2007-07-09",
+      "demo": "线路标识色更改为黄色",
+      "stations": [
+        {
+          "name": "橘黄色",
+          "deferred": true
+        },
+        {
+          "name": "黄色",
+          "deferred": true
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁13号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": "2007-10-07",
+      "demo": "西直门、东直门站内换乘",
+      "stations": [
+        {
+          "name": "西直门",
+          "deferred": false
+        },
+        {
+          "name": "东直门",
+          "deferred": false
+        },
+        {
+          "name": "四惠",
+          "deferred": false
+        },
+        {
+          "name": "四惠东",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁5号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "宋家庄-天通苑北",
+      "stations": [
+        {
+          "name": "宋家庄",
+          "deferred": false
+        },
+        {
+          "name": "刘家窑",
+          "deferred": false
+        },
+        {
+          "name": "蒲黄榆",
+          "deferred": false
+        },
+        {
+          "name": "天坛东门",
+          "deferred": false
+        },
+        {
+          "name": "磁器口",
+          "deferred": false
+        },
+        {
+          "name": "崇文门",
+          "deferred": false
+        },
+        {
+          "name": "东单",
+          "deferred": false
+        },
+        {
+          "name": "灯市口",
+          "deferred": false
+        },
+        {
+          "name": "东四",
+          "deferred": false
+        },
+        {
+          "name": "张自忠路",
+          "deferred": false
+        },
+        {
+          "name": "（宋家庄-天通苑北）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁1号线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "*/2008年",
+      "demo": "古城路站更名为古城站",
+      "stations": [
+        {
+          "name": "古城",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁10号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2008-07-19",
+      "demo": "巴沟-劲松",
+      "stations": [
+        {
+          "name": "巴沟",
+          "deferred": false
+        },
+        {
+          "name": "苏州街",
+          "deferred": false
+        },
+        {
+          "name": "海淀黄庄",
+          "deferred": false
+        },
+        {
+          "name": "知春里",
+          "deferred": false
+        },
+        {
+          "name": "知春路",
+          "deferred": false
+        },
+        {
+          "name": "西土城",
+          "deferred": false
+        },
+        {
+          "name": "牡丹园",
+          "deferred": false
+        },
+        {
+          "name": "健德门",
+          "deferred": false
+        },
+        {
+          "name": "北土城",
+          "deferred": false
+        },
+        {
+          "name": "安贞门",
+          "deferred": false
+        },
+        {
+          "name": "一期（巴沟-劲松）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁奥运支线",
+      "alias": "8号线",
+      "status": "线路开通",
+      "date": null,
+      "demo": "森林公园南门-北土城",
+      "stations": [
+        {
+          "name": "北土城",
+          "deferred": false
+        },
+        {
+          "name": "奥体中心",
+          "deferred": true
+        },
+        {
+          "name": "奥林匹克公园",
+          "deferred": false
+        },
+        {
+          "name": "森林公园南门",
+          "deferred": false
+        },
+        {
+          "name": "需持证或门票",
+          "deferred": false
+        },
+        {
+          "name": "万柳车辆段",
+          "deferred": false
+        },
+        {
+          "name": "（北土城-森林公园南门）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁机场线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "东直门-2号航站楼/3号航站楼",
+      "stations": [
+        {
+          "name": "东直门",
+          "deferred": false
+        },
+        {
+          "name": "三元桥",
+          "deferred": false
+        },
+        {
+          "name": "3号航站楼",
+          "deferred": false
+        },
+        {
+          "name": "2号航站楼",
+          "deferred": false
+        },
+        {
+          "name": "天竺车辆段",
+          "deferred": false
+        },
+        {
+          "name": "（东直门-3号航站楼/2号航站楼）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "北京",
+      "line": "北京地铁8号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2008-10-09",
+      "demo": "森林公园南门-北土城",
+      "stations": [
+        {
+          "name": "森林公园南门",
+          "deferred": false
+        },
+        {
+          "name": "奥林匹克公园",
+          "deferred": false
+        },
+        {
+          "name": "奥体中心",
+          "deferred": false
+        },
+        {
+          "name": "北土城",
+          "deferred": false
+        },
+        {
+          "name": "（北土城-森林公园南门）正式对公众开放运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "北京",
+      "line": "北京地铁4号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2009-09-28",
+      "demo": "公益西桥-安河桥北",
+      "stations": [
+        {
+          "name": "安河桥北",
+          "deferred": false
+        },
+        {
+          "name": "北宫门",
+          "deferred": false
+        },
+        {
+          "name": "西苑",
+          "deferred": false
+        },
+        {
+          "name": "圆明园",
+          "deferred": false
+        },
+        {
+          "name": "北京大学东门",
+          "deferred": false
+        },
+        {
+          "name": "中关村",
+          "deferred": false
+        },
+        {
+          "name": "海淀黄庄",
+          "deferred": false
+        },
+        {
+          "name": "人民大学",
+          "deferred": false
+        },
+        {
+          "name": "魏公村",
+          "deferred": false
+        },
+        {
+          "name": "国家图书馆",
+          "deferred": false
+        },
+        {
+          "name": "（安河桥北-公益西桥）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "北京",
+      "line": "北京地铁13号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2010-12-25",
+      "demo": "西二旗站启用新站",
+      "stations": [
+        {
+          "name": "西二旗",
+          "deferred": false
+        },
+        {
+          "name": "新站房位于旧站房北侧",
+          "deferred": false
+        },
+        {
+          "name": "西二旗站启用新站",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "北京",
+      "line": "北京地铁大兴线",
+      "alias": "贯通4号线",
+      "status": "线路开通",
+      "date": "2010-12-30",
+      "demo": "公益西桥-天宫院",
+      "stations": [
+        {
+          "name": "新宫",
+          "deferred": false
+        },
+        {
+          "name": "西红门",
+          "deferred": false
+        },
+        {
+          "name": "高米店北",
+          "deferred": false
+        },
+        {
+          "name": "高米店南",
+          "deferred": false
+        },
+        {
+          "name": "枣园",
+          "deferred": false
+        },
+        {
+          "name": "清源路",
+          "deferred": false
+        },
+        {
+          "name": "黄村西大街",
+          "deferred": false
+        },
+        {
+          "name": "黄村火车站",
+          "deferred": false
+        },
+        {
+          "name": "义和庄",
+          "deferred": false
+        },
+        {
+          "name": "生物医药基地",
+          "deferred": false
+        },
+        {
+          "name": "（新宫-天宫院）与4号线贯通开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "北京",
+      "line": "北京地铁房山线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "大葆台-苏庄",
+      "stations": [
+        {
+          "name": "大葆台",
+          "deferred": false
+        },
+        {
+          "name": "稻田",
+          "deferred": false
+        },
+        {
+          "name": "长阳",
+          "deferred": false
+        },
+        {
+          "name": "篱笆房",
+          "deferred": false
+        },
+        {
+          "name": "广阳城",
+          "deferred": false
+        },
+        {
+          "name": "良乡大学城北",
+          "deferred": false
+        },
+        {
+          "name": "良乡大学城",
+          "deferred": false
+        },
+        {
+          "name": "良乡大学城西",
+          "deferred": false
+        },
+        {
+          "name": "良乡南关",
+          "deferred": false
+        },
+        {
+          "name": "苏庄",
+          "deferred": false
+        },
+        {
+          "name": "一期（大葆台-苏庄）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "北京",
+      "line": "北京地铁亦庄线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "宋家庄-次渠",
+      "stations": [
+        {
+          "name": "宋家庄",
+          "deferred": false
+        },
+        {
+          "name": "肖村",
+          "deferred": false
+        },
+        {
+          "name": "小红门",
+          "deferred": false
+        },
+        {
+          "name": "旧宫",
+          "deferred": false
+        },
+        {
+          "name": "亦庄桥",
+          "deferred": false
+        },
+        {
+          "name": "亦庄文化园",
+          "deferred": false
+        },
+        {
+          "name": "万源街",
+          "deferred": false
+        },
+        {
+          "name": "荣京东街",
+          "deferred": false
+        },
+        {
+          "name": "荣昌东街",
+          "deferred": false
+        },
+        {
+          "name": "同济南路",
+          "deferred": false
+        },
+        {
+          "name": "一期（宋家庄-亦庄火车站*）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "北京",
+      "line": "北京地铁15号线",
+      "alias": "一期首通段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "望京西-后沙峪",
+      "stations": [
+        {
+          "name": "望京西",
+          "deferred": false
+        },
+        {
+          "name": "望京",
+          "deferred": false
+        },
+        {
+          "name": "望京东",
+          "deferred": true
+        },
+        {
+          "name": "崔各庄",
+          "deferred": false
+        },
+        {
+          "name": "马泉营",
+          "deferred": false
+        },
+        {
+          "name": "孙河",
+          "deferred": false
+        },
+        {
+          "name": "国展",
+          "deferred": false
+        },
+        {
+          "name": "花梨坎",
+          "deferred": false
+        },
+        {
+          "name": "后沙峪",
+          "deferred": false
+        },
+        {
+          "name": "香江北路车辆段",
+          "deferred": false
+        },
+        {
+          "name": "一期首通段（望京西-后沙峪）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "北京",
+      "line": "北京地铁昌平线 （27号线）",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "西二旗-南邵",
+      "stations": [
+        {
+          "name": "西二旗",
+          "deferred": false
+        },
+        {
+          "name": "生命科学园",
+          "deferred": false
+        },
+        {
+          "name": "朱辛庄",
+          "deferred": false
+        },
+        {
+          "name": "巩华城",
+          "deferred": false
+        },
+        {
+          "name": "沙河",
+          "deferred": false
+        },
+        {
+          "name": "沙河高教园",
+          "deferred": false
+        },
+        {
+          "name": "南邵",
+          "deferred": false
+        },
+        {
+          "name": "定泗路停车场",
+          "deferred": false
+        },
+        {
+          "name": "一期（西二旗-南邵）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "北京",
+      "line": "北京地铁8号线",
+      "alias": "一期",
+      "status": "线路停运",
+      "date": "2011-10-15",
+      "demo": "森林公园南门-北土城",
+      "stations": [
+        {
+          "name": "森林公园南门",
+          "deferred": true
+        },
+        {
+          "name": "奥林匹克公园",
+          "deferred": true
+        },
+        {
+          "name": "奥体中心",
+          "deferred": true
+        },
+        {
+          "name": "北土城",
+          "deferred": true
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "北京",
+      "line": "北京地铁房山线",
+      "alias": "一期剩余段",
+      "status": "线路开通",
+      "date": "2011-12-31",
+      "demo": "大葆台-郭公庄",
+      "stations": [
+        {
+          "name": "大葆台",
+          "deferred": true
+        },
+        {
+          "name": "郭公庄",
+          "deferred": false
+        },
+        {
+          "name": "一期剩余段（大葆台-郭公庄）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "北京",
+      "line": "北京地铁9号线",
+      "alias": "南段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "郭公庄-北京西站",
+      "stations": [
+        {
+          "name": "郭公庄",
+          "deferred": false
+        },
+        {
+          "name": "丰台科技园",
+          "deferred": false
+        },
+        {
+          "name": "科怡路",
+          "deferred": false
+        },
+        {
+          "name": "丰台南路",
+          "deferred": false
+        },
+        {
+          "name": "丰台东大街",
+          "deferred": true
+        },
+        {
+          "name": "七里庄",
+          "deferred": false
+        },
+        {
+          "name": "六里桥",
+          "deferred": false
+        },
+        {
+          "name": "六里桥东",
+          "deferred": false
+        },
+        {
+          "name": "北京西站",
+          "deferred": false
+        },
+        {
+          "name": "郭公庄车辆段",
+          "deferred": false
+        },
+        {
+          "name": "南段（郭公庄-北京西站）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "北京",
+      "line": "北京地铁8号线",
+      "alias": "二期北段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "回龙观东大街-北土城",
+      "stations": [
+        {
+          "name": "北土城",
+          "deferred": false
+        },
+        {
+          "name": "奥体中心",
+          "deferred": false
+        },
+        {
+          "name": "奥林匹克公园",
+          "deferred": false
+        },
+        {
+          "name": "森林公园南门",
+          "deferred": false
+        },
+        {
+          "name": "林萃桥",
+          "deferred": false
+        },
+        {
+          "name": "永泰庄",
+          "deferred": false
+        },
+        {
+          "name": "西小口",
+          "deferred": false
+        },
+        {
+          "name": "育新",
+          "deferred": false
+        },
+        {
+          "name": "霍营",
+          "deferred": false
+        },
+        {
+          "name": "回龙观东大街",
+          "deferred": false
+        },
+        {
+          "name": "一期二期北段（北土城-回龙观东大街）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "北京",
+      "line": "北京地铁15号线",
+      "alias": "一期后通段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "后沙峪-俸伯",
+      "stations": [
+        {
+          "name": "后沙峪",
+          "deferred": true
+        },
+        {
+          "name": "南法信",
+          "deferred": false
+        },
+        {
+          "name": "石门",
+          "deferred": false
+        },
+        {
+          "name": "顺义",
+          "deferred": false
+        },
+        {
+          "name": "俸伯",
+          "deferred": false
+        },
+        {
+          "name": "俸伯停车场",
+          "deferred": false
+        },
+        {
+          "name": "一期后通段（后沙峪-俸伯）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "北京",
+      "line": "北京地铁9号线",
+      "alias": "南段",
+      "status": "车站开通",
+      "date": "2012-10-12",
+      "demo": "丰台东大街站投入运营",
+      "stations": [
+        {
+          "name": "丰台东大街",
+          "deferred": false
+        },
+        {
+          "name": "丰台东大街站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "北京",
+      "line": "北京地铁9号线",
+      "alias": "北段",
+      "status": "线路开通",
+      "date": "2012-12-30",
+      "demo": "北京西站-国家图书馆",
+      "stations": [
+        {
+          "name": "北京西站",
+          "deferred": true
+        },
+        {
+          "name": "军事博物馆",
+          "deferred": true
+        },
+        {
+          "name": "白堆子",
+          "deferred": false
+        },
+        {
+          "name": "白石桥南",
+          "deferred": false
+        },
+        {
+          "name": "国家图书馆",
+          "deferred": false
+        },
+        {
+          "name": "北段（北京西站-国家图书馆）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "北京",
+      "line": "北京地铁10号线",
+      "alias": "二期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "劲松-首经贸",
+      "stations": [
+        {
+          "name": "首经贸",
+          "deferred": false
+        },
+        {
+          "name": "纪家庙",
+          "deferred": false
+        },
+        {
+          "name": "草桥",
+          "deferred": false
+        },
+        {
+          "name": "角门西",
+          "deferred": false
+        },
+        {
+          "name": "角门东",
+          "deferred": true
+        },
+        {
+          "name": "大红门",
+          "deferred": false
+        },
+        {
+          "name": "石榴庄",
+          "deferred": false
+        },
+        {
+          "name": "宋家庄",
+          "deferred": false
+        },
+        {
+          "name": "成寿寺",
+          "deferred": false
+        },
+        {
+          "name": "分钟寺",
+          "deferred": false
+        },
+        {
+          "name": "二期东南段（劲松-首经贸）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "北京",
+      "line": "北京地铁10号线",
+      "alias": "二期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "巴沟-西局",
+      "stations": [
+        {
+          "name": "巴沟",
+          "deferred": true
+        },
+        {
+          "name": "火器营",
+          "deferred": false
+        },
+        {
+          "name": "长春桥",
+          "deferred": false
+        },
+        {
+          "name": "车道沟",
+          "deferred": false
+        },
+        {
+          "name": "慈寿寺",
+          "deferred": false
+        },
+        {
+          "name": "西钓鱼台",
+          "deferred": false
+        },
+        {
+          "name": "公主坟",
+          "deferred": false
+        },
+        {
+          "name": "莲花桥",
+          "deferred": false
+        },
+        {
+          "name": "六里桥",
+          "deferred": false
+        },
+        {
+          "name": "西局",
+          "deferred": false
+        },
+        {
+          "name": "二期西段（巴沟-西局）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "北京",
+      "line": "北京地铁8号线",
+      "alias": "二期南段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "北土城-鼓楼大街",
+      "stations": [
+        {
+          "name": "北土城",
+          "deferred": true
+        },
+        {
+          "name": "安华桥",
+          "deferred": false
+        },
+        {
+          "name": "安德里北街",
+          "deferred": true
+        },
+        {
+          "name": "鼓楼大街",
+          "deferred": false
+        },
+        {
+          "name": "二期南段（北土城-鼓楼大街）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "北京",
+      "line": "北京地铁6号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "海淀五路居-草房",
+      "stations": [
+        {
+          "name": "海淀五路居",
+          "deferred": false
+        },
+        {
+          "name": "慈寿寺",
+          "deferred": false
+        },
+        {
+          "name": "花园桥",
+          "deferred": false
+        },
+        {
+          "name": "白石桥南",
+          "deferred": false
+        },
+        {
+          "name": "车公庄西",
+          "deferred": false
+        },
+        {
+          "name": "车公庄",
+          "deferred": false
+        },
+        {
+          "name": "平安里",
+          "deferred": false
+        },
+        {
+          "name": "北海北",
+          "deferred": false
+        },
+        {
+          "name": "南锣鼓巷",
+          "deferred": false
+        },
+        {
+          "name": "东四",
+          "deferred": false
+        },
+        {
+          "name": "一期（海淀五路居-草房）开通试运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "changchun": [
+    {
+      "period": 2,
+      "city": "长春",
+      "line": "长春轻轨1号线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "*/2006年",
+      "demo": "长春轻轨一期",
+      "stations": [
+        {
+          "name": "长春轻轨一期",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "长春",
+      "line": "长春轻轨二期",
+      "alias": "二期\n\n净月线",
+      "status": "线路开通",
+      "date": "2006-12-26",
+      "demo": "卫星广场-长影世纪城",
+      "stations": [
+        {
+          "name": "卫星广场",
+          "deferred": false
+        },
+        {
+          "name": "亚泰大街",
+          "deferred": false
+        },
+        {
+          "name": "伊通河",
+          "deferred": false
+        },
+        {
+          "name": "临河街",
+          "deferred": false
+        },
+        {
+          "name": "仙台大街",
+          "deferred": false
+        },
+        {
+          "name": "会展中心",
+          "deferred": false
+        },
+        {
+          "name": "世纪广场",
+          "deferred": false
+        },
+        {
+          "name": "中医药大学",
+          "deferred": false
+        },
+        {
+          "name": "博硕路",
+          "deferred": false
+        },
+        {
+          "name": "博学路",
+          "deferred": false
+        },
+        {
+          "name": "（卫星广场-长影世纪城）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "长春",
+      "line": "长春轻轨1号线",
+      "alias": "轻轨",
+      "status": "线路开通",
+      "date": "2007-04-03",
+      "demo": "卫光街-卫星广场",
+      "stations": [
+        {
+          "name": "卫光街",
+          "deferred": true
+        },
+        {
+          "name": "卫星广场",
+          "deferred": true
+        },
+        {
+          "name": "一、二期（长春站-长影世纪城）贯通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "长春",
+      "line": "长春轻轨二期",
+      "alias": null,
+      "status": "车站更名",
+      "date": "*/2008年6月",
+      "demo": "博硕路站更名东北师大站",
+      "stations": [
+        {
+          "name": "东北师大",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "长春",
+      "line": "长春轻轨一期",
+      "alias": null,
+      "status": "车站更名",
+      "date": "*/2009年",
+      "demo": "前进西站更名为前进站",
+      "stations": [
+        {
+          "name": "前进",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "长春",
+      "line": "长春轻轨",
+      "alias": "一、二期",
+      "status": "车站更名",
+      "date": null,
+      "demo": "长春轻轨3号线",
+      "stations": [
+        {
+          "name": "长春轻轨3号线",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "长春",
+      "line": "长春轨道交通4号线",
+      "alias": "轻轨",
+      "status": "线路开通",
+      "date": null,
+      "demo": "东大桥-车场",
+      "stations": [
+        {
+          "name": "东大桥",
+          "deferred": false
+        },
+        {
+          "name": "东新路",
+          "deferred": true
+        },
+        {
+          "name": "吉林大路",
+          "deferred": false
+        },
+        {
+          "name": "公平路",
+          "deferred": true
+        },
+        {
+          "name": "自由大路",
+          "deferred": false
+        },
+        {
+          "name": "浦东路",
+          "deferred": false
+        },
+        {
+          "name": "东南湖大路",
+          "deferred": false
+        },
+        {
+          "name": "北海路",
+          "deferred": false
+        },
+        {
+          "name": "卫星路",
+          "deferred": false
+        },
+        {
+          "name": "世荣路",
+          "deferred": false
+        },
+        {
+          "name": "一期高架段（东大桥-车场）开通观光运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "长春",
+      "line": "长春轨道交通4号线",
+      "alias": "轻轨",
+      "status": "线路开通",
+      "date": "2012-05-06",
+      "demo": "长春站-东大桥",
+      "stations": [
+        {
+          "name": "东大桥",
+          "deferred": true
+        },
+        {
+          "name": "伪皇宫站",
+          "deferred": false
+        },
+        {
+          "name": "北亚泰大街",
+          "deferred": false
+        },
+        {
+          "name": "长春站北",
+          "deferred": false
+        },
+        {
+          "name": "一期地下段（东大桥-长春站北）开通观光运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "长春",
+      "line": "长春轨道交通4号线",
+      "alias": "轻轨",
+      "status": "车站开通",
+      "date": "2012-09-22",
+      "demo": "临河街站与卫星路站换乘",
+      "stations": [
+        {
+          "name": "临河街",
+          "deferred": true
+        },
+        {
+          "name": "卫星路",
+          "deferred": true
+        },
+        {
+          "name": "站内换乘",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "changsha": [
+    {
+      "period": 1,
+      "city": "长沙",
+      "line": "港铁MTR-荃湾线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1982-05-10",
+      "demo": "旺角-荃湾",
+      "stations": [
+        {
+          "name": "太子",
+          "deferred": true
+        },
+        {
+          "name": "深水埗",
+          "deferred": true
+        },
+        {
+          "name": "长沙湾",
+          "deferred": true
+        },
+        {
+          "name": "荔枝角",
+          "deferred": true
+        },
+        {
+          "name": "荔湾",
+          "deferred": true
+        },
+        {
+          "name": "荔景",
+          "deferred": false
+        },
+        {
+          "name": "葵芳",
+          "deferred": false
+        },
+        {
+          "name": "葵兴",
+          "deferred": false
+        },
+        {
+          "name": "大窝口",
+          "deferred": false
+        },
+        {
+          "name": "荃湾",
+          "deferred": false
+        },
+        {
+          "name": "（太子-荃湾）正式投入服务",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "长沙",
+      "line": "港铁MTR-荃湾线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1982-05-17",
+      "demo": "多座车站投入服务",
+      "stations": [
+        {
+          "name": "太子",
+          "deferred": false
+        },
+        {
+          "name": "深水埗",
+          "deferred": false
+        },
+        {
+          "name": "长沙湾",
+          "deferred": false
+        },
+        {
+          "name": "荔枝角",
+          "deferred": false
+        },
+        {
+          "name": "荔湾",
+          "deferred": false
+        },
+        {
+          "name": "多座暂缓车站投入服务",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "chengdu": [
+    {
+      "period": 3,
+      "city": "成都",
+      "line": "成都地铁1号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "升仙湖-世纪城",
+      "stations": [
+        {
+          "name": "升仙湖",
+          "deferred": false
+        },
+        {
+          "name": "火车北站",
+          "deferred": false
+        },
+        {
+          "name": "人民北路",
+          "deferred": false
+        },
+        {
+          "name": "文殊院",
+          "deferred": false
+        },
+        {
+          "name": "骡马市",
+          "deferred": false
+        },
+        {
+          "name": "天府广场",
+          "deferred": false
+        },
+        {
+          "name": "锦江宾馆",
+          "deferred": false
+        },
+        {
+          "name": "华西坝",
+          "deferred": false
+        },
+        {
+          "name": "省体育馆",
+          "deferred": false
+        },
+        {
+          "name": "倪家桥",
+          "deferred": false
+        },
+        {
+          "name": "一期（升仙湖-世纪城）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "成都",
+      "line": "成都地铁2号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2012-09-16",
+      "demo": "茶店子客运站-成都行政学院",
+      "stations": [
+        {
+          "name": "成都行政学院",
+          "deferred": false
+        },
+        {
+          "name": "洪河",
+          "deferred": false
+        },
+        {
+          "name": "惠王陵",
+          "deferred": false
+        },
+        {
+          "name": "成渝立交",
+          "deferred": false
+        },
+        {
+          "name": "成都东客站",
+          "deferred": false
+        },
+        {
+          "name": "塔子山公园",
+          "deferred": false
+        },
+        {
+          "name": "东大路",
+          "deferred": false
+        },
+        {
+          "name": "牛市口",
+          "deferred": false
+        },
+        {
+          "name": "牛王庙",
+          "deferred": false
+        },
+        {
+          "name": "东门大桥",
+          "deferred": false
+        },
+        {
+          "name": "一期（茶店子客运站-成都行政学院）开通试运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "chongqing": [
+    {
+      "period": 2,
+      "city": "重庆",
+      "line": "重庆轨道交通2号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2005-06-18",
+      "demo": "较场口-动物园",
+      "stations": [
+        {
+          "name": "较场口",
+          "deferred": false
+        },
+        {
+          "name": "临江门",
+          "deferred": false
+        },
+        {
+          "name": "黄花园",
+          "deferred": false
+        },
+        {
+          "name": "大溪沟",
+          "deferred": false
+        },
+        {
+          "name": "曾家岩",
+          "deferred": false
+        },
+        {
+          "name": "牛角沱",
+          "deferred": false
+        },
+        {
+          "name": "李子坝",
+          "deferred": false
+        },
+        {
+          "name": "佛图关",
+          "deferred": false
+        },
+        {
+          "name": "大坪",
+          "deferred": false
+        },
+        {
+          "name": "袁家岗",
+          "deferred": false
+        },
+        {
+          "name": "一期（较场口-动物园）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "重庆",
+      "line": "重庆轨道交通2号线",
+      "alias": "二期",
+      "status": "线路开通",
+      "date": "2006-07-01",
+      "demo": "动物园-新山村",
+      "stations": [
+        {
+          "name": "动物园",
+          "deferred": true
+        },
+        {
+          "name": "大堰村",
+          "deferred": false
+        },
+        {
+          "name": "马王场",
+          "deferred": false
+        },
+        {
+          "name": "平安",
+          "deferred": false
+        },
+        {
+          "name": "大渡口",
+          "deferred": false
+        },
+        {
+          "name": "新山村",
+          "deferred": false
+        },
+        {
+          "name": "二期（动物园-新山村）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "重庆",
+      "line": "重庆轨道交通2号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": "2006-07-10",
+      "demo": "谢家湾站投入运营",
+      "stations": [
+        {
+          "name": "谢家湾",
+          "deferred": false
+        },
+        {
+          "name": "谢家湾站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通1号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2011-07-28",
+      "demo": "沙坪坝-较场口",
+      "stations": [
+        {
+          "name": "沙坪坝",
+          "deferred": false
+        },
+        {
+          "name": "小龙坎",
+          "deferred": false
+        },
+        {
+          "name": "马家岩",
+          "deferred": true
+        },
+        {
+          "name": "高庙村",
+          "deferred": true
+        },
+        {
+          "name": "石桥铺",
+          "deferred": false
+        },
+        {
+          "name": "歇台子",
+          "deferred": false
+        },
+        {
+          "name": "石油路",
+          "deferred": false
+        },
+        {
+          "name": "大坪",
+          "deferred": false
+        },
+        {
+          "name": "鹅岭",
+          "deferred": false
+        },
+        {
+          "name": "两路口",
+          "deferred": false
+        },
+        {
+          "name": "一期（沙坪坝-小什字*）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通1号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2011-09-27",
+      "demo": "小什字站投入运营",
+      "stations": [
+        {
+          "name": "小什字",
+          "deferred": false
+        },
+        {
+          "name": "小什字站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通3号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2011-09-29",
+      "demo": "两路口-鸳鸯",
+      "stations": [
+        {
+          "name": "两路口",
+          "deferred": false
+        },
+        {
+          "name": "牛角沱",
+          "deferred": false
+        },
+        {
+          "name": "华新街",
+          "deferred": false
+        },
+        {
+          "name": "观音桥",
+          "deferred": false
+        },
+        {
+          "name": "红旗河沟",
+          "deferred": true
+        },
+        {
+          "name": "嘉州路",
+          "deferred": false
+        },
+        {
+          "name": "郑家院子",
+          "deferred": true
+        },
+        {
+          "name": "唐家院子",
+          "deferred": false
+        },
+        {
+          "name": "狮子坪",
+          "deferred": false
+        },
+        {
+          "name": "重庆北站",
+          "deferred": false
+        },
+        {
+          "name": "一期（两路口-鸳鸯）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通1号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": "2011-10-17",
+      "demo": "高庙村站投入运营",
+      "stations": [
+        {
+          "name": "高庙村",
+          "deferred": false
+        },
+        {
+          "name": "高庙村站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通3号线",
+      "alias": "二期",
+      "status": "线路开通",
+      "date": "2011-11-08",
+      "demo": "鸳鸯-长福路",
+      "stations": [
+        {
+          "name": "鸳鸯",
+          "deferred": true
+        },
+        {
+          "name": "园博园",
+          "deferred": false
+        },
+        {
+          "name": "翠云",
+          "deferred": false
+        },
+        {
+          "name": "长福路",
+          "deferred": false
+        },
+        {
+          "name": "一期（鸳鸯-长福路）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通3号线",
+      "alias": "一期",
+      "status": "车站开通",
+      "date": "2011-12-30",
+      "demo": "童家院子站投入运营",
+      "stations": [
+        {
+          "name": "童家院子",
+          "deferred": false
+        },
+        {
+          "name": "童家院子站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通3号线",
+      "alias": "二期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "长福路-江北机场",
+      "stations": [
+        {
+          "name": "长福路",
+          "deferred": true
+        },
+        {
+          "name": "回兴",
+          "deferred": false
+        },
+        {
+          "name": "双龙",
+          "deferred": false
+        },
+        {
+          "name": "碧津",
+          "deferred": false
+        },
+        {
+          "name": "江北机场",
+          "deferred": false
+        },
+        {
+          "name": "一期（长福路-江北机场）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通3号线",
+      "alias": "南延段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "两路口-二塘",
+      "stations": [
+        {
+          "name": "两路口",
+          "deferred": true
+        },
+        {
+          "name": "铜元局",
+          "deferred": true
+        },
+        {
+          "name": "工贸",
+          "deferred": true
+        },
+        {
+          "name": "南坪",
+          "deferred": false
+        },
+        {
+          "name": "四公里",
+          "deferred": false
+        },
+        {
+          "name": "五公里",
+          "deferred": false
+        },
+        {
+          "name": "六公里",
+          "deferred": false
+        },
+        {
+          "name": "二塘",
+          "deferred": false
+        },
+        {
+          "name": "南延段（两路口-二塘）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通",
+      "alias": "2/1号线",
+      "status": "车站开通",
+      "date": "2012-03-01",
+      "demo": "较场口站实现站内换乘",
+      "stations": [
+        {
+          "name": "较场口",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通3号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": null,
+      "demo": "红旗河沟站投入运营",
+      "stations": [
+        {
+          "name": "红旗河沟",
+          "deferred": false
+        },
+        {
+          "name": "红旗河沟站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通3号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": "2012-05-01",
+      "demo": "郑家院子站投入运营",
+      "stations": [
+        {
+          "name": "郑家院子",
+          "deferred": false
+        },
+        {
+          "name": "郑家院子站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通6号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2012-09-28",
+      "demo": "五里店-康庄",
+      "stations": [
+        {
+          "name": "五里店",
+          "deferred": false
+        },
+        {
+          "name": "拉风箱",
+          "deferred": false
+        },
+        {
+          "name": "一期（五里店-康庄）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通1号线",
+      "alias": "二期",
+      "status": "线路开通",
+      "date": "2012-12-20",
+      "demo": "沙坪坝-大学城",
+      "stations": [
+        {
+          "name": "沙坪坝",
+          "deferred": true
+        },
+        {
+          "name": "杨公桥",
+          "deferred": false
+        },
+        {
+          "name": "烈士墓",
+          "deferred": false
+        },
+        {
+          "name": "磁器口",
+          "deferred": false
+        },
+        {
+          "name": "石井坡",
+          "deferred": true
+        },
+        {
+          "name": "双碑",
+          "deferred": false
+        },
+        {
+          "name": "赖家桥",
+          "deferred": false
+        },
+        {
+          "name": "微电园",
+          "deferred": true
+        },
+        {
+          "name": "陈家桥",
+          "deferred": false
+        },
+        {
+          "name": "大学城",
+          "deferred": false
+        },
+        {
+          "name": "二期（沙坪坝-大学城）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通6号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2012-12-26",
+      "demo": "康庄-礼嘉",
+      "stations": [
+        {
+          "name": "康庄",
+          "deferred": true
+        },
+        {
+          "name": "九曲河",
+          "deferred": true
+        },
+        {
+          "name": "礼嘉",
+          "deferred": false
+        },
+        {
+          "name": "一期（康庄-礼嘉）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通3号线",
+      "alias": "南延段",
+      "status": "线路开通",
+      "date": "2012-12-28",
+      "demo": "二塘-鱼洞",
+      "stations": [
+        {
+          "name": "二塘",
+          "deferred": true
+        },
+        {
+          "name": "八公里",
+          "deferred": false
+        },
+        {
+          "name": "麒龙",
+          "deferred": false
+        },
+        {
+          "name": "九公里",
+          "deferred": false
+        },
+        {
+          "name": "岔路口",
+          "deferred": true
+        },
+        {
+          "name": "花溪",
+          "deferred": true
+        },
+        {
+          "name": "大山村",
+          "deferred": false
+        },
+        {
+          "name": "学堂湾",
+          "deferred": false
+        },
+        {
+          "name": "鱼胡路",
+          "deferred": false
+        },
+        {
+          "name": "金竹",
+          "deferred": true
+        },
+        {
+          "name": "南延段（二塘-鱼洞）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "重庆",
+      "line": "重庆轨道交通3号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": null,
+      "demo": "工贸、铜元局站投入运营",
+      "stations": [
+        {
+          "name": "工贸",
+          "deferred": false
+        },
+        {
+          "name": "铜元局",
+          "deferred": false
+        },
+        {
+          "name": "铜元局站、工贸站投入运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "dalian": [
+    {
+      "period": 2,
+      "city": "大连",
+      "line": "大连快轨3号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2003-05-01",
+      "demo": "香炉礁-金石滩",
+      "stations": [
+        {
+          "name": "金石滩",
+          "deferred": false
+        },
+        {
+          "name": "黄海大道*",
+          "deferred": true
+        },
+        {
+          "name": "小窑湾",
+          "deferred": true
+        },
+        {
+          "name": "双D港",
+          "deferred": false
+        },
+        {
+          "name": "高城山*",
+          "deferred": true
+        },
+        {
+          "name": "保税区",
+          "deferred": false
+        },
+        {
+          "name": "开发区",
+          "deferred": false
+        },
+        {
+          "name": "金马路",
+          "deferred": false
+        },
+        {
+          "name": "快轨车辆段（员工）",
+          "deferred": false
+        },
+        {
+          "name": "大连湾",
+          "deferred": false
+        },
+        {
+          "name": "一期（香炉礁-金石滩）正式运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "大连",
+      "line": "大连快轨3号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "香炉礁-大连火车站",
+      "stations": [
+        {
+          "name": "香炉礁",
+          "deferred": true
+        },
+        {
+          "name": "大连站",
+          "deferred": false
+        },
+        {
+          "name": "二期（香炉礁-大连站）正式运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "大连",
+      "line": "大连快轨3号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": null,
+      "demo": "小窑湾站投入运营",
+      "stations": [
+        {
+          "name": "小窑湾",
+          "deferred": false
+        },
+        {
+          "name": "小窑湾站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "大连",
+      "line": "大连快轨3号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "开发区-九里",
+      "stations": [
+        {
+          "name": "开发区",
+          "deferred": true
+        },
+        {
+          "name": "通世泰",
+          "deferred": false
+        },
+        {
+          "name": "鸿玮澜山",
+          "deferred": false
+        },
+        {
+          "name": "东山路",
+          "deferred": false
+        },
+        {
+          "name": "和平路",
+          "deferred": false
+        },
+        {
+          "name": "十九局",
+          "deferred": false
+        },
+        {
+          "name": "九里",
+          "deferred": false
+        },
+        {
+          "name": "九里车辆段",
+          "deferred": false
+        },
+        {
+          "name": "（开发区-九里）正式运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "guangzhou": [
+    {
+      "period": 1,
+      "city": "广州",
+      "line": "广州地铁1号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1997-06-28",
+      "demo": "西朗-黄沙",
+      "stations": [
+        {
+          "name": "西朗",
+          "deferred": false
+        },
+        {
+          "name": "坑口",
+          "deferred": false
+        },
+        {
+          "name": "花地湾",
+          "deferred": false
+        },
+        {
+          "name": "芳村",
+          "deferred": false
+        },
+        {
+          "name": "黄沙",
+          "deferred": false
+        },
+        {
+          "name": "西朗车辆段",
+          "deferred": false
+        },
+        {
+          "name": "首通段（西朗-黄沙）观光试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "广州",
+      "line": "广州地铁1号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1999-02-16",
+      "demo": "黄沙-广州东站",
+      "stations": [
+        {
+          "name": "黄沙",
+          "deferred": true
+        },
+        {
+          "name": "长寿路",
+          "deferred": false
+        },
+        {
+          "name": "陈家祠",
+          "deferred": false
+        },
+        {
+          "name": "西门口",
+          "deferred": false
+        },
+        {
+          "name": "公园前",
+          "deferred": false
+        },
+        {
+          "name": "农讲所",
+          "deferred": false
+        },
+        {
+          "name": "烈士陵园",
+          "deferred": false
+        },
+        {
+          "name": "东山口",
+          "deferred": false
+        },
+        {
+          "name": "杨箕",
+          "deferred": false
+        },
+        {
+          "name": "体育西路",
+          "deferred": false
+        },
+        {
+          "name": "全线（西朗-广州东站）开通商业运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "广州",
+      "line": "广州地铁2号线",
+      "alias": "首通段",
+      "status": "线路开通",
+      "date": "2002-12-29",
+      "demo": "三元里-晓港",
+      "stations": [
+        {
+          "name": "三元里",
+          "deferred": false
+        },
+        {
+          "name": "广州火车站",
+          "deferred": false
+        },
+        {
+          "name": "越秀公园",
+          "deferred": false
+        },
+        {
+          "name": "纪念堂",
+          "deferred": false
+        },
+        {
+          "name": "公园前",
+          "deferred": false
+        },
+        {
+          "name": "海珠广场",
+          "deferred": false
+        },
+        {
+          "name": "市二宫",
+          "deferred": false
+        },
+        {
+          "name": "江南西",
+          "deferred": false
+        },
+        {
+          "name": "晓港",
+          "deferred": false
+        },
+        {
+          "name": "西朗车辆段",
+          "deferred": false
+        },
+        {
+          "name": "首通段（三元里-晓港）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "广州",
+      "line": " 广州地铁2号线",
+      "alias": "后通段",
+      "status": "线路开通",
+      "date": "2003-06-28",
+      "demo": "晓港-琶洲",
+      "stations": [
+        {
+          "name": "晓港",
+          "deferred": true
+        },
+        {
+          "name": "中大",
+          "deferred": false
+        },
+        {
+          "name": "鹭江",
+          "deferred": false
+        },
+        {
+          "name": "客村",
+          "deferred": false
+        },
+        {
+          "name": "赤岗",
+          "deferred": false
+        },
+        {
+          "name": "磨碟沙",
+          "deferred": false
+        },
+        {
+          "name": "新港东",
+          "deferred": false
+        },
+        {
+          "name": "琶洲",
+          "deferred": false
+        },
+        {
+          "name": "后通段（晓港-琶洲）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "广州",
+      "line": "广州地铁3号线",
+      "alias": "首通段",
+      "status": "线路开通",
+      "date": "2005-12-26",
+      "demo": "广州东站-客村",
+      "stations": [
+        {
+          "name": "客村",
+          "deferred": false
+        },
+        {
+          "name": "赤岗塔",
+          "deferred": false
+        },
+        {
+          "name": "珠江新城",
+          "deferred": false
+        },
+        {
+          "name": "体育西路",
+          "deferred": false
+        },
+        {
+          "name": "林和西",
+          "deferred": false
+        },
+        {
+          "name": "广州东站",
+          "deferred": false
+        },
+        {
+          "name": "赤沙车辆段",
+          "deferred": false
+        },
+        {
+          "name": "首通段（广州东站-客村）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "广州",
+      "line": "广州地铁2号线",
+      "alias": "调整工程",
+      "status": "线路开通",
+      "date": null,
+      "demo": "琶洲-万胜围",
+      "stations": [
+        {
+          "name": "琶洲",
+          "deferred": true
+        },
+        {
+          "name": "万胜围",
+          "deferred": false
+        },
+        {
+          "name": "调整工程（琶洲-万胜围）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "广州",
+      "line": "广州地铁4号线",
+      "alias": "大学城专线",
+      "status": "线路开通",
+      "date": null,
+      "demo": "万胜围-新造",
+      "stations": [
+        {
+          "name": "万胜围",
+          "deferred": false
+        },
+        {
+          "name": "官洲",
+          "deferred": false
+        },
+        {
+          "name": "北亭",
+          "deferred": false
+        },
+        {
+          "name": "南亭",
+          "deferred": false
+        },
+        {
+          "name": "新造",
+          "deferred": false
+        },
+        {
+          "name": "新造车辆段",
+          "deferred": false
+        },
+        {
+          "name": "大学城专线（万胜围-新造）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "广州",
+      "line": "广州地铁4号线",
+      "alias": "大学城专线",
+      "status": "车站更名",
+      "date": "2006-05-10",
+      "demo": "南亭站更名大学城南站",
+      "stations": [
+        {
+          "name": "南亭",
+          "deferred": true
+        },
+        {
+          "name": "大学城南",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "广州",
+      "line": "广州地铁4号线",
+      "alias": "大学城专线",
+      "status": "车站更名",
+      "date": null,
+      "demo": "北亭站更名大学城南站",
+      "stations": [
+        {
+          "name": "北亭",
+          "deferred": true
+        },
+        {
+          "name": "大学城北",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "广州",
+      "line": "广州地铁4号线",
+      "alias": "二期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "新造-黄阁",
+      "stations": [
+        {
+          "name": "新造",
+          "deferred": true
+        },
+        {
+          "name": "官桥",
+          "deferred": true
+        },
+        {
+          "name": "石碁",
+          "deferred": false
+        },
+        {
+          "name": "海傍",
+          "deferred": false
+        },
+        {
+          "name": "低涌",
+          "deferred": false
+        },
+        {
+          "name": "东涌",
+          "deferred": false
+        },
+        {
+          "name": "庆盛",
+          "deferred": true
+        },
+        {
+          "name": "黄阁汽车城",
+          "deferred": false
+        },
+        {
+          "name": "黄阁",
+          "deferred": false
+        },
+        {
+          "name": "二期（新造-黄阁）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "广州",
+      "line": "广州地铁3号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "体育西路-天河客运站",
+      "stations": [
+        {
+          "name": "体育西路",
+          "deferred": true
+        },
+        {
+          "name": "石牌桥",
+          "deferred": false
+        },
+        {
+          "name": "岗顶",
+          "deferred": false
+        },
+        {
+          "name": "华师",
+          "deferred": false
+        },
+        {
+          "name": "五山",
+          "deferred": false
+        },
+        {
+          "name": "天河客运站",
+          "deferred": false
+        },
+        {
+          "name": "（体育西路-天河客运站）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "广州",
+      "line": "广州地铁4号线",
+      "alias": "二期",
+      "status": "线路开通",
+      "date": "2007-06-28",
+      "demo": "黄阁-金洲",
+      "stations": [
+        {
+          "name": "黄阁",
+          "deferred": true
+        },
+        {
+          "name": "蕉门",
+          "deferred": false
+        },
+        {
+          "name": "金洲",
+          "deferred": false
+        },
+        {
+          "name": "二期（黄阁-金洲）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "广州",
+      "line": "广州地铁4号线",
+      "alias": "北延",
+      "status": "线路开通",
+      "date": "2009-12-28",
+      "demo": "万胜围-车陂南",
+      "stations": [
+        {
+          "name": "万胜围",
+          "deferred": true
+        },
+        {
+          "name": "车陂南",
+          "deferred": false
+        },
+        {
+          "name": "北延段（万胜围-车陂南）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "广州",
+      "line": "广州地铁5号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "滘口-文冲",
+      "stations": [
+        {
+          "name": "滘口",
+          "deferred": false
+        },
+        {
+          "name": "坦尾",
+          "deferred": false
+        },
+        {
+          "name": "中山八",
+          "deferred": false
+        },
+        {
+          "name": "西场",
+          "deferred": false
+        },
+        {
+          "name": "西村",
+          "deferred": false
+        },
+        {
+          "name": "广州火车站",
+          "deferred": false
+        },
+        {
+          "name": "小北",
+          "deferred": false
+        },
+        {
+          "name": "淘金",
+          "deferred": false
+        },
+        {
+          "name": "区庄",
+          "deferred": false
+        },
+        {
+          "name": "动物园",
+          "deferred": false
+        },
+        {
+          "name": "全线（滘口-文冲）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "广州",
+      "line": "广州地铁2号线",
+      "alias": "旧线",
+      "status": "线路停运",
+      "date": "2010-09-22",
+      "demo": "三元里-万胜围",
+      "stations": [
+        {
+          "name": "三元里",
+          "deferred": true
+        },
+        {
+          "name": "广州火车站",
+          "deferred": true
+        },
+        {
+          "name": "越秀公园",
+          "deferred": true
+        },
+        {
+          "name": "纪念堂",
+          "deferred": true
+        },
+        {
+          "name": "公园前",
+          "deferred": true
+        },
+        {
+          "name": "海珠广场",
+          "deferred": true
+        },
+        {
+          "name": "市二宫",
+          "deferred": true
+        },
+        {
+          "name": "江南西",
+          "deferred": true
+        },
+        {
+          "name": "晓港",
+          "deferred": true
+        },
+        {
+          "name": "中大",
+          "deferred": true
+        },
+        {
+          "name": "（三元里-万胜围）进行拆解与联合调试",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "广州",
+      "line": "广州地铁2号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2010-09-25",
+      "demo": "嘉禾望岗-三元里",
+      "stations": [
+        {
+          "name": "嘉禾望岗",
+          "deferred": false
+        },
+        {
+          "name": "黄边",
+          "deferred": false
+        },
+        {
+          "name": "江夏",
+          "deferred": false
+        },
+        {
+          "name": "萧岗",
+          "deferred": false
+        },
+        {
+          "name": "白云文化广场",
+          "deferred": false
+        },
+        {
+          "name": "白云公园",
+          "deferred": false
+        },
+        {
+          "name": "飞翔公园",
+          "deferred": false
+        },
+        {
+          "name": "*三元里",
+          "deferred": false
+        },
+        {
+          "name": "*江南西",
+          "deferred": false
+        },
+        {
+          "name": "昌岗",
+          "deferred": false
+        },
+        {
+          "name": "（嘉禾望岗-广州南站）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "广州",
+      "line": "广州地铁8号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "昌岗-万胜围",
+      "stations": [
+        {
+          "name": "昌岗",
+          "deferred": false
+        },
+        {
+          "name": "晓港",
+          "deferred": false
+        },
+        {
+          "name": "中大",
+          "deferred": false
+        },
+        {
+          "name": "鹭江",
+          "deferred": false
+        },
+        {
+          "name": "客村",
+          "deferred": false
+        },
+        {
+          "name": "赤岗",
+          "deferred": false
+        },
+        {
+          "name": "磨碟沙",
+          "deferred": false
+        },
+        {
+          "name": "新港东",
+          "deferred": false
+        },
+        {
+          "name": "琶洲",
+          "deferred": false
+        },
+        {
+          "name": "万胜围",
+          "deferred": false
+        },
+        {
+          "name": "（昌岗-万胜围）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "广州",
+      "line": "广州地铁4号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "黄村-车陂南",
+      "stations": [
+        {
+          "name": "车陂南",
+          "deferred": true
+        },
+        {
+          "name": "车陂",
+          "deferred": false
+        },
+        {
+          "name": "黄村",
+          "deferred": false
+        },
+        {
+          "name": "北延段（车陂南-黄村）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "广州",
+      "line": "广州地铁3号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2010-10-30",
+      "demo": "广州东站-机场南",
+      "stations": [
+        {
+          "name": "广州东站",
+          "deferred": true
+        },
+        {
+          "name": "燕塘",
+          "deferred": false
+        },
+        {
+          "name": "梅花园",
+          "deferred": false
+        },
+        {
+          "name": "京溪南方医院",
+          "deferred": false
+        },
+        {
+          "name": "同和",
+          "deferred": false
+        },
+        {
+          "name": "永泰",
+          "deferred": false
+        },
+        {
+          "name": "白云大道北",
+          "deferred": false
+        },
+        {
+          "name": "嘉禾望岗",
+          "deferred": false
+        },
+        {
+          "name": "龙归",
+          "deferred": false
+        },
+        {
+          "name": "人和",
+          "deferred": false
+        },
+        {
+          "name": "北延段（广州东站-机场南）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "广州",
+      "line": "广州地铁8号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2010-11-03",
+      "demo": "凤凰新村-昌岗",
+      "stations": [
+        {
+          "name": "昌岗",
+          "deferred": true
+        },
+        {
+          "name": "宝岗大道",
+          "deferred": false
+        },
+        {
+          "name": "沙园",
+          "deferred": false
+        },
+        {
+          "name": "凤凰新村",
+          "deferred": false
+        },
+        {
+          "name": "西延段（昌岗-凤凰新村）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "广州",
+      "line": "广佛地铁1号线",
+      "alias": "首通段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "西朗-魁奇路",
+      "stations": [
+        {
+          "name": "西朗",
+          "deferred": false
+        },
+        {
+          "name": "菊树",
+          "deferred": false
+        },
+        {
+          "name": "龙溪",
+          "deferred": false
+        },
+        {
+          "name": "金融高新区",
+          "deferred": false
+        },
+        {
+          "name": "千灯湖",
+          "deferred": false
+        },
+        {
+          "name": "𧒽岗",
+          "deferred": false
+        },
+        {
+          "name": "南桂路",
+          "deferred": false
+        },
+        {
+          "name": "桂城",
+          "deferred": false
+        },
+        {
+          "name": "朝安",
+          "deferred": false
+        },
+        {
+          "name": "普君北路",
+          "deferred": false
+        },
+        {
+          "name": "首通段（西朗-魁奇路）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "广州",
+      "line": "广州地铁APM线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2010-11-08",
+      "demo": "林和西-赤岗塔*",
+      "stations": [
+        {
+          "name": "林和西*",
+          "deferred": false
+        },
+        {
+          "name": "体育中心南",
+          "deferred": false
+        },
+        {
+          "name": "天河南",
+          "deferred": false
+        },
+        {
+          "name": "黄埔大道",
+          "deferred": false
+        },
+        {
+          "name": "妇儿中心",
+          "deferred": false
+        },
+        {
+          "name": "花城大道",
+          "deferred": false
+        },
+        {
+          "name": "歌剧院",
+          "deferred": false
+        },
+        {
+          "name": "海心沙",
+          "deferred": true
+        },
+        {
+          "name": "赤岗塔*",
+          "deferred": true
+        },
+        {
+          "name": "赤岗塔车场",
+          "deferred": false
+        },
+        {
+          "name": "（林和西-赤岗塔*）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "广州",
+      "line": "广州地铁APM线",
+      "alias": null,
+      "status": "车站开通",
+      "date": "2010-11-27",
+      "demo": "赤岗塔站投入运营",
+      "stations": [
+        {
+          "name": "赤岗塔",
+          "deferred": false
+        },
+        {
+          "name": "赤岗塔站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "广州",
+      "line": "广州地铁APM线",
+      "alias": null,
+      "status": "车站开通",
+      "date": "2011-02-24",
+      "demo": "海心沙站投入运营",
+      "stations": [
+        {
+          "name": "海心沙",
+          "deferred": false
+        },
+        {
+          "name": "海心沙站投入运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "hangzhou": [
+    {
+      "period": 4,
+      "city": "杭州",
+      "line": "杭州地铁1号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2012-11-24",
+      "demo": "湘湖-文泽路",
+      "stations": [
+        {
+          "name": "湘湖",
+          "deferred": false
+        },
+        {
+          "name": "滨康路",
+          "deferred": false
+        },
+        {
+          "name": "西兴",
+          "deferred": false
+        },
+        {
+          "name": "滨和路",
+          "deferred": false
+        },
+        {
+          "name": "江陵路",
+          "deferred": false
+        },
+        {
+          "name": "近江",
+          "deferred": false
+        },
+        {
+          "name": "婺江路",
+          "deferred": false
+        },
+        {
+          "name": "城站",
+          "deferred": false
+        },
+        {
+          "name": "定安路",
+          "deferred": false
+        },
+        {
+          "name": "龙翔桥",
+          "deferred": false
+        },
+        {
+          "name": "一期（湘湖-文泽路）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "杭州",
+      "line": "杭州地铁1号线",
+      "alias": "临平支线",
+      "status": "线路开通",
+      "date": null,
+      "demo": "客运中心-临平",
+      "stations": [
+        {
+          "name": "客运中心",
+          "deferred": false
+        },
+        {
+          "name": "乔司南",
+          "deferred": false
+        },
+        {
+          "name": "乔司",
+          "deferred": false
+        },
+        {
+          "name": "翁梅",
+          "deferred": false
+        },
+        {
+          "name": "余杭高铁站",
+          "deferred": false
+        },
+        {
+          "name": "南苑",
+          "deferred": false
+        },
+        {
+          "name": "临平",
+          "deferred": false
+        },
+        {
+          "name": "杭港",
+          "deferred": false
+        },
+        {
+          "name": "临平支线（客运中心-临平）开通运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "hongkong": [
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-修正早期系统 Modified Initial System",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1979-10-01",
+      "demo": "石硖尾-观塘",
+      "stations": [
+        {
+          "name": "石硖尾",
+          "deferred": false
+        },
+        {
+          "name": "九龙塘",
+          "deferred": false
+        },
+        {
+          "name": "乐富",
+          "deferred": false
+        },
+        {
+          "name": "黄大仙",
+          "deferred": false
+        },
+        {
+          "name": "钻石山",
+          "deferred": false
+        },
+        {
+          "name": "彩虹",
+          "deferred": false
+        },
+        {
+          "name": "九龙湾",
+          "deferred": false
+        },
+        {
+          "name": "牛头角",
+          "deferred": false
+        },
+        {
+          "name": "观塘",
+          "deferred": false
+        },
+        {
+          "name": "九龙湾车厂",
+          "deferred": false
+        },
+        {
+          "name": "北段（石硖尾-观塘）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-修正早期系统",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1979-12-16",
+      "demo": "石硖尾-尖沙咀",
+      "stations": [
+        {
+          "name": "石硖尾",
+          "deferred": true
+        },
+        {
+          "name": "太子",
+          "deferred": true
+        },
+        {
+          "name": "旺角",
+          "deferred": true
+        },
+        {
+          "name": "油麻地",
+          "deferred": true
+        },
+        {
+          "name": "佐敦",
+          "deferred": false
+        },
+        {
+          "name": "尖沙咀",
+          "deferred": false
+        },
+        {
+          "name": "中段（石硖尾-尖沙咀）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-修正早期系统",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1979-12-22",
+      "demo": "油麻地站投入服务",
+      "stations": [
+        {
+          "name": "油麻地",
+          "deferred": false
+        },
+        {
+          "name": "油麻地站投入服务",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-修正早期系统",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1979-12-31",
+      "demo": "旺角站投入服务",
+      "stations": [
+        {
+          "name": "旺角",
+          "deferred": false
+        },
+        {
+          "name": "旺角站投入服务",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-修正早期系统",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1980-02-12",
+      "demo": "尖沙咀-中环",
+      "stations": [
+        {
+          "name": "尖沙咀",
+          "deferred": true
+        },
+        {
+          "name": "金钟",
+          "deferred": false
+        },
+        {
+          "name": "中环",
+          "deferred": false
+        },
+        {
+          "name": "南段（尖沙咀-中环）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-观塘线 Kwun Tong Line",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1982-04-26",
+      "demo": "观塘-油麻地",
+      "stations": [
+        {
+          "name": "观塘",
+          "deferred": false
+        },
+        {
+          "name": "牛头角",
+          "deferred": false
+        },
+        {
+          "name": "九龙湾",
+          "deferred": false
+        },
+        {
+          "name": "彩虹",
+          "deferred": false
+        },
+        {
+          "name": "钻石山",
+          "deferred": false
+        },
+        {
+          "name": "黄大仙",
+          "deferred": false
+        },
+        {
+          "name": "乐富",
+          "deferred": false
+        },
+        {
+          "name": "九龙塘",
+          "deferred": false
+        },
+        {
+          "name": "石硖尾",
+          "deferred": false
+        },
+        {
+          "name": "太子",
+          "deferred": true
+        },
+        {
+          "name": "拆分并更名为观塘线与荃湾线",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-荃湾线 Tsuen Wan Line",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "旺角-中环",
+      "stations": [
+        {
+          "name": "太子",
+          "deferred": true
+        },
+        {
+          "name": "旺角",
+          "deferred": false
+        },
+        {
+          "name": "油麻地",
+          "deferred": false
+        },
+        {
+          "name": "佐敦",
+          "deferred": false
+        },
+        {
+          "name": "尖沙咀",
+          "deferred": false
+        },
+        {
+          "name": "金钟",
+          "deferred": false
+        },
+        {
+          "name": "中环",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "九铁KCR-九广铁路 Kowloon-Canton Railway",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1982-05-06",
+      "demo": "第一期电气化工程通车",
+      "stations": [
+        {
+          "name": "九龙",
+          "deferred": false
+        },
+        {
+          "name": "旺角",
+          "deferred": false
+        },
+        {
+          "name": "九龙塘",
+          "deferred": false
+        },
+        {
+          "name": "沙田",
+          "deferred": false
+        },
+        {
+          "name": "九铁工场",
+          "deferred": false
+        },
+        {
+          "name": "第一期（九龙-沙田）电气化工程通车",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "九铁KCR-九广铁路",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1983-04-26",
+      "demo": "第二期电气化工程通车",
+      "stations": [
+        {
+          "name": "沙田",
+          "deferred": true
+        },
+        {
+          "name": "马场(仅赛马日开放)",
+          "deferred": false
+        },
+        {
+          "name": "大学",
+          "deferred": false
+        },
+        {
+          "name": "大埔墟",
+          "deferred": false
+        },
+        {
+          "name": "第二期（沙田-大埔墟）电气化工程通车",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "九铁KCR-九广铁路",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1983-07-15",
+      "demo": "第三期电气化工程通车",
+      "stations": [
+        {
+          "name": "大埔墟",
+          "deferred": true
+        },
+        {
+          "name": "粉岭",
+          "deferred": false
+        },
+        {
+          "name": "上水",
+          "deferred": false
+        },
+        {
+          "name": "罗湖",
+          "deferred": false
+        },
+        {
+          "name": "第三期（大埔墟-罗湖）电气化工程通车",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-港岛线 Island Line",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1985-05-31",
+      "demo": "金钟-柴湾",
+      "stations": [
+        {
+          "name": "金钟",
+          "deferred": false
+        },
+        {
+          "name": "湾仔",
+          "deferred": false
+        },
+        {
+          "name": "铜锣湾",
+          "deferred": false
+        },
+        {
+          "name": "天后",
+          "deferred": false
+        },
+        {
+          "name": "炮台山",
+          "deferred": false
+        },
+        {
+          "name": "北角",
+          "deferred": false
+        },
+        {
+          "name": "鲗鱼涌",
+          "deferred": false
+        },
+        {
+          "name": "太古",
+          "deferred": false
+        },
+        {
+          "name": "西湾河",
+          "deferred": false
+        },
+        {
+          "name": "筲箕湾",
+          "deferred": false
+        },
+        {
+          "name": "（金钟-柴湾）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "九铁KCR-九广铁路",
+      "alias": null,
+      "status": "车站开通",
+      "date": "1985-10-01",
+      "demo": "马场站全面改善设施永久开放",
+      "stations": [
+        {
+          "name": "马场",
+          "deferred": false
+        },
+        {
+          "name": "虚线变实线",
+          "deferred": false
+        },
+        {
+          "name": "马场站全面改善设施永久开放",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-港岛线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1986-05-23",
+      "demo": "金钟-上环",
+      "stations": [
+        {
+          "name": "金钟",
+          "deferred": true
+        },
+        {
+          "name": "中环",
+          "deferred": false
+        },
+        {
+          "name": "上环",
+          "deferred": false
+        },
+        {
+          "name": "（金钟-上环）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-港岛线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1986-10-16",
+      "demo": "杏花邨站投入服务",
+      "stations": [
+        {
+          "name": "杏花邨",
+          "deferred": false
+        },
+        {
+          "name": "杏花邨站投入服务",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-观塘线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1989-08-06",
+      "demo": "观塘-鲗鱼涌",
+      "stations": [
+        {
+          "name": "观塘",
+          "deferred": true
+        },
+        {
+          "name": "蓝田",
+          "deferred": true
+        },
+        {
+          "name": "鲗鱼涌",
+          "deferred": false
+        },
+        {
+          "name": "（观塘-鲗鱼涌）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "九铁KCR-九广铁路",
+      "alias": null,
+      "status": "车站开通",
+      "date": "1990-02-17",
+      "demo": "马场站仅在赛马日开放",
+      "stations": [
+        {
+          "name": "马场(仅赛马日开放)",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "九铁KCR-九广铁路",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1995-09-24",
+      "demo": "白石角区间完成南行改造",
+      "stations": [
+        {
+          "name": "白石角区间完成南行改造",
+          "deferred": false
+        },
+        {
+          "name": "右侧沿海",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-东涌线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1998-06-22",
+      "demo": "香港-东涌",
+      "stations": [
+        {
+          "name": "香港",
+          "deferred": false
+        },
+        {
+          "name": "九龙",
+          "deferred": false
+        },
+        {
+          "name": "奥运",
+          "deferred": false
+        },
+        {
+          "name": "荔景",
+          "deferred": false
+        },
+        {
+          "name": "青衣",
+          "deferred": false
+        },
+        {
+          "name": "东涌",
+          "deferred": false
+        },
+        {
+          "name": "香港-中环",
+          "deferred": false
+        },
+        {
+          "name": "小蠔湾车厂",
+          "deferred": false
+        },
+        {
+          "name": "（香港-东涌）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "香港",
+      "line": "港铁MTR-机场快线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1998-07-06",
+      "demo": "机场-香港",
+      "stations": [
+        {
+          "name": "香港",
+          "deferred": false
+        },
+        {
+          "name": "九龙",
+          "deferred": false
+        },
+        {
+          "name": "青衣",
+          "deferred": false
+        },
+        {
+          "name": "机场",
+          "deferred": false
+        },
+        {
+          "name": "单线运营里程按全程，双轨区间不重复计入总里程",
+          "deferred": false
+        },
+        {
+          "name": "小蠔湾车厂",
+          "deferred": false
+        },
+        {
+          "name": "（香港-机场）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "香港",
+      "line": "港铁MTR-观塘线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2001-09-27",
+      "demo": "鲗鱼涌-北角",
+      "stations": [
+        {
+          "name": "鲗鱼涌",
+          "deferred": true
+        },
+        {
+          "name": "北角",
+          "deferred": false
+        },
+        {
+          "name": "（鲗鱼涌-北角）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "香港",
+      "line": "港铁MTR-观塘线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2002-08-04",
+      "demo": "蓝田-油塘",
+      "stations": [
+        {
+          "name": "蓝田",
+          "deferred": true
+        },
+        {
+          "name": "油塘",
+          "deferred": false
+        },
+        {
+          "name": "鲗鱼涌",
+          "deferred": true
+        },
+        {
+          "name": "北角",
+          "deferred": true
+        },
+        {
+          "name": "终点站由北角缩短至油塘站",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "香港",
+      "line": "港铁MTR-将军澳线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "北角-油塘",
+      "stations": [
+        {
+          "name": "北角",
+          "deferred": false
+        },
+        {
+          "name": "鲗鱼涌",
+          "deferred": false
+        },
+        {
+          "name": "油塘",
+          "deferred": false
+        },
+        {
+          "name": "（北角-油塘）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "香港",
+      "line": "港铁MTR-将军澳线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2002-08-18",
+      "demo": "油塘-宝琳",
+      "stations": [
+        {
+          "name": "油塘",
+          "deferred": true
+        },
+        {
+          "name": "调景岭",
+          "deferred": false
+        },
+        {
+          "name": "将军澳",
+          "deferred": false
+        },
+        {
+          "name": "坑口",
+          "deferred": false
+        },
+        {
+          "name": "宝琳",
+          "deferred": false
+        },
+        {
+          "name": "将军澳车厂",
+          "deferred": false
+        },
+        {
+          "name": "第一期（油塘-宝琳）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "香港",
+      "line": "港铁MTR-观塘线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "油塘-调景岭",
+      "stations": [
+        {
+          "name": "油塘",
+          "deferred": true
+        },
+        {
+          "name": "调景岭",
+          "deferred": false
+        },
+        {
+          "name": "（油塘-调景岭）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "香港",
+      "line": "九铁KCR-九广东铁",
+      "alias": "尖沙咀支线",
+      "status": "线路开通",
+      "date": "2004-10-24",
+      "demo": "红磡-尖东开通",
+      "stations": [
+        {
+          "name": "红磡",
+          "deferred": true
+        },
+        {
+          "name": "尖东",
+          "deferred": false
+        },
+        {
+          "name": "尖东-尖沙咀",
+          "deferred": false
+        },
+        {
+          "name": "付费区外换乘",
+          "deferred": false
+        },
+        {
+          "name": "重回尖沙咀，新设尖东站",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "香港",
+      "line": "九铁KCR-马鞍山铁路",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2004-12-21",
+      "demo": "大围-乌溪沙",
+      "stations": [
+        {
+          "name": "大围",
+          "deferred": false
+        },
+        {
+          "name": "车公庙",
+          "deferred": false
+        },
+        {
+          "name": "沙田围",
+          "deferred": false
+        },
+        {
+          "name": "第一城",
+          "deferred": false
+        },
+        {
+          "name": "石门",
+          "deferred": false
+        },
+        {
+          "name": "大水坑",
+          "deferred": false
+        },
+        {
+          "name": "恒安",
+          "deferred": false
+        },
+        {
+          "name": "马鞍山",
+          "deferred": false
+        },
+        {
+          "name": "乌溪沙",
+          "deferred": false
+        },
+        {
+          "name": "大围维修中心",
+          "deferred": false
+        },
+        {
+          "name": "（大围-乌溪沙）正式通车",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "香港",
+      "line": "港铁MTR-迪士尼线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2005-08-01",
+      "demo": "欣澳-迪士尼",
+      "stations": [
+        {
+          "name": "欣澳",
+          "deferred": false
+        },
+        {
+          "name": "迪士尼",
+          "deferred": false
+        },
+        {
+          "name": "小蠔湾车厂",
+          "deferred": false
+        },
+        {
+          "name": "（欣澳-迪士尼）正式通车",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "香港",
+      "line": "港铁MTR-机场快线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2005-12-20",
+      "demo": "机场-博览馆",
+      "stations": [
+        {
+          "name": "机场",
+          "deferred": true
+        },
+        {
+          "name": "博览馆",
+          "deferred": false
+        },
+        {
+          "name": "为配合博览馆启用，博览馆站投入服务",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "香港",
+      "line": "九广东铁",
+      "alias": "落马洲支线",
+      "status": "线路开通",
+      "date": "2007-08-15",
+      "demo": "落马洲支线开通",
+      "stations": [
+        {
+          "name": "上水",
+          "deferred": true
+        },
+        {
+          "name": "落马洲",
+          "deferred": false
+        },
+        {
+          "name": "落马洲支线（上水-落马洲）正式通车",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "香港",
+      "line": "港铁将军澳线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2009-07-26",
+      "demo": "将军澳-康城",
+      "stations": [
+        {
+          "name": "将军澳",
+          "deferred": true
+        },
+        {
+          "name": "康城",
+          "deferred": false
+        },
+        {
+          "name": "第二期支线康城站正式开放",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "kaohsiung": [
+    {
+      "period": 2,
+      "city": "高雄",
+      "line": "高雄捷运红线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2008-03-09",
+      "demo": "小港-桥头火车站",
+      "stations": [
+        {
+          "name": "小港",
+          "deferred": false
+        },
+        {
+          "name": "高雄国际机场",
+          "deferred": false
+        },
+        {
+          "name": "草衙",
+          "deferred": false
+        },
+        {
+          "name": "前镇高中",
+          "deferred": false
+        },
+        {
+          "name": "凯旋",
+          "deferred": false
+        },
+        {
+          "name": "狮甲",
+          "deferred": false
+        },
+        {
+          "name": "三多商圈",
+          "deferred": false
+        },
+        {
+          "name": "中央公园",
+          "deferred": false
+        },
+        {
+          "name": "美丽岛",
+          "deferred": true
+        },
+        {
+          "name": "高雄车站",
+          "deferred": false
+        },
+        {
+          "name": "（桥头火车站-小港）通车启用",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "高雄",
+      "line": "高雄捷运橘线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2008-09-14",
+      "demo": "大寮-西子湾",
+      "stations": [
+        {
+          "name": "大寮",
+          "deferred": false
+        },
+        {
+          "name": "凤山国中",
+          "deferred": false
+        },
+        {
+          "name": "大东",
+          "deferred": false
+        },
+        {
+          "name": "凤山",
+          "deferred": false
+        },
+        {
+          "name": "凤山西",
+          "deferred": false
+        },
+        {
+          "name": "卫武营",
+          "deferred": false
+        },
+        {
+          "name": "技击馆",
+          "deferred": false
+        },
+        {
+          "name": "五块厝",
+          "deferred": false
+        },
+        {
+          "name": "文化中心",
+          "deferred": false
+        },
+        {
+          "name": "信义国小",
+          "deferred": false
+        },
+        {
+          "name": "（西子湾-大寮）全线通车",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "高雄",
+      "line": "高雄捷运橘线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2011-09-19",
+      "demo": "市议会站增加副站名",
+      "stations": [
+        {
+          "name": "市议会（旧址）",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "高雄",
+      "line": "高雄捷运红线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2012-12-23",
+      "demo": "桥头火车站-南岗山",
+      "stations": [
+        {
+          "name": "桥头火车站",
+          "deferred": true
+        },
+        {
+          "name": "南岗山",
+          "deferred": false
+        },
+        {
+          "name": "（桥头火车站-南岗山）通车运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "kunming": [
+    {
+      "period": 4,
+      "city": "昆明",
+      "line": "昆明地铁6号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2012-06-28",
+      "demo": "东部汽车站-机场中心",
+      "stations": [
+        {
+          "name": "东部汽车站",
+          "deferred": false
+        },
+        {
+          "name": "大板桥",
+          "deferred": true
+        },
+        {
+          "name": "机场前",
+          "deferred": true
+        },
+        {
+          "name": "机场中心",
+          "deferred": false
+        },
+        {
+          "name": "大板桥车辆段",
+          "deferred": false
+        },
+        {
+          "name": "（东部汽车站-机场中心）正式投入运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "nanchang": [
+    {
+      "period": 2,
+      "city": "南昌",
+      "line": "港铁MTR-东涌线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2003-12-16",
+      "demo": "奥运-荔景四线化",
+      "stations": [
+        {
+          "name": "奥运",
+          "deferred": true
+        },
+        {
+          "name": "南昌",
+          "deferred": true
+        },
+        {
+          "name": "荔景",
+          "deferred": true
+        },
+        {
+          "name": "（奥运-荔景）实现四轨化运行",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "南昌",
+      "line": "港铁MTR-东涌线",
+      "alias": null,
+      "status": "车站开通",
+      "date": null,
+      "demo": "南昌站投入服务",
+      "stations": [
+        {
+          "name": "南昌",
+          "deferred": false
+        },
+        {
+          "name": "增设南昌站投入服务",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "南昌",
+      "line": "九铁KCR-九广西铁",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2003-12-20",
+      "demo": "屯门-南昌",
+      "stations": [
+        {
+          "name": "南昌",
+          "deferred": false
+        },
+        {
+          "name": "美孚",
+          "deferred": false
+        },
+        {
+          "name": "荃湾西",
+          "deferred": false
+        },
+        {
+          "name": "锦上路",
+          "deferred": false
+        },
+        {
+          "name": "元朗",
+          "deferred": false
+        },
+        {
+          "name": "朗屏",
+          "deferred": false
+        },
+        {
+          "name": "天水围",
+          "deferred": false
+        },
+        {
+          "name": "兆康",
+          "deferred": false
+        },
+        {
+          "name": "屯门",
+          "deferred": false
+        },
+        {
+          "name": "八乡维修中心",
+          "deferred": false
+        },
+        {
+          "name": "（南昌-屯门）正式通车",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "南昌",
+      "line": "港铁MTR",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2008-09-28",
+      "demo": "部分车站闸区合并",
+      "stations": [
+        {
+          "name": "九龙塘",
+          "deferred": false
+        },
+        {
+          "name": "南昌",
+          "deferred": false
+        },
+        {
+          "name": "美孚",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "南昌",
+      "line": "港铁西铁线",
+      "alias": "九龙南线",
+      "status": "线路开通",
+      "date": null,
+      "demo": "南昌-尖东",
+      "stations": [
+        {
+          "name": "南昌",
+          "deferred": true
+        },
+        {
+          "name": "柯士甸",
+          "deferred": false
+        },
+        {
+          "name": "尖东",
+          "deferred": false
+        },
+        {
+          "name": "红磡",
+          "deferred": false
+        },
+        {
+          "name": "九龙南线（南昌-红磡）开通运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "nanjing": [
+    {
+      "period": 1,
+      "city": "南京",
+      "line": "台北捷运木栅线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1996-03-28",
+      "demo": "中山国中-动物园",
+      "stations": [
+        {
+          "name": "中山国中",
+          "deferred": false
+        },
+        {
+          "name": "南京东路",
+          "deferred": false
+        },
+        {
+          "name": "忠孝复兴",
+          "deferred": false
+        },
+        {
+          "name": "大安",
+          "deferred": false
+        },
+        {
+          "name": "科技大楼",
+          "deferred": false
+        },
+        {
+          "name": "六张犁",
+          "deferred": false
+        },
+        {
+          "name": "麟光",
+          "deferred": false
+        },
+        {
+          "name": "辛亥",
+          "deferred": false
+        },
+        {
+          "name": "万芳医院",
+          "deferred": false
+        },
+        {
+          "name": "万芳社区",
+          "deferred": false
+        },
+        {
+          "name": "（中山国中-动物园）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "南京",
+      "line": "台北捷运",
+      "alias": null,
+      "status": "车站更名",
+      "date": "约*/1999年",
+      "demo": "部分车站更换站名",
+      "stations": [
+        {
+          "name": "中正纪念堂",
+          "deferred": false
+        },
+        {
+          "name": "南京东路",
+          "deferred": false
+        },
+        {
+          "name": "民权西路",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "南京",
+      "line": "南京地铁1号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2005-09-03",
+      "demo": "迈皋桥-奥体中心",
+      "stations": [
+        {
+          "name": "迈皋桥",
+          "deferred": false
+        },
+        {
+          "name": "红山动物园",
+          "deferred": false
+        },
+        {
+          "name": "南京站",
+          "deferred": false
+        },
+        {
+          "name": "新模范马路",
+          "deferred": false
+        },
+        {
+          "name": "玄武门",
+          "deferred": false
+        },
+        {
+          "name": "鼓楼",
+          "deferred": false
+        },
+        {
+          "name": "珠江路",
+          "deferred": false
+        },
+        {
+          "name": "新街口",
+          "deferred": false
+        },
+        {
+          "name": "张府园",
+          "deferred": false
+        },
+        {
+          "name": "三山街",
+          "deferred": false
+        },
+        {
+          "name": "一期（迈皋桥-奥体中心）正式开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "南京",
+      "line": "南京地铁1号线",
+      "alias": "南延段",
+      "status": "线路开通",
+      "date": "2010-05-28",
+      "demo": "安德门-中国药科大学",
+      "stations": [
+        {
+          "name": "安德门",
+          "deferred": true
+        },
+        {
+          "name": "天隆寺",
+          "deferred": false
+        },
+        {
+          "name": "软件大道",
+          "deferred": false
+        },
+        {
+          "name": "花神庙",
+          "deferred": false
+        },
+        {
+          "name": "高铁南京南",
+          "deferred": true
+        },
+        {
+          "name": "双龙大道",
+          "deferred": false
+        },
+        {
+          "name": "河定桥",
+          "deferred": false
+        },
+        {
+          "name": "胜太路",
+          "deferred": false
+        },
+        {
+          "name": "百家湖",
+          "deferred": false
+        },
+        {
+          "name": "小龙湾",
+          "deferred": false
+        },
+        {
+          "name": "南延线（安德门-中国药科大学）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "南京",
+      "line": "台北捷运芦洲线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "忠孝新生-芦洲",
+      "stations": [
+        {
+          "name": "忠孝新生",
+          "deferred": false
+        },
+        {
+          "name": "松江南京",
+          "deferred": false
+        },
+        {
+          "name": "行天宫",
+          "deferred": false
+        },
+        {
+          "name": "中山国小",
+          "deferred": false
+        },
+        {
+          "name": "民权西路",
+          "deferred": false
+        },
+        {
+          "name": "大桥头",
+          "deferred": false
+        },
+        {
+          "name": "三重国小",
+          "deferred": false
+        },
+        {
+          "name": "三和国中",
+          "deferred": false
+        },
+        {
+          "name": "徐汇中学",
+          "deferred": false
+        },
+        {
+          "name": "三民高中",
+          "deferred": false
+        },
+        {
+          "name": "（忠孝新生-芦洲）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "南京",
+      "line": "南京地铁1号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": null,
+      "demo": "南京南站(地铁站)投入运营",
+      "stations": [
+        {
+          "name": "南京南站",
+          "deferred": false
+        },
+        {
+          "name": "高铁南京南站更名为南京南站站并投入运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "shanghai": [
+    {
+      "period": 1,
+      "city": "上海",
+      "line": "上海地铁1号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1993-05-28",
+      "demo": "徐家汇-锦江乐园",
+      "stations": [
+        {
+          "name": "徐家汇",
+          "deferred": false
+        },
+        {
+          "name": "上海体育馆",
+          "deferred": false
+        },
+        {
+          "name": "漕宝路",
+          "deferred": false
+        },
+        {
+          "name": "新龙华",
+          "deferred": false
+        },
+        {
+          "name": "锦江乐园",
+          "deferred": false
+        },
+        {
+          "name": "新龙华车辆段",
+          "deferred": false
+        },
+        {
+          "name": "南段（徐家汇-锦江乐园）观光试运行",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "上海",
+      "line": "上海地铁1号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1995-04-10",
+      "demo": "徐家汇-上海火车站",
+      "stations": [
+        {
+          "name": "徐家汇",
+          "deferred": true
+        },
+        {
+          "name": "衡山路",
+          "deferred": false
+        },
+        {
+          "name": "常熟路",
+          "deferred": false
+        },
+        {
+          "name": "陕西南路",
+          "deferred": false
+        },
+        {
+          "name": "黄陂南路",
+          "deferred": false
+        },
+        {
+          "name": "人民广场",
+          "deferred": false
+        },
+        {
+          "name": "新闸路",
+          "deferred": false
+        },
+        {
+          "name": "汉中路",
+          "deferred": false
+        },
+        {
+          "name": "上海火车站",
+          "deferred": false
+        },
+        {
+          "name": "全线（锦江乐园-上海火车站）试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "上海",
+      "line": "上海地铁1号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": "*/1996年4月",
+      "demo": "锦江乐园站暂时移位",
+      "stations": [
+        {
+          "name": "锦江乐园",
+          "deferred": false
+        },
+        {
+          "name": "锦江乐园站北移至临时站",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "上海",
+      "line": "上海地铁1号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1996-12-28",
+      "demo": "莘庄-虹梅路独立运行",
+      "stations": [
+        {
+          "name": "虹梅路",
+          "deferred": false
+        },
+        {
+          "name": "莲花路",
+          "deferred": false
+        },
+        {
+          "name": "外环路",
+          "deferred": false
+        },
+        {
+          "name": "莘庄",
+          "deferred": false
+        },
+        {
+          "name": "南延段（莘庄-虹梅路）开始独立运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "上海",
+      "line": "上海地铁1号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1997-07-01",
+      "demo": "贯通，锦江乐园站废弃",
+      "stations": [
+        {
+          "name": "新龙华",
+          "deferred": true
+        },
+        {
+          "name": "虹梅路",
+          "deferred": true
+        },
+        {
+          "name": "全线贯通运营，锦江乐园(临时)站废弃",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "上海",
+      "line": "上海地铁1号线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "1999-12-28",
+      "demo": "新龙华站改名为上海南站",
+      "stations": [
+        {
+          "name": "上海南站",
+          "deferred": false
+        },
+        {
+          "name": "梅陇车辆段",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "上海",
+      "line": "上海地铁2号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2000-06-11",
+      "demo": "中山公园-龙阳路",
+      "stations": [
+        {
+          "name": "中山公园",
+          "deferred": false
+        },
+        {
+          "name": "江苏路",
+          "deferred": false
+        },
+        {
+          "name": "静安寺",
+          "deferred": false
+        },
+        {
+          "name": "石门一路",
+          "deferred": false
+        },
+        {
+          "name": "人民公园",
+          "deferred": false
+        },
+        {
+          "name": "河南中路",
+          "deferred": false
+        },
+        {
+          "name": "陆家嘴",
+          "deferred": false
+        },
+        {
+          "name": "东昌路",
+          "deferred": false
+        },
+        {
+          "name": "东方路",
+          "deferred": false
+        },
+        {
+          "name": "杨高南路",
+          "deferred": false
+        },
+        {
+          "name": "一期（中山公园-龙阳路）正式通车",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "上海",
+      "line": "上海地铁2号线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2000-08-10",
+      "demo": "人民公园站更名为人民广场站",
+      "stations": [
+        {
+          "name": "人民广场",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "上海",
+      "line": "上海地铁2号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2000-12-26",
+      "demo": "龙阳路-张江高科",
+      "stations": [
+        {
+          "name": "龙阳路",
+          "deferred": true
+        },
+        {
+          "name": "张江高科",
+          "deferred": false
+        },
+        {
+          "name": "东延段（龙阳路-张江高科）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "上海",
+      "line": "上海地铁明珠线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "上海南站-江湾镇",
+      "stations": [
+        {
+          "name": "上海南站",
+          "deferred": false
+        },
+        {
+          "name": "石龙路",
+          "deferred": false
+        },
+        {
+          "name": "龙漕路",
+          "deferred": false
+        },
+        {
+          "name": "漕溪路",
+          "deferred": false
+        },
+        {
+          "name": "宜山路",
+          "deferred": false
+        },
+        {
+          "name": "虹桥路",
+          "deferred": false
+        },
+        {
+          "name": "延安西路",
+          "deferred": false
+        },
+        {
+          "name": "中山公园",
+          "deferred": false
+        },
+        {
+          "name": "金沙江路",
+          "deferred": false
+        },
+        {
+          "name": "曹杨路",
+          "deferred": false
+        },
+        {
+          "name": "一期（上海南站-江湾镇）建成投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁1号线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2001-05-01",
+      "demo": "虹梅路站更名锦江乐园站",
+      "stations": [
+        {
+          "name": "锦江乐园*",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁明珠线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2002-08-08",
+      "demo": "明珠线更名3号线",
+      "stations": [
+        {
+          "name": "3号线",
+          "deferred": true
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁2号线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2002-12-12",
+      "demo": "杨高南路更名上海科技馆",
+      "stations": [
+        {
+          "name": "上海科技馆",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁3号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2003-11-01",
+      "demo": "与其余线路统一票价",
+      "stations": [
+        {
+          "name": "统一票价",
+          "deferred": true
+        },
+        {
+          "name": "取消独立计费",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁5号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2003-11-25",
+      "demo": "莘庄-闵行开发区",
+      "stations": [
+        {
+          "name": "莘庄",
+          "deferred": false
+        },
+        {
+          "name": "春申路",
+          "deferred": false
+        },
+        {
+          "name": "银都路",
+          "deferred": false
+        },
+        {
+          "name": "颛桥",
+          "deferred": false
+        },
+        {
+          "name": "北桥",
+          "deferred": false
+        },
+        {
+          "name": "剑川路",
+          "deferred": false
+        },
+        {
+          "name": "东川路",
+          "deferred": false
+        },
+        {
+          "name": "金平路",
+          "deferred": false
+        },
+        {
+          "name": "华宁路",
+          "deferred": false
+        },
+        {
+          "name": "文井路",
+          "deferred": false
+        },
+        {
+          "name": "（莘庄-闵行开发区）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁1号线",
+      "alias": null,
+      "status": "线路拆分",
+      "date": "2004-10-30",
+      "demo": "新上海南站启用",
+      "stations": [
+        {
+          "name": "漕宝路",
+          "deferred": true
+        },
+        {
+          "name": "上海南站",
+          "deferred": false
+        },
+        {
+          "name": "锦江乐园*",
+          "deferred": true
+        },
+        {
+          "name": "改线并改成地下站",
+          "deferred": false
+        },
+        {
+          "name": "新上海南站站改成地下车站运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁1号线",
+      "alias": "北延伸段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "上海火车站-共富新村",
+      "stations": [
+        {
+          "name": "上海火车站",
+          "deferred": true
+        },
+        {
+          "name": "中山北路",
+          "deferred": false
+        },
+        {
+          "name": "延长路",
+          "deferred": false
+        },
+        {
+          "name": "上海马戏城",
+          "deferred": false
+        },
+        {
+          "name": "汶水路",
+          "deferred": false
+        },
+        {
+          "name": "彭浦新村",
+          "deferred": false
+        },
+        {
+          "name": "共康路",
+          "deferred": false
+        },
+        {
+          "name": "通河新村",
+          "deferred": false
+        },
+        {
+          "name": "呼兰路",
+          "deferred": false
+        },
+        {
+          "name": "共富新村",
+          "deferred": false
+        },
+        {
+          "name": "北延段（上海火车站-共富新村）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁",
+      "alias": "2/3号线",
+      "status": "车站开通",
+      "date": "2005-12-25",
+      "demo": "中山公园站实现站内换乘",
+      "stations": [
+        {
+          "name": "中山公园",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁",
+      "alias": "1/5号线",
+      "status": "车站开通",
+      "date": null,
+      "demo": "莘庄站实现站内换乘",
+      "stations": [
+        {
+          "name": "莘庄",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁4号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2005-12-31",
+      "demo": "大木桥路-蓝村路",
+      "stations": [
+        {
+          "name": "大木桥路",
+          "deferred": false
+        },
+        {
+          "name": "东安路",
+          "deferred": false
+        },
+        {
+          "name": "上海体育场",
+          "deferred": false
+        },
+        {
+          "name": "上海体育馆",
+          "deferred": false
+        },
+        {
+          "name": "宜山路",
+          "deferred": false
+        },
+        {
+          "name": "虹桥路",
+          "deferred": false
+        },
+        {
+          "name": "延安西路",
+          "deferred": false
+        },
+        {
+          "name": "中山公园",
+          "deferred": false
+        },
+        {
+          "name": "金沙江路",
+          "deferred": false
+        },
+        {
+          "name": "曹杨路",
+          "deferred": false
+        },
+        {
+          "name": "（大木桥路-蓝村路）率先建成通车",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海磁悬浮线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2006-04-27",
+      "demo": "正式投入商业运营",
+      "stations": [
+        {
+          "name": "龙阳路",
+          "deferred": false
+        },
+        {
+          "name": "浦东国际机场",
+          "deferred": false
+        },
+        {
+          "name": "上海磁悬浮维修基地",
+          "deferred": false
+        },
+        {
+          "name": "（龙阳路-浦东国际机场）正式投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁",
+      "alias": "2/4号线",
+      "status": "车站更名",
+      "date": "2006-07-18",
+      "demo": "东方路站更名世纪大道",
+      "stations": [
+        {
+          "name": "世纪大道",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2006-10-19",
+      "demo": "石门一路站更名为南京西路站",
+      "stations": [
+        {
+          "name": "石门一路",
+          "deferred": true
+        },
+        {
+          "name": "南京西路",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁",
+      "alias": null,
+      "status": "车站更名",
+      "date": null,
+      "demo": "河南中路站更名为南京东路站",
+      "stations": [
+        {
+          "name": "河南中路",
+          "deferred": true
+        },
+        {
+          "name": "南京东路",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁",
+      "alias": null,
+      "status": "车站更名",
+      "date": null,
+      "demo": "汶水东路站更名为大柏树站",
+      "stations": [
+        {
+          "name": "汶水东路",
+          "deferred": true
+        },
+        {
+          "name": "大柏树",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁",
+      "alias": "2/4号线",
+      "status": "车站开通",
+      "date": "2006-10-28",
+      "demo": "世纪大道站投入运营",
+      "stations": [
+        {
+          "name": "世纪大道",
+          "deferred": false
+        },
+        {
+          "name": "世纪大道站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁3号线",
+      "alias": "北延伸段",
+      "status": "线路开通",
+      "date": "2006-12-18",
+      "demo": "江湾镇-江杨北路",
+      "stations": [
+        {
+          "name": "江湾镇",
+          "deferred": true
+        },
+        {
+          "name": "殷高西路",
+          "deferred": false
+        },
+        {
+          "name": "长江南路",
+          "deferred": false
+        },
+        {
+          "name": "淞发路",
+          "deferred": false
+        },
+        {
+          "name": "张华浜",
+          "deferred": false
+        },
+        {
+          "name": "淞滨路",
+          "deferred": false
+        },
+        {
+          "name": "水产路",
+          "deferred": false
+        },
+        {
+          "name": "宝杨路",
+          "deferred": false
+        },
+        {
+          "name": "友谊路",
+          "deferred": false
+        },
+        {
+          "name": "铁力路",
+          "deferred": false
+        },
+        {
+          "name": "北延段（江湾镇-江杨北路）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁2号线",
+      "alias": "西延伸段",
+      "status": "线路开通",
+      "date": "2006-12-30",
+      "demo": "中山公园-淞虹路",
+      "stations": [
+        {
+          "name": "中山公园",
+          "deferred": true
+        },
+        {
+          "name": "娄山关路",
+          "deferred": false
+        },
+        {
+          "name": "威宁路",
+          "deferred": false
+        },
+        {
+          "name": "北新泾",
+          "deferred": false
+        },
+        {
+          "name": "淞虹路",
+          "deferred": false
+        },
+        {
+          "name": "西延段（中山公园-淞虹路）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁1号线",
+      "alias": "北延伸二期",
+      "status": "线路开通",
+      "date": "2007-12-29",
+      "demo": "共富新村-富锦路",
+      "stations": [
+        {
+          "name": "共富新村",
+          "deferred": true
+        },
+        {
+          "name": "宝安公路",
+          "deferred": false
+        },
+        {
+          "name": "友谊西路",
+          "deferred": false
+        },
+        {
+          "name": "富锦路",
+          "deferred": false
+        },
+        {
+          "name": "富锦路停车场",
+          "deferred": false
+        },
+        {
+          "name": "北延二期（共富新村-富锦路）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁4号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "环线运营",
+      "stations": [
+        {
+          "name": "蓝村路",
+          "deferred": true
+        },
+        {
+          "name": "塘桥",
+          "deferred": false
+        },
+        {
+          "name": "南浦大桥",
+          "deferred": false
+        },
+        {
+          "name": "西藏南路",
+          "deferred": false
+        },
+        {
+          "name": "鲁班路",
+          "deferred": false
+        },
+        {
+          "name": "大木桥路",
+          "deferred": true
+        },
+        {
+          "name": "修复段（大木桥路-蓝村路）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁6号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "港城路-灵岩南路",
+      "stations": [
+        {
+          "name": "港城路",
+          "deferred": false
+        },
+        {
+          "name": "外高桥保税区北",
+          "deferred": false
+        },
+        {
+          "name": "航津路",
+          "deferred": false
+        },
+        {
+          "name": "外高桥保税区南",
+          "deferred": false
+        },
+        {
+          "name": "洲海路",
+          "deferred": false
+        },
+        {
+          "name": "五洲大道",
+          "deferred": false
+        },
+        {
+          "name": "东靖路",
+          "deferred": false
+        },
+        {
+          "name": "巨峰路",
+          "deferred": false
+        },
+        {
+          "name": "五莲路",
+          "deferred": false
+        },
+        {
+          "name": "博兴路",
+          "deferred": false
+        },
+        {
+          "name": "（灵岩南路-港城路）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁8号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "市光路-耀华路",
+      "stations": [
+        {
+          "name": "耀华路",
+          "deferred": false
+        },
+        {
+          "name": "周家渡",
+          "deferred": true
+        },
+        {
+          "name": "西藏南路",
+          "deferred": false
+        },
+        {
+          "name": "陆家浜路",
+          "deferred": false
+        },
+        {
+          "name": "老西门",
+          "deferred": false
+        },
+        {
+          "name": "大世界",
+          "deferred": false
+        },
+        {
+          "name": "人民广场",
+          "deferred": false
+        },
+        {
+          "name": "曲阜路",
+          "deferred": false
+        },
+        {
+          "name": "中兴路",
+          "deferred": false
+        },
+        {
+          "name": "西藏北路",
+          "deferred": false
+        },
+        {
+          "name": "一期（耀华路-市光路）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁9号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "桂林路-松江新城",
+      "stations": [
+        {
+          "name": "桂林路",
+          "deferred": false
+        },
+        {
+          "name": "漕河泾开发区",
+          "deferred": false
+        },
+        {
+          "name": "合川路",
+          "deferred": false
+        },
+        {
+          "name": "星中路",
+          "deferred": false
+        },
+        {
+          "name": "七宝",
+          "deferred": false
+        },
+        {
+          "name": "中春路",
+          "deferred": false
+        },
+        {
+          "name": "九亭",
+          "deferred": false
+        },
+        {
+          "name": "泗泾",
+          "deferred": false
+        },
+        {
+          "name": "佘山",
+          "deferred": false
+        },
+        {
+          "name": "洞泾",
+          "deferred": false
+        },
+        {
+          "name": "（桂林路-松江新城）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁3号线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2008-06-01",
+      "demo": "上海站统一站名上海火车站",
+      "stations": [
+        {
+          "name": "上海火车站",
+          "deferred": false
+        },
+        {
+          "name": "虚拟换乘",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "上海",
+      "line": "上海地铁9号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2008-12-28",
+      "demo": "桂林路-宜山路",
+      "stations": [
+        {
+          "name": "桂林路",
+          "deferred": true
+        },
+        {
+          "name": "宜山路",
+          "deferred": false
+        },
+        {
+          "name": "（桂林路-宜山路）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁8号线",
+      "alias": "二期",
+      "status": "线路开通",
+      "date": "2009-07-05",
+      "demo": "耀华路-航天博物馆",
+      "stations": [
+        {
+          "name": "耀华路",
+          "deferred": true
+        },
+        {
+          "name": "成山路",
+          "deferred": false
+        },
+        {
+          "name": "杨思",
+          "deferred": false
+        },
+        {
+          "name": "济阳路",
+          "deferred": true
+        },
+        {
+          "name": "凌兆新村",
+          "deferred": false
+        },
+        {
+          "name": "芦恒路",
+          "deferred": false
+        },
+        {
+          "name": "浦江镇",
+          "deferred": false
+        },
+        {
+          "name": "江月路",
+          "deferred": false
+        },
+        {
+          "name": "联航路",
+          "deferred": false
+        },
+        {
+          "name": "航天博物馆",
+          "deferred": false
+        },
+        {
+          "name": "二期（耀华路-航天博物馆）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁7号线",
+      "alias": "首期",
+      "status": "线路开通",
+      "date": "2009-12-05",
+      "demo": "上海大学-花木路",
+      "stations": [
+        {
+          "name": "花木路",
+          "deferred": false
+        },
+        {
+          "name": "龙阳路",
+          "deferred": false
+        },
+        {
+          "name": "芳华路",
+          "deferred": false
+        },
+        {
+          "name": "锦绣路",
+          "deferred": false
+        },
+        {
+          "name": "杨高南路",
+          "deferred": false
+        },
+        {
+          "name": "高科西路",
+          "deferred": false
+        },
+        {
+          "name": "云台路",
+          "deferred": false
+        },
+        {
+          "name": "耀华路",
+          "deferred": false
+        },
+        {
+          "name": "长清路",
+          "deferred": false
+        },
+        {
+          "name": "后滩",
+          "deferred": true
+        },
+        {
+          "name": "首期（花木路-祁华路*）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁9号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2009-12-31",
+      "demo": "宜山路-世纪大道",
+      "stations": [
+        {
+          "name": "宜山路",
+          "deferred": true
+        },
+        {
+          "name": "徐家汇",
+          "deferred": false
+        },
+        {
+          "name": "肇嘉浜路",
+          "deferred": false
+        },
+        {
+          "name": "嘉善路",
+          "deferred": false
+        },
+        {
+          "name": "打浦桥",
+          "deferred": false
+        },
+        {
+          "name": "马当路",
+          "deferred": false
+        },
+        {
+          "name": "陆家浜路",
+          "deferred": false
+        },
+        {
+          "name": "小南门",
+          "deferred": false
+        },
+        {
+          "name": "商城路",
+          "deferred": false
+        },
+        {
+          "name": "世纪大道",
+          "deferred": false
+        },
+        {
+          "name": "（宜山路-世纪大道）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁11号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "江苏路-嘉定北",
+      "stations": [
+        {
+          "name": "江苏路",
+          "deferred": false
+        },
+        {
+          "name": "隆德路",
+          "deferred": false
+        },
+        {
+          "name": "曹杨路",
+          "deferred": false
+        },
+        {
+          "name": "枫桥路",
+          "deferred": false
+        },
+        {
+          "name": "真如",
+          "deferred": false
+        },
+        {
+          "name": "上海西站",
+          "deferred": false
+        },
+        {
+          "name": "李子园",
+          "deferred": false
+        },
+        {
+          "name": "祁连山路",
+          "deferred": false
+        },
+        {
+          "name": "武威路",
+          "deferred": false
+        },
+        {
+          "name": "桃浦新村",
+          "deferred": false
+        },
+        {
+          "name": "一期（江苏路-嘉定北）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁2号线",
+      "alias": "东延",
+      "status": "线路开通",
+      "date": null,
+      "demo": "龙阳路-广兰路",
+      "stations": [
+        {
+          "name": "龙阳路",
+          "deferred": true
+        },
+        {
+          "name": "张江高科",
+          "deferred": false
+        },
+        {
+          "name": "金科路",
+          "deferred": false
+        },
+        {
+          "name": "广兰路",
+          "deferred": false
+        },
+        {
+          "name": "原张江高科站停用，改作培训基地。",
+          "deferred": false
+        },
+        {
+          "name": "东延（龙阳路-广兰路）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁2号线",
+      "alias": "西延",
+      "status": "线路开通",
+      "date": "2010-03-16",
+      "demo": "淞虹路-徐泾东",
+      "stations": [
+        {
+          "name": "淞虹路",
+          "deferred": true
+        },
+        {
+          "name": "虹桥2号航站楼",
+          "deferred": false
+        },
+        {
+          "name": "虹桥火车站",
+          "deferred": true
+        },
+        {
+          "name": "徐泾东",
+          "deferred": false
+        },
+        {
+          "name": "西延段（淞虹路-徐泾东）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁11号线",
+      "alias": "支线",
+      "status": "线路开通",
+      "date": "2010-03-29",
+      "demo": "嘉定新城-安亭",
+      "stations": [
+        {
+          "name": "嘉定新城",
+          "deferred": true
+        },
+        {
+          "name": "上海赛车场",
+          "deferred": false
+        },
+        {
+          "name": "昌吉东路",
+          "deferred": true
+        },
+        {
+          "name": "上海汽车城",
+          "deferred": false
+        },
+        {
+          "name": "安亭",
+          "deferred": false
+        },
+        {
+          "name": "赛车场车辆段",
+          "deferred": false
+        },
+        {
+          "name": "支线（嘉定新城-安亭）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁9号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2010-04-07",
+      "demo": "杨高中路开通",
+      "stations": [
+        {
+          "name": "世纪大道",
+          "deferred": true
+        },
+        {
+          "name": "杨高中路",
+          "deferred": false
+        },
+        {
+          "name": "（世纪大道-杨高中路）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁9号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": null,
+      "demo": "徐家汇站内换乘",
+      "stations": [
+        {
+          "name": "徐家汇",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁2号线",
+      "alias": "东延",
+      "status": "线路开通",
+      "date": "2010-04-08",
+      "demo": "广兰路-浦东国际机场",
+      "stations": [
+        {
+          "name": "广兰路",
+          "deferred": false
+        },
+        {
+          "name": "唐镇",
+          "deferred": false
+        },
+        {
+          "name": "创新中路",
+          "deferred": false
+        },
+        {
+          "name": "华夏东路",
+          "deferred": false
+        },
+        {
+          "name": "川沙",
+          "deferred": false
+        },
+        {
+          "name": "凌空路",
+          "deferred": false
+        },
+        {
+          "name": "远东大道",
+          "deferred": false
+        },
+        {
+          "name": "海天三路",
+          "deferred": false
+        },
+        {
+          "name": "浦东国际机场*",
+          "deferred": false
+        },
+        {
+          "name": "川沙停车场",
+          "deferred": false
+        },
+        {
+          "name": "（广兰路-浦东国际机场）独立交路运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁10号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2010-04-10",
+      "demo": "新江湾城-航中路",
+      "stations": [
+        {
+          "name": "航中路",
+          "deferred": false
+        },
+        {
+          "name": "紫藤路",
+          "deferred": false
+        },
+        {
+          "name": "龙柏新村",
+          "deferred": false
+        },
+        {
+          "name": "龙溪路",
+          "deferred": false
+        },
+        {
+          "name": "水城路",
+          "deferred": false
+        },
+        {
+          "name": "伊犁路",
+          "deferred": false
+        },
+        {
+          "name": "宋园路",
+          "deferred": false
+        },
+        {
+          "name": "虹桥路",
+          "deferred": false
+        },
+        {
+          "name": "交通大学",
+          "deferred": false
+        },
+        {
+          "name": "上海图书馆",
+          "deferred": false
+        },
+        {
+          "name": "一期（航中路-新江湾城）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "世博专线",
+      "alias": "13号线",
+      "status": "线路开通",
+      "date": "2010-04-20",
+      "demo": "马当路-世博大道",
+      "stations": [
+        {
+          "name": "马当路",
+          "deferred": false
+        },
+        {
+          "name": "卢浦大桥",
+          "deferred": false
+        },
+        {
+          "name": "世博大道",
+          "deferred": false
+        },
+        {
+          "name": "独立运营",
+          "deferred": false
+        },
+        {
+          "name": "中心线",
+          "deferred": false
+        },
+        {
+          "name": "通过位于长清路站的7-13联络线东北角",
+          "deferred": false
+        },
+        {
+          "name": "（马当路-世博大道）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁7号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": null,
+      "demo": "后滩站投入运营",
+      "stations": [
+        {
+          "name": "后滩",
+          "deferred": false
+        },
+        {
+          "name": "后滩站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "南京地铁2号线",
+      "alias": "一期及东延段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "油坊桥-经天路",
+      "stations": [
+        {
+          "name": "油坊桥",
+          "deferred": false
+        },
+        {
+          "name": "雨润大街",
+          "deferred": false
+        },
+        {
+          "name": "元通",
+          "deferred": false
+        },
+        {
+          "name": "奥体东",
+          "deferred": false
+        },
+        {
+          "name": "兴隆大街",
+          "deferred": false
+        },
+        {
+          "name": "集庆门大街",
+          "deferred": false
+        },
+        {
+          "name": "云锦路",
+          "deferred": false
+        },
+        {
+          "name": "莫愁湖",
+          "deferred": false
+        },
+        {
+          "name": "汉中门",
+          "deferred": false
+        },
+        {
+          "name": "上海路",
+          "deferred": false
+        },
+        {
+          "name": "一期及东延线（油坊桥-经天路）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁2号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": "2010-07-01",
+      "demo": "虹桥火车站",
+      "stations": [
+        {
+          "name": "虹桥火车站",
+          "deferred": false
+        },
+        {
+          "name": "虹桥火车站站随高铁站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁13号线",
+      "alias": null,
+      "status": "线路停运",
+      "date": "2010-11-02",
+      "demo": "马当路-世博大道退出运营",
+      "stations": [
+        {
+          "name": "马当路",
+          "deferred": true
+        },
+        {
+          "name": "世博会博物馆",
+          "deferred": true
+        },
+        {
+          "name": "世博大道",
+          "deferred": true
+        },
+        {
+          "name": "（马当路-世博大道）退出运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁10号线",
+      "alias": "主线",
+      "status": "线路开通",
+      "date": "2010-11-30",
+      "demo": "龙溪路-虹桥火车站",
+      "stations": [
+        {
+          "name": "龙溪路",
+          "deferred": true
+        },
+        {
+          "name": "上海动物园",
+          "deferred": false
+        },
+        {
+          "name": "虹桥1号航站楼",
+          "deferred": false
+        },
+        {
+          "name": "虹桥2号航站楼",
+          "deferred": false
+        },
+        {
+          "name": "虹桥火车站",
+          "deferred": false
+        },
+        {
+          "name": "一期（龙溪路-虹桥火车站）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁",
+      "alias": "3/4/9号线",
+      "status": "线路开通",
+      "date": "2010-12-28",
+      "demo": "宜山路站站内换乘",
+      "stations": [
+        {
+          "name": "宜山路",
+          "deferred": false
+        },
+        {
+          "name": "宜山路站与9号线实现站内换乘",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "上海",
+      "line": "上海地铁7号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "美兰湖-上海大学开通",
+      "stations": [
+        {
+          "name": "上海大学",
+          "deferred": true
+        },
+        {
+          "name": "祁华路",
+          "deferred": true
+        },
+        {
+          "name": "顾村公园",
+          "deferred": false
+        },
+        {
+          "name": "刘行",
+          "deferred": true
+        },
+        {
+          "name": "潘广路",
+          "deferred": true
+        },
+        {
+          "name": "罗南新村",
+          "deferred": false
+        },
+        {
+          "name": "美兰湖",
+          "deferred": false
+        },
+        {
+          "name": "北延段（上海大学-美兰湖）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "上海",
+      "line": "上海地铁6号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2011-04-12",
+      "demo": "灵岩南路-济阳路",
+      "stations": [
+        {
+          "name": "灵岩南路",
+          "deferred": true
+        },
+        {
+          "name": "济阳路",
+          "deferred": false
+        },
+        {
+          "name": "济阳路站启用并与8号线换乘",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "上海",
+      "line": "上海地铁",
+      "alias": "6/8号线",
+      "status": "车站开通",
+      "date": null,
+      "demo": "济阳路站开通",
+      "stations": [
+        {
+          "name": "济阳路",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "上海",
+      "line": "上海地铁11号线",
+      "alias": "支线",
+      "status": "车站开通",
+      "date": "2011-04-26",
+      "demo": "昌吉东路开通",
+      "stations": [
+        {
+          "name": "昌吉东路",
+          "deferred": false
+        },
+        {
+          "name": "支线昌吉东路站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "上海",
+      "line": "上海地铁",
+      "alias": null,
+      "status": "车站开通",
+      "date": "2011-05-07",
+      "demo": "济阳路站更名",
+      "stations": [
+        {
+          "name": "东方体育中心",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "上海",
+      "line": "上海地铁7号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": "2011-06-30",
+      "demo": "刘行、潘广路站开通",
+      "stations": [
+        {
+          "name": "刘行",
+          "deferred": false
+        },
+        {
+          "name": "潘广路",
+          "deferred": false
+        },
+        {
+          "name": "潘广路站、刘行站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "上海",
+      "line": "上海地铁8号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": null,
+      "demo": "周家渡站更名中华艺术宫",
+      "stations": [
+        {
+          "name": "中华艺术宫",
+          "deferred": true
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "上海",
+      "line": "上海地铁8号线",
+      "alias": null,
+      "status": "车站开通",
+      "date": null,
+      "demo": "中华艺术宫开通",
+      "stations": [
+        {
+          "name": "中华艺术宫",
+          "deferred": false
+        },
+        {
+          "name": "周家渡站更名为中华艺术宫站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "上海",
+      "line": "上海地铁",
+      "alias": "3/8号线",
+      "status": "车站开通",
+      "date": "2012-10-21",
+      "demo": "虹口足球场站站内换乘",
+      "stations": [
+        {
+          "name": "虹口足球场",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "上海",
+      "line": "上海地铁7号线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2012-12-24",
+      "demo": "船厂路站更名龙华中路",
+      "stations": [
+        {
+          "name": "龙华中路",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "上海",
+      "line": "上海地铁9号线",
+      "alias": "松江段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "松江新城-松江南站",
+      "stations": [
+        {
+          "name": "松江新城",
+          "deferred": true
+        },
+        {
+          "name": "松江体育中心",
+          "deferred": false
+        },
+        {
+          "name": "醉白池",
+          "deferred": false
+        },
+        {
+          "name": "松江南站",
+          "deferred": false
+        },
+        {
+          "name": "松江段（松江新城-松江南站）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "上海",
+      "line": "上海地铁13号线",
+      "alias": "西段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "金运路-金沙江路",
+      "stations": [
+        {
+          "name": "金运路",
+          "deferred": false
+        },
+        {
+          "name": "金沙江西路",
+          "deferred": false
+        },
+        {
+          "name": "丰庄",
+          "deferred": false
+        },
+        {
+          "name": "祁连山南路",
+          "deferred": true
+        },
+        {
+          "name": "真北路",
+          "deferred": false
+        },
+        {
+          "name": "大渡河路",
+          "deferred": true
+        },
+        {
+          "name": "金沙江路",
+          "deferred": false
+        },
+        {
+          "name": "北翟路车辆段",
+          "deferred": false
+        },
+        {
+          "name": "一期西段（金沙江路-金运路）开通试运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "shenyang": [
+    {
+      "period": 3,
+      "city": "沈阳",
+      "line": "沈阳地铁1号线",
+      "alias": "首通段",
+      "status": "线路开通",
+      "date": "2010-09-27",
+      "demo": "十三号街-黎明广场",
+      "stations": [
+        {
+          "name": "十三号街",
+          "deferred": false
+        },
+        {
+          "name": "中央大街",
+          "deferred": false
+        },
+        {
+          "name": "七号街",
+          "deferred": false
+        },
+        {
+          "name": "四号街",
+          "deferred": false
+        },
+        {
+          "name": "张士",
+          "deferred": false
+        },
+        {
+          "name": "开发大道",
+          "deferred": false
+        },
+        {
+          "name": "于洪广场",
+          "deferred": false
+        },
+        {
+          "name": "迎宾路",
+          "deferred": false
+        },
+        {
+          "name": "重工街",
+          "deferred": false
+        },
+        {
+          "name": "启工街",
+          "deferred": false
+        },
+        {
+          "name": "一期（十三号街-黎明广场）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "沈阳",
+      "line": "沈阳地铁2号线",
+      "alias": "首通段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "三台子-全运路",
+      "stations": [
+        {
+          "name": "三台子",
+          "deferred": false
+        },
+        {
+          "name": "陵西",
+          "deferred": false
+        },
+        {
+          "name": "新乐遗址",
+          "deferred": false
+        },
+        {
+          "name": "北陵公园",
+          "deferred": false
+        },
+        {
+          "name": "中医药大学",
+          "deferred": false
+        },
+        {
+          "name": "岐山路",
+          "deferred": false
+        },
+        {
+          "name": "沈阳北站",
+          "deferred": false
+        },
+        {
+          "name": "金融中心",
+          "deferred": false
+        },
+        {
+          "name": "市府广场",
+          "deferred": false
+        },
+        {
+          "name": "青年大街",
+          "deferred": false
+        },
+        {
+          "name": "一期（三台子-全运路）开通试运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "shenzhen": [
+    {
+      "period": 2,
+      "city": "深圳",
+      "line": "深圳地铁1号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2004-12-28",
+      "demo": "罗湖-世界之窗",
+      "stations": [
+        {
+          "name": "罗湖",
+          "deferred": false
+        },
+        {
+          "name": "国贸",
+          "deferred": false
+        },
+        {
+          "name": "老街",
+          "deferred": false
+        },
+        {
+          "name": "大剧院",
+          "deferred": false
+        },
+        {
+          "name": "科学馆",
+          "deferred": false
+        },
+        {
+          "name": "华强路",
+          "deferred": false
+        },
+        {
+          "name": "岗厦",
+          "deferred": false
+        },
+        {
+          "name": "会展中心",
+          "deferred": false
+        },
+        {
+          "name": "购物公园",
+          "deferred": false
+        },
+        {
+          "name": "香蜜湖",
+          "deferred": false
+        },
+        {
+          "name": "一期（罗湖-世界之窗）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "深圳",
+      "line": "深圳地铁4号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "福民-少年宫",
+      "stations": [
+        {
+          "name": "皇岗",
+          "deferred": true
+        },
+        {
+          "name": "福民",
+          "deferred": false
+        },
+        {
+          "name": "会展中心",
+          "deferred": false
+        },
+        {
+          "name": "市民中心",
+          "deferred": false
+        },
+        {
+          "name": "少年宫",
+          "deferred": false
+        },
+        {
+          "name": "竹子林车辆段",
+          "deferred": false
+        },
+        {
+          "name": "一期（福民-少年宫）单线拉风箱式运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "深圳",
+      "line": "深圳地铁4号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "皇岗站投入运营",
+      "stations": [
+        {
+          "name": "皇岗",
+          "deferred": false
+        },
+        {
+          "name": "一期启用双线运营，皇岗站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "深圳",
+      "line": "深圳地铁",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2008-04-23",
+      "demo": "由数字名称更改为文字名称",
+      "stations": [
+        {
+          "name": "罗宝线",
+          "deferred": false
+        },
+        {
+          "name": "龙华线",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "深圳",
+      "line": "深圳地铁龙华线",
+      "alias": "一期",
+      "status": "车站更名",
+      "date": "2008-08-15",
+      "demo": "皇岗站更名为福田口岸站",
+      "stations": [
+        {
+          "name": "福田口岸",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "深圳",
+      "line": "深圳地铁罗宝线 （1号线）",
+      "alias": "续建工程",
+      "status": "线路开通",
+      "date": null,
+      "demo": "世界之窗-深大",
+      "stations": [
+        {
+          "name": "世界之窗",
+          "deferred": true
+        },
+        {
+          "name": "白石洲",
+          "deferred": false
+        },
+        {
+          "name": "高新园",
+          "deferred": false
+        },
+        {
+          "name": "深大",
+          "deferred": false
+        },
+        {
+          "name": "西延段（世界之窗-深大）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "深圳",
+      "line": "深圳地铁蛇口线 （2号线）",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "赤湾-世界之窗",
+      "stations": [
+        {
+          "name": "赤湾",
+          "deferred": false
+        },
+        {
+          "name": "蛇口港",
+          "deferred": false
+        },
+        {
+          "name": "海上世界",
+          "deferred": false
+        },
+        {
+          "name": "水湾",
+          "deferred": false
+        },
+        {
+          "name": "东角头",
+          "deferred": false
+        },
+        {
+          "name": "湾厦",
+          "deferred": false
+        },
+        {
+          "name": "海月",
+          "deferred": false
+        },
+        {
+          "name": "登良",
+          "deferred": false
+        },
+        {
+          "name": "后海",
+          "deferred": false
+        },
+        {
+          "name": "科苑",
+          "deferred": false
+        },
+        {
+          "name": "一期（世界之窗-赤湾）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "深圳",
+      "line": "深圳地铁龙岗线 （3号线）",
+      "alias": "高架段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "草埔-双龙",
+      "stations": [
+        {
+          "name": "草埔",
+          "deferred": false
+        },
+        {
+          "name": "布吉",
+          "deferred": false
+        },
+        {
+          "name": "木棉湾",
+          "deferred": false
+        },
+        {
+          "name": "大芬",
+          "deferred": false
+        },
+        {
+          "name": "丹竹头",
+          "deferred": false
+        },
+        {
+          "name": "六约",
+          "deferred": false
+        },
+        {
+          "name": "塘坑",
+          "deferred": false
+        },
+        {
+          "name": "横岗",
+          "deferred": false
+        },
+        {
+          "name": "永湖",
+          "deferred": false
+        },
+        {
+          "name": "荷坳",
+          "deferred": false
+        },
+        {
+          "name": "高架段（草埔-双龙）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "深圳",
+      "line": "深圳地铁罗宝线 （1号线）",
+      "alias": "二期",
+      "status": "线路开通",
+      "date": "2011-06-15",
+      "demo": "深大-机场东",
+      "stations": [
+        {
+          "name": "深大",
+          "deferred": true
+        },
+        {
+          "name": "桃园",
+          "deferred": false
+        },
+        {
+          "name": "大新",
+          "deferred": false
+        },
+        {
+          "name": "鲤鱼门",
+          "deferred": false
+        },
+        {
+          "name": "前海湾",
+          "deferred": false
+        },
+        {
+          "name": "新安",
+          "deferred": false
+        },
+        {
+          "name": "宝安中心",
+          "deferred": false
+        },
+        {
+          "name": "宝体",
+          "deferred": false
+        },
+        {
+          "name": "坪洲",
+          "deferred": false
+        },
+        {
+          "name": "西乡",
+          "deferred": false
+        },
+        {
+          "name": "二期（深大-机场东）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "深圳",
+      "line": "深圳地铁龙华线 （4号线）",
+      "alias": "二期",
+      "status": "线路开通",
+      "date": "2011-06-16",
+      "demo": "少年宫-清湖",
+      "stations": [
+        {
+          "name": "少年宫",
+          "deferred": true
+        },
+        {
+          "name": "莲花北",
+          "deferred": false
+        },
+        {
+          "name": "上梅林",
+          "deferred": false
+        },
+        {
+          "name": "民乐",
+          "deferred": false
+        },
+        {
+          "name": "白石龙",
+          "deferred": false
+        },
+        {
+          "name": "深圳北站",
+          "deferred": true
+        },
+        {
+          "name": "红山",
+          "deferred": false
+        },
+        {
+          "name": "上塘",
+          "deferred": false
+        },
+        {
+          "name": "龙胜",
+          "deferred": false
+        },
+        {
+          "name": "龙华",
+          "deferred": false
+        },
+        {
+          "name": "二期（少年宫-清湖）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "深圳",
+      "line": "深圳地铁环中线 （5号线）",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2011-06-22",
+      "demo": "前海湾-黄贝岭",
+      "stations": [
+        {
+          "name": "前海湾",
+          "deferred": false
+        },
+        {
+          "name": "临海",
+          "deferred": false
+        },
+        {
+          "name": "宝华",
+          "deferred": false
+        },
+        {
+          "name": "宝安中心",
+          "deferred": false
+        },
+        {
+          "name": "翻身",
+          "deferred": false
+        },
+        {
+          "name": "灵芝",
+          "deferred": false
+        },
+        {
+          "name": "洪浪北",
+          "deferred": false
+        },
+        {
+          "name": "兴东",
+          "deferred": false
+        },
+        {
+          "name": "留仙洞",
+          "deferred": false
+        },
+        {
+          "name": "西丽",
+          "deferred": false
+        },
+        {
+          "name": "一期（前海湾-黄贝岭）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "深圳",
+      "line": "深圳地铁蛇口线 （2号线）",
+      "alias": "东延段",
+      "status": "线路开通",
+      "date": "2011-06-28",
+      "demo": "世界之窗-新秀",
+      "stations": [
+        {
+          "name": "世界之窗",
+          "deferred": true
+        },
+        {
+          "name": "侨城北",
+          "deferred": false
+        },
+        {
+          "name": "深康",
+          "deferred": false
+        },
+        {
+          "name": "安托山",
+          "deferred": false
+        },
+        {
+          "name": "侨香",
+          "deferred": false
+        },
+        {
+          "name": "香蜜",
+          "deferred": false
+        },
+        {
+          "name": "香梅北",
+          "deferred": false
+        },
+        {
+          "name": "景田",
+          "deferred": false
+        },
+        {
+          "name": "莲花西",
+          "deferred": false
+        },
+        {
+          "name": "福田",
+          "deferred": false
+        },
+        {
+          "name": "东延段（世界之窗-新秀）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "深圳",
+      "line": "深圳地铁龙岗线 （3号线）",
+      "alias": "后通段及\n西延段",
+      "status": "线路开通",
+      "date": null,
+      "demo": "草埔-益田",
+      "stations": [
+        {
+          "name": "草埔",
+          "deferred": true
+        },
+        {
+          "name": "水贝",
+          "deferred": false
+        },
+        {
+          "name": "田贝",
+          "deferred": false
+        },
+        {
+          "name": "翠竹",
+          "deferred": false
+        },
+        {
+          "name": "晒布",
+          "deferred": false
+        },
+        {
+          "name": "老街",
+          "deferred": false
+        },
+        {
+          "name": "红岭",
+          "deferred": false
+        },
+        {
+          "name": "通新岭",
+          "deferred": false
+        },
+        {
+          "name": "华新",
+          "deferred": false
+        },
+        {
+          "name": "莲花村",
+          "deferred": false
+        },
+        {
+          "name": "后通段（草埔-益田）开通运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "suzhou": [
+    {
+      "period": 4,
+      "city": "苏州",
+      "line": "苏州轨道交通1号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2012-04-28",
+      "demo": "木渎-钟南街",
+      "stations": [
+        {
+          "name": "木渎",
+          "deferred": false
+        },
+        {
+          "name": "金枫路",
+          "deferred": false
+        },
+        {
+          "name": "汾湖路",
+          "deferred": false
+        },
+        {
+          "name": "玉山路",
+          "deferred": false
+        },
+        {
+          "name": "苏州乐园",
+          "deferred": false
+        },
+        {
+          "name": "塔园路",
+          "deferred": false
+        },
+        {
+          "name": "滨河路",
+          "deferred": false
+        },
+        {
+          "name": "西环路",
+          "deferred": false
+        },
+        {
+          "name": "桐泾北路",
+          "deferred": false
+        },
+        {
+          "name": "广济南路",
+          "deferred": false
+        },
+        {
+          "name": "（木渎-钟南街）开通试运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "taipei": [
+    {
+      "period": 1,
+      "city": "台北",
+      "line": "台北捷运淡水线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1997-03-28",
+      "demo": "淡水-中山",
+      "stations": [
+        {
+          "name": "淡水",
+          "deferred": false
+        },
+        {
+          "name": "红树林",
+          "deferred": false
+        },
+        {
+          "name": "竹围",
+          "deferred": false
+        },
+        {
+          "name": "关渡",
+          "deferred": false
+        },
+        {
+          "name": "忠义",
+          "deferred": false
+        },
+        {
+          "name": "复兴岗",
+          "deferred": false
+        },
+        {
+          "name": "北投",
+          "deferred": false
+        },
+        {
+          "name": "奇岩",
+          "deferred": false
+        },
+        {
+          "name": "唭哩岸",
+          "deferred": false
+        },
+        {
+          "name": "石牌",
+          "deferred": false
+        },
+        {
+          "name": "（中山-淡水）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "台北",
+      "line": "台北捷运新北投支线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "北投-新北投",
+      "stations": [
+        {
+          "name": "北投",
+          "deferred": true
+        },
+        {
+          "name": "新北投",
+          "deferred": false
+        },
+        {
+          "name": "大红色",
+          "deferred": false
+        },
+        {
+          "name": "支线新北投站同步投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "台北",
+      "line": "台北捷运淡水线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1997-12-25",
+      "demo": "中山-台北车站",
+      "stations": [
+        {
+          "name": "中山",
+          "deferred": true
+        },
+        {
+          "name": "台北车站",
+          "deferred": false
+        },
+        {
+          "name": "木栅线与淡水线，两条南北向的路线两两独立，无法透过捷运转乘",
+          "deferred": false
+        },
+        {
+          "name": "（中山-台北车站）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "台北",
+      "line": "台北捷运淡水线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1998-12-24",
+      "demo": "台北车站-中正纪念堂",
+      "stations": [
+        {
+          "name": "台北车站",
+          "deferred": true
+        },
+        {
+          "name": "台大医院",
+          "deferred": false
+        },
+        {
+          "name": "中正纪念堂",
+          "deferred": false
+        },
+        {
+          "name": "与新店线、中和线贯通运营至南势角站",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "台北",
+      "line": "台北捷运新店线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "中正纪念堂-古亭",
+      "stations": [
+        {
+          "name": "中正纪念堂",
+          "deferred": true
+        },
+        {
+          "name": "古亭",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "台北",
+      "line": "台北捷运中和线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "古亭-南势角",
+      "stations": [
+        {
+          "name": "古亭",
+          "deferred": true
+        },
+        {
+          "name": "顶溪",
+          "deferred": false
+        },
+        {
+          "name": "永安市场",
+          "deferred": false
+        },
+        {
+          "name": "景安",
+          "deferred": false
+        },
+        {
+          "name": "南势角",
+          "deferred": false
+        },
+        {
+          "name": "中和机厂",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "台北",
+      "line": "台北捷运新店线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1999-11-11",
+      "demo": "古亭-新店",
+      "stations": [
+        {
+          "name": "古亭",
+          "deferred": true
+        },
+        {
+          "name": "台电大楼",
+          "deferred": false
+        },
+        {
+          "name": "公馆",
+          "deferred": false
+        },
+        {
+          "name": "万隆",
+          "deferred": false
+        },
+        {
+          "name": "景美",
+          "deferred": false
+        },
+        {
+          "name": "大坪林",
+          "deferred": false
+        },
+        {
+          "name": "七张",
+          "deferred": false
+        },
+        {
+          "name": "新店市公所",
+          "deferred": false
+        },
+        {
+          "name": "新店",
+          "deferred": false
+        },
+        {
+          "name": "新店机厂",
+          "deferred": false
+        },
+        {
+          "name": "（古亭-新店）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "台北",
+      "line": "台北捷运",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1999-11-11",
+      "demo": "开行交路",
+      "stations": [
+        {
+          "name": "取消“淡水-南势角”线路",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "台北",
+      "line": "台北捷运南港线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1999-12-24",
+      "demo": "市政府-龙山寺",
+      "stations": [
+        {
+          "name": "市政府",
+          "deferred": false
+        },
+        {
+          "name": "国父纪念馆",
+          "deferred": false
+        },
+        {
+          "name": "忠孝敦化",
+          "deferred": false
+        },
+        {
+          "name": "忠孝复兴",
+          "deferred": false
+        },
+        {
+          "name": "忠孝新生",
+          "deferred": false
+        },
+        {
+          "name": "善导寺",
+          "deferred": false
+        },
+        {
+          "name": "台北车站",
+          "deferred": false
+        },
+        {
+          "name": "西门",
+          "deferred": false
+        },
+        {
+          "name": "龙山寺",
+          "deferred": false
+        },
+        {
+          "name": "新店机厂",
+          "deferred": false
+        },
+        {
+          "name": "（龙山寺-市政府）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "台北",
+      "line": "台北捷运板南线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2000-08-31",
+      "demo": "龙山寺-新埔",
+      "stations": [
+        {
+          "name": "龙山寺",
+          "deferred": true
+        },
+        {
+          "name": "江子翠",
+          "deferred": false
+        },
+        {
+          "name": "新埔",
+          "deferred": false
+        },
+        {
+          "name": "（龙山寺-新埔）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "台北",
+      "line": "台北捷运小南门线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "西门-中正纪念堂",
+      "stations": [
+        {
+          "name": "西门",
+          "deferred": false
+        },
+        {
+          "name": "小南门",
+          "deferred": false
+        },
+        {
+          "name": "中正纪念堂",
+          "deferred": false
+        },
+        {
+          "name": "单线行驶",
+          "deferred": false
+        },
+        {
+          "name": "（西门-中正纪念堂）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "台北",
+      "line": "台北捷运板南线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2000-12-30",
+      "demo": "市政府-昆阳",
+      "stations": [
+        {
+          "name": "市政府",
+          "deferred": true
+        },
+        {
+          "name": "永春",
+          "deferred": false
+        },
+        {
+          "name": "后山埤",
+          "deferred": false
+        },
+        {
+          "name": "昆阳",
+          "deferred": false
+        },
+        {
+          "name": "南港机厂",
+          "deferred": false
+        },
+        {
+          "name": "（市政府-昆阳）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "台北",
+      "line": "台北捷运新北投支线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2003年",
+      "demo": "新北投支线更改标识色",
+      "stations": [
+        {
+          "name": "新北投支线",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "台北",
+      "line": "台北捷运小碧潭支线",
+      "alias": "G03A",
+      "status": "线路开通",
+      "date": "2004-09-29",
+      "demo": "七张-小碧潭",
+      "stations": [
+        {
+          "name": "七张",
+          "deferred": true
+        },
+        {
+          "name": "小碧潭",
+          "deferred": false
+        },
+        {
+          "name": "单线双向",
+          "deferred": false
+        },
+        {
+          "name": "（七张-小碧潭）单线双向通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "台北",
+      "line": "台北捷运板桥线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2006-05-31",
+      "demo": "新埔-府中",
+      "stations": [
+        {
+          "name": "新埔",
+          "deferred": true
+        },
+        {
+          "name": "板桥",
+          "deferred": false
+        },
+        {
+          "name": "府中",
+          "deferred": false
+        },
+        {
+          "name": "（新埔-府中）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "台北",
+      "line": "台北捷运土城线",
+      "alias": null,
+      "status": "线路开通",
+      "date": null,
+      "demo": "府中-永宁",
+      "stations": [
+        {
+          "name": "府中",
+          "deferred": true
+        },
+        {
+          "name": "亚东医院",
+          "deferred": false
+        },
+        {
+          "name": "海山",
+          "deferred": false
+        },
+        {
+          "name": "土城",
+          "deferred": false
+        },
+        {
+          "name": "永宁",
+          "deferred": false
+        },
+        {
+          "name": "土城机厂",
+          "deferred": false
+        },
+        {
+          "name": "（府中-永宁）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "台北",
+      "line": "台北捷运南港线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2008-12-25",
+      "demo": "昆阳-南港",
+      "stations": [
+        {
+          "name": "昆阳",
+          "deferred": true
+        },
+        {
+          "name": "南港",
+          "deferred": false
+        },
+        {
+          "name": "（昆阳-南港）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "台北",
+      "line": "台北捷运内湖线",
+      "alias": "木山内湖线\n（栅湖线）",
+      "status": "线路开通",
+      "date": "2009-07-04",
+      "demo": "中山国中-南港展览馆",
+      "stations": [
+        {
+          "name": "中山国中",
+          "deferred": true
+        },
+        {
+          "name": "松山机场",
+          "deferred": false
+        },
+        {
+          "name": "大直",
+          "deferred": false
+        },
+        {
+          "name": "剑南路",
+          "deferred": false
+        },
+        {
+          "name": "西湖",
+          "deferred": false
+        },
+        {
+          "name": "港墘",
+          "deferred": false
+        },
+        {
+          "name": "文德",
+          "deferred": false
+        },
+        {
+          "name": "内湖",
+          "deferred": false
+        },
+        {
+          "name": "大湖公园",
+          "deferred": false
+        },
+        {
+          "name": "葫洲",
+          "deferred": false
+        },
+        {
+          "name": "（中山国中-南港展览馆）通车运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "台北",
+      "line": "台北捷运文湖线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "2009-10-08",
+      "demo": "栅湖线更名为文湖线",
+      "stations": [
+        {
+          "name": "文湖线",
+          "deferred": false
+        },
+        {
+          "name": "木栅内湖线（简称栅湖线）正式合并更名为文山内湖线（简称文湖线），路线颜色标示则仍为棕色",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "台北",
+      "line": "台北捷运南港线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2011-02-27",
+      "demo": "南港-南港展览馆",
+      "stations": [
+        {
+          "name": "南港",
+          "deferred": true
+        },
+        {
+          "name": "南港展览馆",
+          "deferred": false
+        },
+        {
+          "name": "（南港-南港展览馆）通车营运",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "台北",
+      "line": "台北捷运新芦线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2012-01-05",
+      "demo": "大桥头-辅大",
+      "stations": [
+        {
+          "name": "大桥头",
+          "deferred": true
+        },
+        {
+          "name": "台北桥",
+          "deferred": false
+        },
+        {
+          "name": "菜寮",
+          "deferred": false
+        },
+        {
+          "name": "三重",
+          "deferred": false
+        },
+        {
+          "name": "先啬宫",
+          "deferred": false
+        },
+        {
+          "name": "头前庄",
+          "deferred": false
+        },
+        {
+          "name": "新庄",
+          "deferred": false
+        },
+        {
+          "name": "辅大",
+          "deferred": false
+        },
+        {
+          "name": "（大桥头-辅大）正式通车营运",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "台北",
+      "line": "台北捷运中和新芦线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2012-09-30",
+      "demo": "忠孝新生-古亭",
+      "stations": [
+        {
+          "name": "忠孝新生",
+          "deferred": true
+        },
+        {
+          "name": "东门",
+          "deferred": false
+        },
+        {
+          "name": "古亭",
+          "deferred": true
+        },
+        {
+          "name": "东门站正式投入营运",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "tianjin": [
+    {
+      "period": 1,
+      "city": "天津",
+      "line": "天津地铁1号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "1984-12-28",
+      "demo": "新华路-西站",
+      "stations": [
+        {
+          "name": "新华路",
+          "deferred": false
+        },
+        {
+          "name": "营口道",
+          "deferred": false
+        },
+        {
+          "name": "电报大楼",
+          "deferred": false
+        },
+        {
+          "name": "海光寺",
+          "deferred": false
+        },
+        {
+          "name": "二纬路",
+          "deferred": false
+        },
+        {
+          "name": "西南角",
+          "deferred": false
+        },
+        {
+          "name": "西北角",
+          "deferred": false
+        },
+        {
+          "name": "西站",
+          "deferred": false
+        },
+        {
+          "name": "全线（新华路-西站）正式开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 1,
+      "city": "天津",
+      "line": "天津地铁1号线",
+      "alias": null,
+      "status": "车站更名",
+      "date": "1984-12-28",
+      "demo": "定名为天津地铁1号线",
+      "stations": [
+        {
+          "name": "天津地铁既有线定名为天津地铁1号线",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "天津",
+      "line": "天津地铁1号线",
+      "alias": null,
+      "status": "线路停运",
+      "date": "2001-10-09",
+      "demo": "新华路-西站",
+      "stations": [
+        {
+          "name": "西站",
+          "deferred": true
+        },
+        {
+          "name": "西北角",
+          "deferred": true
+        },
+        {
+          "name": "西南角",
+          "deferred": true
+        },
+        {
+          "name": "二纬路",
+          "deferred": true
+        },
+        {
+          "name": "海光寺",
+          "deferred": true
+        },
+        {
+          "name": "鞍山道",
+          "deferred": true
+        },
+        {
+          "name": "营口道",
+          "deferred": true
+        },
+        {
+          "name": "新华路",
+          "deferred": true
+        },
+        {
+          "name": "海光寺车辆段",
+          "deferred": false
+        },
+        {
+          "name": "既有线（新华路-西站）停运进入改造",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "天津",
+      "line": "津滨轻轨",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": "2004-03-28",
+      "demo": "中山门-东海路",
+      "stations": [
+        {
+          "name": "中山门",
+          "deferred": false
+        },
+        {
+          "name": "一号桥",
+          "deferred": true
+        },
+        {
+          "name": "二号桥",
+          "deferred": true
+        },
+        {
+          "name": "张贵庄",
+          "deferred": true
+        },
+        {
+          "name": "新立",
+          "deferred": true
+        },
+        {
+          "name": "东丽开发区",
+          "deferred": false
+        },
+        {
+          "name": "小东庄",
+          "deferred": true
+        },
+        {
+          "name": "军粮城",
+          "deferred": true
+        },
+        {
+          "name": "钢管公司",
+          "deferred": false
+        },
+        {
+          "name": "中西村",
+          "deferred": true
+        },
+        {
+          "name": "一期（中山门-东海路）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "天津",
+      "line": "天津地铁1号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2006-06-12",
+      "demo": "刘园-双林",
+      "stations": [
+        {
+          "name": "刘园",
+          "deferred": false
+        },
+        {
+          "name": "西横堤",
+          "deferred": false
+        },
+        {
+          "name": "果酒厂",
+          "deferred": false
+        },
+        {
+          "name": "本溪路",
+          "deferred": false
+        },
+        {
+          "name": "勤俭道",
+          "deferred": false
+        },
+        {
+          "name": "洪湖里",
+          "deferred": false
+        },
+        {
+          "name": "西站",
+          "deferred": false
+        },
+        {
+          "name": "西北角",
+          "deferred": false
+        },
+        {
+          "name": "西南角",
+          "deferred": false
+        },
+        {
+          "name": "二纬路",
+          "deferred": false
+        },
+        {
+          "name": "（刘园-双林）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "天津",
+      "line": "天津地铁1号线",
+      "alias": null,
+      "status": "车站更名",
+      "date": null,
+      "demo": "电报大楼站更名为鞍山道站",
+      "stations": [
+        {
+          "name": "鞍山道",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "天津",
+      "line": "天津地铁9号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2011-05-01",
+      "demo": "中山门-十一经路",
+      "stations": [
+        {
+          "name": "中山门",
+          "deferred": true
+        },
+        {
+          "name": "东兴路",
+          "deferred": false
+        },
+        {
+          "name": "直沽",
+          "deferred": false
+        },
+        {
+          "name": "十一经路",
+          "deferred": false
+        },
+        {
+          "name": "（中山门-十一经路）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "天津",
+      "line": "天津地铁2号线",
+      "alias": "西段",
+      "status": "线路开通",
+      "date": "2012-07-01",
+      "demo": "曹庄-东南角",
+      "stations": [
+        {
+          "name": "曹庄",
+          "deferred": false
+        },
+        {
+          "name": "卞兴",
+          "deferred": false
+        },
+        {
+          "name": "芥园西道",
+          "deferred": true
+        },
+        {
+          "name": "咸阳路",
+          "deferred": false
+        },
+        {
+          "name": "长虹公园",
+          "deferred": false
+        },
+        {
+          "name": "广开四马路",
+          "deferred": false
+        },
+        {
+          "name": "西南角",
+          "deferred": false
+        },
+        {
+          "name": "鼓楼",
+          "deferred": false
+        },
+        {
+          "name": "东南角",
+          "deferred": false
+        },
+        {
+          "name": "曹庄停车场",
+          "deferred": false
+        },
+        {
+          "name": "西段（曹庄-东南角）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "天津",
+      "line": "天津地铁3号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2012-10-01",
+      "demo": "高新区-小淀 ",
+      "stations": [
+        {
+          "name": "高新区",
+          "deferred": false
+        },
+        {
+          "name": "大学城",
+          "deferred": false
+        },
+        {
+          "name": "华苑",
+          "deferred": false
+        },
+        {
+          "name": "王顶堤",
+          "deferred": false
+        },
+        {
+          "name": "红旗南路",
+          "deferred": false
+        },
+        {
+          "name": "周邓纪念馆",
+          "deferred": false
+        },
+        {
+          "name": "天塔",
+          "deferred": false
+        },
+        {
+          "name": "吴家窑",
+          "deferred": false
+        },
+        {
+          "name": "西康路",
+          "deferred": false
+        },
+        {
+          "name": "营口道",
+          "deferred": false
+        },
+        {
+          "name": "一期（高新区-小淀 ）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "天津",
+      "line": "天津地铁9号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2012-10-15",
+      "demo": "十一经路-天津站",
+      "stations": [
+        {
+          "name": "十一经路",
+          "deferred": true
+        },
+        {
+          "name": "大王庄",
+          "deferred": false
+        },
+        {
+          "name": "天津站",
+          "deferred": false
+        },
+        {
+          "name": "统一票价",
+          "deferred": false
+        },
+        {
+          "name": "（十一经路-天津站）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "天津",
+      "line": "天津地铁2号线",
+      "alias": null,
+      "status": "线路开通",
+      "date": "2012-11-18",
+      "demo": "芥园西道站投入运营",
+      "stations": [
+        {
+          "name": "芥园西道",
+          "deferred": false
+        },
+        {
+          "name": "芥园西道站投入运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "wuhan": [
+    {
+      "period": 2,
+      "city": "武汉",
+      "line": "武汉轻轨1号线",
+      "alias": "轻轨一期",
+      "status": "线路开通",
+      "date": "2004-07-28",
+      "demo": "黄浦路-宗关",
+      "stations": [
+        {
+          "name": "宗关",
+          "deferred": false
+        },
+        {
+          "name": "太平洋",
+          "deferred": true
+        },
+        {
+          "name": "硚口路",
+          "deferred": false
+        },
+        {
+          "name": "崇仁路",
+          "deferred": false
+        },
+        {
+          "name": "利济北路",
+          "deferred": false
+        },
+        {
+          "name": "友谊路",
+          "deferred": false
+        },
+        {
+          "name": "江汉路",
+          "deferred": false
+        },
+        {
+          "name": "大智路",
+          "deferred": false
+        },
+        {
+          "name": "三阳路",
+          "deferred": false
+        },
+        {
+          "name": "黄浦路",
+          "deferred": false
+        },
+        {
+          "name": "一期（宗关-黄浦路）观光试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 2,
+      "city": "武汉",
+      "line": "武汉地铁1号线",
+      "alias": "轻轨一期",
+      "status": "线路开通",
+      "date": "2006-04-08",
+      "demo": "太平洋站投入运营",
+      "stations": [
+        {
+          "name": "太平洋",
+          "deferred": false
+        },
+        {
+          "name": "太平洋站投入运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 3,
+      "city": "武汉",
+      "line": "武汉轨道交通1号线",
+      "alias": "二期东段",
+      "status": "线路开通",
+      "date": "2010-07-29",
+      "demo": "黄浦路-堤角",
+      "stations": [
+        {
+          "name": "黄浦路",
+          "deferred": true
+        },
+        {
+          "name": "头道街",
+          "deferred": false
+        },
+        {
+          "name": "二七路",
+          "deferred": false
+        },
+        {
+          "name": "徐州新村",
+          "deferred": false
+        },
+        {
+          "name": "丹水池",
+          "deferred": false
+        },
+        {
+          "name": "新荣",
+          "deferred": false
+        },
+        {
+          "name": "堤角",
+          "deferred": false
+        },
+        {
+          "name": "二期东段（黄浦路-堤角）开通试运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "武汉",
+      "line": "武汉地铁2号线",
+      "alias": "一期",
+      "status": "线路开通",
+      "date": null,
+      "demo": "金银潭-光谷广场",
+      "stations": [
+        {
+          "name": "金银潭",
+          "deferred": false
+        },
+        {
+          "name": "常青花园",
+          "deferred": false
+        },
+        {
+          "name": "长港路",
+          "deferred": false
+        },
+        {
+          "name": "汉口火车站",
+          "deferred": false
+        },
+        {
+          "name": "范湖",
+          "deferred": false
+        },
+        {
+          "name": "王家墩东",
+          "deferred": false
+        },
+        {
+          "name": "青年路",
+          "deferred": false
+        },
+        {
+          "name": "中山公园",
+          "deferred": false
+        },
+        {
+          "name": "循礼门",
+          "deferred": false
+        },
+        {
+          "name": "江汉路",
+          "deferred": false
+        },
+        {
+          "name": "一期（金银潭-光谷广场）开通试运营",
+          "deferred": false
+        }
+      ]
+    }
+  ],
+  "xian": [
+    {
+      "period": 2,
+      "city": "西安",
+      "line": "长春轻轨1号线",
+      "alias": "一期\n\n现3号线",
+      "status": "线路开通",
+      "date": "2002-10-30",
+      "demo": "长春站-卫光街",
+      "stations": [
+        {
+          "name": "长春站",
+          "deferred": false
+        },
+        {
+          "name": "辽宁路",
+          "deferred": false
+        },
+        {
+          "name": "芙蓉桥",
+          "deferred": false
+        },
+        {
+          "name": "西安桥",
+          "deferred": false
+        },
+        {
+          "name": "南昌路",
+          "deferred": false
+        },
+        {
+          "name": "朝阳桥",
+          "deferred": false
+        },
+        {
+          "name": "解放桥",
+          "deferred": false
+        },
+        {
+          "name": "湖西桥",
+          "deferred": false
+        },
+        {
+          "name": "宽平桥",
+          "deferred": false
+        },
+        {
+          "name": "抚松路",
+          "deferred": false
+        },
+        {
+          "name": "（长春站-卫光街）开通运营",
+          "deferred": false
+        }
+      ]
+    },
+    {
+      "period": 4,
+      "city": "西安",
+      "line": "西安地铁2号线",
+      "alias": "一期北段",
+      "status": "线路开通",
+      "date": "2011-09-16",
+      "demo": "北客站-会展中心",
+      "stations": [
+        {
+          "name": "北客站",
+          "deferred": false
+        },
+        {
+          "name": "北苑",
+          "deferred": false
+        },
+        {
+          "name": "运动公园",
+          "deferred": false
+        },
+        {
+          "name": "行政中心",
+          "deferred": false
+        },
+        {
+          "name": "凤城五路",
+          "deferred": false
+        },
+        {
+          "name": "市图书馆",
+          "deferred": false
+        },
+        {
+          "name": "大明宫西",
+          "deferred": false
+        },
+        {
+          "name": "龙首原",
+          "deferred": false
+        },
+        {
+          "name": "安远门",
+          "deferred": false
+        },
+        {
+          "name": "北大街",
+          "deferred": false
+        },
+        {
+          "name": "一期北段（北客站-会展中心）开通运营",
+          "deferred": false
+        }
+      ]
+    }
+  ]
+}

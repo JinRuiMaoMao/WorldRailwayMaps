@@ -1,0 +1,34 @@
+{
+  "name": "china-railway-history",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "osm:beijing": "node scripts/fetch-osm-beijing.js",
+    "osm:beijing-bus": "node scripts/fetch-osm-beijing-bus.js",
+    "osm:city-bus": "node scripts/fetch-osm-city-bus.js",
+    "osm:cities": "node scripts/fetch-osm-cities.js",
+    "osm:rail": "node scripts/fetch-osm-china-rail.js",
+    "osm:china-network": "node scripts/fetch-osm-china-network.js",
+    "osm:world": "node scripts/fetch-osm-world.js",
+    "osm:world-metro": "node scripts/fetch-osm-world-metro.js",
+    "osm:world-rail": "node scripts/fetch-osm-world-rail.js",
+    "osm:world-rail-network": "node scripts/fetch-osm-world-rail-network.js",
+    "osm:world-bus": "node scripts/fetch-osm-world-bus.js",
+    "stations:amap": "node scripts/fetch-amap-stations.js",
+    "stations:amap:cities": "node scripts/fetch-amap-city-stations.js all",
+    "gen:cities": "node scripts/gen-city-metro-from-jianban.js"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0"
+  },
+  "dependencies": {
+    "d3-geo": "^3.1.1",
+    "html-to-image": "^1.11.13",
+    "leaflet": "^1.9.4",
+    "mp4-muxer": "^5.2.2"
+  }
+}

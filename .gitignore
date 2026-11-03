@@ -1,0 +1,14 @@
+﻿node_modules/
+dist/
+.DS_Store
+*.local
+tile-cache/
+public/geo/_china-rail-fetch.json
+public/geo/_*-fetch.json
+scripts/_probe*.js
+.env
+.env.*
+refs/jianban/videos/
+*.mp4
+*.MP4
+push-log.txt
