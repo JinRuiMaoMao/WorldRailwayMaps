@@ -1,24 +1,70 @@
 /**
- * OpenRailwayMap 风格：按国拉取 railway=* 基础设施轨位
+ * OpenRailwayMap 风格 schema2：轨位 + 车站 + 命名 route
  *   node scripts/fetch-osm-orm-rails.js de fr jp
  *   node scripts/fetch-osm-orm-rails.js all
- *   node scripts/fetch-osm-orm-rails.js force nl
+ *   node scripts/fetch-osm-orm-rails.js force cn nl
+ *
+ * 大国写出 public/geo/world/orm/{cc}/index.json + t/{iy}_{ix}.json
+ * 小国写出 public/geo/world/{cc}-orm-rails.json
  */
-import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'fs';
+import {
+  writeFileSync,
+  mkdirSync,
+  existsSync,
+  readFileSync,
+  rmSync,
+} from 'fs';
 import { WORLD_COUNTRIES } from '../src/data/worldCatalog.js';
 
-const UA = 'chinasubwayplan/1.0 (orm rails; OSM)';
-const SCHEMA = 1;
+const UA = 'chinasubwayplan/1.0 (orm rails v2; OSM)';
+const SCHEMA = 2;
 const OVERPASS = [
   'https://maps.mail.ru/osm/tools/overpass/api/interpreter',
   'https://overpass.kumi.systems/api/interpreter',
+  'https://z.overpass-api.de/api/interpreter',
+  'https://lz4.overpass-api.de/api/interpreter',
   'https://overpass-api.de/api/interpreter',
 ];
 
 const RAIL_RE = '^(rail|subway|light_rail|tram|narrow_gauge|monorail|funicular|highspeed)$';
-const TRACK_KINDS = new Set(['rail', 'subway', 'light_rail', 'tram', 'narrow_gauge', 'monorail', 'funicular', 'highspeed']);
+const TRACK_KINDS = new Set([
+  'rail',
+  'subway',
+  'light_rail',
+  'tram',
+  'narrow_gauge',
+  'monorail',
+  'funicular',
+  'highspeed',
+]);
+const STATION_RE = '^(station|halt|tram_stop|stop)$';
+const URBAN_ROUTES = new Set(['subway', 'metro', 'light_rail', 'tram', 'monorail', 'funicular']);
 const SKIP_SERVICE = /^(yard|siding|spur|crossover|crossing|traverser|turntable)$/i;
-const BIG = new Set(['us', 'ru', 'ca', 'br', 'au', 'in', 'id', 'mx', 'ar', 'kz', 'cn', 'de', 'fr', 'gb', 'es', 'it', 'pl', 'ua', 'tr', 'jp']);
+
+/** 走分块目录的国家 */
+const TILED = new Set([
+  'us',
+  'ru',
+  'ca',
+  'br',
+  'au',
+  'in',
+  'id',
+  'mx',
+  'ar',
+  'kz',
+  'cn',
+  'de',
+  'fr',
+  'gb',
+  'es',
+  'it',
+  'pl',
+  'ua',
+  'tr',
+  'jp',
+]);
+const HUGE = new Set(['us', 'ru', 'ca', 'br', 'au', 'id', 'cn']);
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -87,7 +133,21 @@ function pathLen(path) {
   return m;
 }
 
-async function overpass(query, timeoutMs = 90000) {
+function pathBBox(path) {
+  let s = Infinity;
+  let n = -Infinity;
+  let w = Infinity;
+  let e = -Infinity;
+  for (const p of path) {
+    if (p[0] < s) s = p[0];
+    if (p[0] > n) n = p[0];
+    if (p[1] < w) w = p[1];
+    if (p[1] > e) e = p[1];
+  }
+  return [w, s, e, n];
+}
+
+async function overpass(query, timeoutMs = 100000) {
   let last;
   for (let round = 0; round < 2; round++) {
     for (const ep of OVERPASS) {
@@ -104,7 +164,7 @@ async function overpass(query, timeoutMs = 90000) {
         return await res.json();
       } catch (e) {
         last = e;
-        await sleep(600 + round * 1200);
+        await sleep(700 + round * 1400);
       } finally {
         clearTimeout(t);
       }
@@ -113,24 +173,36 @@ async function overpass(query, timeoutMs = 90000) {
   throw last || new Error('overpass failed');
 }
 
-const HUGE = new Set(['us', 'ru', 'ca', 'br', 'au', 'id', 'cn']);
-
 /** country.bbox = [west, south, east, north] */
+function tileSpan(countryId) {
+  if (HUGE.has(countryId)) return 4;
+  if (TILED.has(countryId)) return 2;
+  return 8;
+}
+
 function tilesFor(country) {
   const [w, s, e, n] = country.bbox;
-  const span = HUGE.has(country.id) ? 8 : BIG.has(country.id) ? 4 : 8;
+  const span = tileSpan(country.id);
   const tiles = [];
-  for (let y = s; y < n - 1e-9; y += span) {
-    for (let x = w; x < e - 1e-9; x += span) {
+  let iy = 0;
+  for (let y = s; y < n - 1e-9; y += span, iy++) {
+    let ix = 0;
+    for (let x = w; x < e - 1e-9; x += span, ix++) {
       tiles.push({
+        iy,
+        ix,
+        key: `${iy}_${ix}`,
         south: y,
         west: x,
         north: Math.min(n, y + span),
         east: Math.min(e, x + span),
+        span,
       });
     }
   }
-  return tiles.length ? tiles : [{ south: s, west: w, north: n, east: e }];
+  return tiles.length
+    ? tiles
+    : [{ iy: 0, ix: 0, key: '0_0', south: s, west: w, north: n, east: e, span: n - s }];
 }
 
 function keepWay(tags) {
@@ -186,106 +258,419 @@ function wayToSeg(el) {
   };
 }
 
-async function fetchTile(tile) {
+function nodeToStation(el) {
+  if (el.type !== 'node' || !el.id) return null;
+  const tags = el.tags || {};
+  const rw = String(tags.railway || '');
+  if (!/^(station|halt|tram_stop|stop)$/.test(rw)) return null;
+  if (!Number.isFinite(el.lat) || !Number.isFinite(el.lon)) return null;
+  const name = tags['name:zh'] || tags['name:en'] || tags.name || tags.ref || '';
+  if (!name) return null;
+  return {
+    id: el.id,
+    name,
+    lat: Math.round(el.lat * 1e5) / 1e5,
+    lng: Math.round(el.lon * 1e5) / 1e5,
+    railway: rw,
+  };
+}
+
+function stitch(parts) {
+  if (!parts.length) return [];
+  const unused = parts.map((p) => p.slice());
+  const chains = [];
+  while (unused.length) {
+    let chain = unused.shift();
+    let grew = true;
+    while (grew) {
+      grew = false;
+      for (let i = 0; i < unused.length; i++) {
+        const p = unused[i];
+        const near = (u, v) => Math.hypot(u[0] - v[0], u[1] - v[1]) < 2.5e-4;
+        const a0 = chain[0];
+        const a1 = chain[chain.length - 1];
+        const b0 = p[0];
+        const b1 = p[p.length - 1];
+        if (near(a1, b0)) {
+          chain = chain.concat(p.slice(1));
+          unused.splice(i, 1);
+          grew = true;
+          break;
+        }
+        if (near(a1, b1)) {
+          chain = chain.concat(p.slice(0, -1).reverse());
+          unused.splice(i, 1);
+          grew = true;
+          break;
+        }
+        if (near(a0, b1)) {
+          chain = p.slice(0, -1).concat(chain);
+          unused.splice(i, 1);
+          grew = true;
+          break;
+        }
+        if (near(a0, b0)) {
+          chain = p.slice(1).reverse().concat(chain);
+          unused.splice(i, 1);
+          grew = true;
+          break;
+        }
+      }
+    }
+    chains.push(chain);
+  }
+  chains.sort((a, b) => b.length - a.length);
+  return chains[0] || [];
+}
+
+function pathFromRelation(rel) {
+  const parts = [];
+  for (const m of rel.members || []) {
+    if (m.type !== 'way' || !m.geometry?.length) continue;
+    if (m.role && !['', 'forward', 'backward', 'route'].includes(m.role)) continue;
+    const coords = [];
+    for (const g of m.geometry) {
+      if (!g || !Number.isFinite(g.lat) || !Number.isFinite(g.lon)) continue;
+      coords.push([g.lat, g.lon]);
+    }
+    if (coords.length < 2) continue;
+    if (m.role === 'backward') coords.reverse();
+    parts.push(coords);
+  }
+  return roundPath(simplify(douglasPeucker(stitch(parts), 40), 28));
+}
+
+function stationsFromRelation(rel, stationById) {
+  const out = [];
+  const seen = new Set();
+  for (const m of rel.members || []) {
+    if (m.type !== 'node') continue;
+    if (m.role && !/stop|station|platform|halt/i.test(String(m.role)) && m.role !== '') continue;
+    const id = m.ref || m.id;
+    const fromPool = id != null ? stationById.get(id) : null;
+    if (fromPool) {
+      if (seen.has(fromPool.name)) continue;
+      seen.add(fromPool.name);
+      out.push({ ...fromPool });
+      continue;
+    }
+    const lat = m.lat ?? m.geometry?.lat;
+    const lon = m.lon ?? m.geometry?.lon;
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+    const tags = m.tags || {};
+    const name = tags['name:zh'] || tags['name:en'] || tags.name || tags.ref || '';
+    if (!name || seen.has(name)) continue;
+    seen.add(name);
+    out.push({
+      id,
+      name,
+      lat: Math.round(lat * 1e5) / 1e5,
+      lng: Math.round(lon * 1e5) / 1e5,
+      railway: tags.railway || 'station',
+    });
+  }
+  return out;
+}
+
+function relationToRoute(el, stationById) {
+  if (el.type !== 'relation' || !el.id || !el.tags) return null;
+  let route = String(el.tags.route || '');
+  if (route === 'metro') route = 'subway';
+  const highspeed = el.tags.highspeed === 'yes' || el.tags.highspeed === '1';
+  if (URBAN_ROUTES.has(route)) {
+    /* ok */
+  } else if (route === 'train' && (highspeed || el.tags.name || el.tags.ref)) {
+    /* 干线命名 train，避免无名车次 */
+  } else {
+    return null;
+  }
+  const path = pathFromRelation(el);
+  if (path.length < 4 || pathLen(path) < 400) return null;
+  const name =
+    el.tags['name:zh'] || el.tags['name:en'] || el.tags.name || el.tags.ref || `rel-${el.id}`;
+  const colour = el.tags.colour || el.tags.color || '';
+  let stations = stationsFromRelation(el, stationById);
+  // 成员未标站时：按路径邻近挂车站池
+  if (!stations.length && stationById.size) {
+    const pool = [...stationById.values()];
+    const max2 = 2.2 * 2.2;
+    const seen = new Set();
+    for (const st of pool) {
+      let best = Infinity;
+      for (const p of path) {
+        const dlat = (p[0] - st.lat) * 111;
+        const dlng = (p[1] - st.lng) * 85;
+        const d = dlat * dlat + dlng * dlng;
+        if (d < best) best = d;
+      }
+      if (best > max2 || seen.has(st.name)) continue;
+      seen.add(st.name);
+      stations.push(st);
+      if (stations.length >= 60) break;
+    }
+  }
+  return {
+    id: el.id,
+    name,
+    colour,
+    routeKind: route === 'train' ? (highspeed ? 'highspeed' : 'rail') : route,
+    highspeed: !!highspeed || route === 'highspeed',
+    path,
+    stations,
+  };
+}
+
+async function fetchTileBundle(tile) {
   const bbox = `${tile.south},${tile.west},${tile.north},${tile.east}`;
   const json = await overpass(
-    `[out:json][timeout:90][maxsize:67108864];
+    `[out:json][timeout:100][maxsize:67108864];
 (
   way["railway"~"${RAIL_RE}"](${bbox});
   way["railway"="construction"](${bbox});
   way["railway"="proposed"](${bbox});
+  node["railway"~"${STATION_RE}"](${bbox});
+  relation["type"="route"]["route"~"^(subway|metro|light_rail|tram|monorail|funicular)$"](${bbox});
+  relation["type"="route"]["route"="train"]["highspeed"="yes"](${bbox});
 );
 out geom;`,
-    95000
+    105000
   );
-  const segs = [];
+  const segments = [];
+  const stations = [];
+  const routes = [];
+  const seenSeg = new Set();
+  const seenSt = new Set();
+  const seenRt = new Set();
+  const stationById = new Map();
+  const rels = [];
   for (const el of json.elements || []) {
-    const seg = wayToSeg(el);
-    if (seg) segs.push(seg);
+    if (el.type === 'way') {
+      const seg = wayToSeg(el);
+      if (seg && !seenSeg.has(seg.id)) {
+        seenSeg.add(seg.id);
+        segments.push(seg);
+      }
+    } else if (el.type === 'node') {
+      const st = nodeToStation(el);
+      if (st && !seenSt.has(st.id)) {
+        seenSt.add(st.id);
+        stations.push(st);
+        stationById.set(st.id, st);
+      }
+    } else if (el.type === 'relation') {
+      rels.push(el);
+    }
   }
-  return segs;
+  for (const el of rels) {
+    const rt = relationToRoute(el, stationById);
+    if (rt && !seenRt.has(rt.id)) {
+      seenRt.add(rt.id);
+      routes.push(rt);
+    }
+  }
+  return { segments, stations, routes };
 }
 
-async function fetchCountry(country) {
-  console.log('orm', country.id, country.nameZh);
-  const tiles = tilesFor(country);
-  console.log('  tiles', tiles.length);
-  const byId = new Map();
-  let fails = 0;
-  const cap = BIG.has(country.id) ? 12000 : 8000;
-  const softCap = Math.floor(cap * 2.2);
+function injectChinaNetwork(segments) {
+  const src = 'public/geo/china-rail-network.json';
+  if (!existsSync(src)) return segments;
+  const data = JSON.parse(readFileSync(src, 'utf8'));
+  const byId = new Map(segments.map((s) => [String(s.id), s]));
+  for (const line of Object.values(data.lines || {})) {
+    const paths = line.paths || (line.path ? [line.path] : []);
+    const highspeed = !!line.highspeed;
+    const status = line.status === 'planned' || line.status === 'construction' ? line.status : 'open';
+    paths.forEach((path, i) => {
+      if (!path || path.length < 2) return;
+      const p = roundPath(simplify(path, highspeed ? 55 : 80));
+      if (p.length < 2 || pathLen(p) < 120) return;
+      const id = `cn-net-${line.id}-${i}`;
+      if (byId.has(id)) return;
+      byId.set(id, {
+        id,
+        railway: highspeed ? 'highspeed' : 'rail',
+        highspeed,
+        status,
+        name: line.name || line.ref || '',
+        path: p,
+      });
+    });
+  }
+  return [...byId.values()];
+}
 
-  const stratifiedCap = (items, limit) => {
-    if (items.length <= limit) return items;
-    const buckets = { rail: [], hs: [], urban: [], tram: [], other: [] };
-    for (const s of items) {
-      if (s.highspeed || s.railway === 'highspeed') buckets.hs.push(s);
-      else if (s.railway === 'subway' || s.railway === 'light_rail') buckets.urban.push(s);
-      else if (s.railway === 'tram' || s.railway === 'monorail' || s.railway === 'funicular') buckets.tram.push(s);
-      else if (s.railway === 'rail' || s.railway === 'narrow_gauge') buckets.rail.push(s);
-      else buckets.other.push(s);
-    }
-    const byLen = (a, b) => pathLen(b.path) - pathLen(a.path);
-    for (const k of Object.keys(buckets)) buckets[k].sort(byLen);
-    const quotas = {
-      rail: Math.floor(limit * 0.48),
-      hs: Math.floor(limit * 0.14),
-      urban: Math.floor(limit * 0.22),
-      tram: Math.floor(limit * 0.12),
-      other: Math.floor(limit * 0.04),
-    };
-    const picked = [];
-    const leftover = [];
-    for (const [k, q] of Object.entries(quotas)) {
-      picked.push(...buckets[k].slice(0, q));
-      leftover.push(...buckets[k].slice(q));
-    }
-    leftover.sort(byLen);
-    if (picked.length < limit) picked.push(...leftover.slice(0, limit - picked.length));
-    return picked.slice(0, limit);
-  };
-
-  const prune = () => {
-    if (byId.size <= softCap) return;
-    const kept = stratifiedCap([...byId.values()], cap);
-    byId.clear();
-    for (const s of kept) byId.set(s.id, s);
-  };
-
-  for (let i = 0; i < tiles.length; i++) {
-    try {
-      const segs = await fetchTile(tiles[i]);
-      for (const s of segs) if (!byId.has(s.id)) byId.set(s.id, s);
-      prune();
-      fails = 0;
-      console.log('  tile', i + 1, '/', tiles.length, 'segs', byId.size);
-    } catch (e) {
-      fails += 1;
-      console.warn('  tile fail', i + 1, e.message || e);
-      if (fails >= 6) {
-        console.warn('  too many fails, stop early');
+function assignToTiles(items, tiles, getBBox) {
+  const buckets = new Map(tiles.map((t) => [t.key, []]));
+  for (const item of items) {
+    const [w, s, e, n] = getBBox(item);
+    if (![w, s, e, n].every(Number.isFinite)) continue;
+    const cx = (w + e) / 2;
+    const cy = (s + n) / 2;
+    let placed = false;
+    for (const t of tiles) {
+      if (cx >= t.west && cx < t.east && cy >= t.south && cy < t.north) {
+        buckets.get(t.key).push(item);
+        placed = true;
         break;
       }
-      await sleep(2000 * fails);
     }
-    if (i + 1 < tiles.length) await sleep(BIG.has(country.id) ? 900 : 500);
+    if (!placed && tiles[0]) buckets.get(tiles[0].key).push(item);
   }
-
-  return stratifiedCap([...byId.values()], cap);
+  return buckets;
 }
 
-function writeCountry(country, segments) {
+function writeTiledCountry(country, tiles, segments, stations, routes) {
+  const dir = `public/geo/world/orm/${country.id}`;
+  const tileDir = `${dir}/t`;
+  if (existsSync(dir)) rmSync(dir, { recursive: true, force: true });
+  mkdirSync(tileDir, { recursive: true });
+
+  const segBuckets = assignToTiles(segments, tiles, (s) => pathBBox(s.path));
+  const stBuckets = assignToTiles(stations, tiles, (s) => [s.lng, s.lat, s.lng, s.lat]);
+  const rtBuckets = assignToTiles(routes, tiles, (r) => pathBBox(r.path));
+
+  const indexTiles = [];
+  let segN = 0;
+  let stN = 0;
+  let rtN = 0;
+  for (const t of tiles) {
+    const segs = segBuckets.get(t.key) || [];
+    const sts = stBuckets.get(t.key) || [];
+    const rts = rtBuckets.get(t.key) || [];
+    if (!segs.length && !sts.length && !rts.length) continue;
+    const body = {
+      schema: SCHEMA,
+      country: country.id,
+      key: t.key,
+      bbox: [t.west, t.south, t.east, t.north],
+      segments: segs,
+      stations: sts,
+      routes: rts,
+    };
+    writeFileSync(`${tileDir}/${t.key}.json`, JSON.stringify(body));
+    indexTiles.push({
+      key: t.key,
+      bbox: [t.west, t.south, t.east, t.north],
+      segments: segs.length,
+      stations: sts.length,
+      routes: rts.length,
+    });
+    segN += segs.length;
+    stN += sts.length;
+    rtN += rts.length;
+  }
+
+  const index = {
+    generatedAt: new Date().toISOString(),
+    schema: SCHEMA,
+    country: country.id,
+    tiled: true,
+    attribution: '© OpenStreetMap contributors',
+    bbox: country.bbox,
+    span: tileSpan(country.id),
+    count: { segments: segN, stations: stN, routes: rtN },
+    tiles: indexTiles,
+  };
+  writeFileSync(`${dir}/index.json`, JSON.stringify(index));
+  // 兼容入口：指向分块索引
+  writeFileSync(
+    `public/geo/world/${country.id}-orm-rails.json`,
+    JSON.stringify({
+      generatedAt: index.generatedAt,
+      schema: SCHEMA,
+      country: country.id,
+      tiled: true,
+      index: `orm/${country.id}/index.json`,
+      attribution: index.attribution,
+      count: segN,
+      segments: [],
+      stations: [],
+      routes: [],
+    })
+  );
+  console.log('OK tiled', country.id, 'segs', segN, 'st', stN, 'rt', rtN, 'tiles', indexTiles.length);
+}
+
+function writeFlatCountry(country, segments, stations, routes) {
   const dest = `public/geo/world/${country.id}-orm-rails.json`;
   const json = {
     generatedAt: new Date().toISOString(),
     schema: SCHEMA,
     country: country.id,
+    tiled: false,
     attribution: '© OpenStreetMap contributors',
     count: segments.length,
     segments,
+    stations,
+    routes,
   };
   writeFileSync(dest, JSON.stringify(json));
-  console.log('OK', dest, json.count);
+  console.log('OK', dest, 'segs', segments.length, 'st', stations.length, 'rt', routes.length);
+}
+
+async function fetchCountry(country) {
+  console.log('orm', country.id, country.nameZh);
+  const tiles = tilesFor(country);
+  console.log('  tiles', tiles.length, 'span', tileSpan(country.id));
+  const segBy = new Map();
+  const stBy = new Map();
+  const rtBy = new Map();
+  let fails = 0;
+
+  for (let i = 0; i < tiles.length; i++) {
+    try {
+      const bundle = await fetchTileBundle(tiles[i]);
+      for (const s of bundle.segments) if (!segBy.has(s.id)) segBy.set(s.id, s);
+      for (const s of bundle.stations) if (!stBy.has(s.id)) stBy.set(s.id, s);
+      for (const r of bundle.routes) if (!rtBy.has(r.id)) rtBy.set(r.id, r);
+      fails = 0;
+      console.log(
+        '  tile',
+        i + 1,
+        '/',
+        tiles.length,
+        'segs',
+        segBy.size,
+        'st',
+        stBy.size,
+        'rt',
+        rtBy.size
+      );
+    } catch (e) {
+      fails += 1;
+      console.warn('  tile fail', i + 1, e.message || e);
+      if (fails >= 8) {
+        console.warn('  too many fails, stop early');
+        break;
+      }
+      await sleep(2000 * fails);
+    }
+    if (i + 1 < tiles.length) await sleep(TILED.has(country.id) ? 800 : 450);
+  }
+
+  let segments = [...segBy.values()];
+  if (country.id === 'cn') segments = injectChinaNetwork(segments);
+  const stations = [...stBy.values()];
+  const routes = [...rtBy.values()];
+  return { segments, stations, routes, tiles };
+}
+
+function alreadySchema2(country) {
+  const dest = `public/geo/world/${country.id}-orm-rails.json`;
+  if (!existsSync(dest)) return false;
+  try {
+    const prev = JSON.parse(readFileSync(dest, 'utf8'));
+    if ((prev.schema || 0) < SCHEMA) return false;
+    if (prev.tiled) {
+      const idx = `public/geo/world/orm/${country.id}/index.json`;
+      if (!existsSync(idx)) return false;
+      const index = JSON.parse(readFileSync(idx, 'utf8'));
+      return (index.count?.segments || 0) > 0 || (index.tiles?.length || 0) > 0;
+    }
+    return (prev.count || prev.segments?.length || 0) >= 1 || prev.empty;
+  } catch {
+    return false;
+  }
 }
 
 async function main() {
@@ -301,7 +686,7 @@ async function main() {
     process.exit(1);
   }
   mkdirSync('public/geo/world', { recursive: true });
-  const priority = ['de', 'fr', 'jp', 'gb', 'nl', 'be', 'at', 'ch', 'kr', 'es', 'it', 'pl', 'us', 'in', 'ru'];
+  const priority = ['cn', 'de', 'fr', 'jp', 'gb', 'us', 'kr', 'nl', 'be', 'at', 'ch', 'es', 'it'];
   list.sort((a, b) => {
     const ia = priority.indexOf(a.id);
     const ib = priority.indexOf(b.id);
@@ -309,40 +694,28 @@ async function main() {
   });
 
   for (const country of list) {
-    const dest = `public/geo/world/${country.id}-orm-rails.json`;
-    if (!force && existsSync(dest)) {
-      try {
-        const prev = JSON.parse(readFileSync(dest, 'utf8'));
-        if ((prev.count || prev.segments?.length || 0) >= 20 && (prev.schema || 0) >= SCHEMA) {
-          console.log('skip', country.id, prev.count || prev.segments.length);
-          continue;
-        }
-      } catch {
-        /* rewrite */
-      }
+    if (!force && alreadySchema2(country)) {
+      console.log('skip', country.id, 'schema2');
+      continue;
     }
     try {
-      const segs = await fetchCountry(country);
-      if (!segs.length) {
-        if (existsSync(dest)) {
-          try {
-            const prev = JSON.parse(readFileSync(dest, 'utf8'));
-            if ((prev.count || prev.segments?.length || 0) > 0) {
-              console.warn('keep previous nonempty', country.id);
-              continue;
-            }
-          } catch {
-            /* rewrite empty/corrupt */
-          }
-        }
-        console.warn('skip empty write', country.id);
+      const { segments, stations, routes, tiles } = await fetchCountry(country);
+      if (!segments.length && !stations.length && !routes.length) {
+        writeFlatCountry(country, [], [], []);
+        const dest = `public/geo/world/${country.id}-orm-rails.json`;
+        const empty = JSON.parse(readFileSync(dest, 'utf8'));
+        empty.empty = true;
+        empty.count = 0;
+        writeFileSync(dest, JSON.stringify(empty));
+        console.warn('empty', country.id);
         continue;
       }
-      writeCountry(country, segs);
+      if (TILED.has(country.id)) writeTiledCountry(country, tiles, segments, stations, routes);
+      else writeFlatCountry(country, segments, stations, routes);
     } catch (e) {
       console.error('FAIL', country.id, e.message || e);
     }
-    await sleep(2500);
+    await sleep(2000);
   }
   console.log('done');
 }

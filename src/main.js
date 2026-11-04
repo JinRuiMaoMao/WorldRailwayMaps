@@ -31,8 +31,7 @@ import {
   allBoundWorldSegments,
   ensureWorldMetro,
   ensureWorldRailNetwork,
-  ensureWorldOrmRails,
-  ensureWorldOrmUrban,
+  ensureWorldOrmInView,
   loadAllWorldMetros,
   loadAllWorldOrmRails,
   countriesIntersectingView,
@@ -836,7 +835,7 @@ async function loadViewportMetros() {
   }
   const chunks = await Promise.all([...ids].map((id) => ensureWorldMetro(id)));
   paintWorldSegs(chunks.flat());
-  // 视口国家 ORM 城轨轨位（地铁/轻轨/有轨；含中国 cn-orm-rails）
+  // 视口国家 ORM 城轨：分块 LOD + 命名线/站名（schema2）
   const bounds = state.view.getBounds?.();
   if (bounds && z >= 7.2) {
     let cids = countriesIntersectingView(bounds, { pad: 0.6 });
@@ -844,7 +843,12 @@ async function loadViewportMetros() {
       cids = [state.atlasCountryId, ...cids.filter((x) => x !== state.atlasCountryId)];
     }
     if (cids.length > 8) cids = cids.slice(0, 8);
-    const urban = await Promise.all(cids.map((id) => ensureWorldOrmUrban(id)));
+    const urban = await Promise.all(
+      cids.map(async (id) => {
+        const split = await ensureWorldOrmInView(id, bounds, z);
+        return split.urban;
+      })
+    );
     paintWorldSegs(urban.flat());
   }
   state.view?.setModeFilter?.([...state.modeFilters]);
@@ -869,20 +873,23 @@ async function loadViewportWorldRails() {
   const bounds = state.view.getBounds?.();
   if (!bounds) return;
   let ids = countriesIntersectingView(bounds, { pad: z >= 6 ? 0.8 : 1.5 });
-  if (state.atlasCountryId && state.atlasCountryId !== 'cn') ids = [state.atlasCountryId, ...ids.filter((x) => x !== state.atlasCountryId)];
+  if (state.atlasCountryId) {
+    ids = [state.atlasCountryId, ...ids.filter((x) => x !== state.atlasCountryId)];
+  }
   // 视口国家过多时优先当前国 + 面积较小者，避免一次打爆
   if (ids.length > 12) ids = ids.slice(0, 12);
   const segs = (
     await Promise.all(
       ids.map(async (id) => {
-        const orm = await ensureWorldOrmRails(id);
-        if (orm.length) return orm;
+        const split = await ensureWorldOrmInView(id, bounds, z);
+        if (split.rail.length) return split.rail;
+        if (id === 'cn') return [];
         return ensureWorldRailNetwork(id);
       })
     )
   ).flat();
   if (segs.length) state.view?.registerRails?.(segs);
-  // 中国全网始终可叠
+  // 中国全网始终可叠（ORM 分块未覆盖时的干线底图）
   if (chinaRailNetworkReady()) state.view?.registerRails?.(chinaRailNetworkSegments());
   state.view?.syncViewportRails?.();
 }
