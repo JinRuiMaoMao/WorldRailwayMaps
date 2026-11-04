@@ -2,7 +2,14 @@ import './style.css';
 import { CHAPTERS } from './data/scenes.js';
 import { PLACES } from './data/network.js';
 import { createLeafletView } from './leafletView.js';
-import { loadAllCityOsm, loadChinaRailOsm, bindOsmToScenes, bindOsmToRailScenes } from './data/osmUtil.js';
+import {
+  loadAllCityOsm,
+  loadChinaRailOsm,
+  bindOsmToScenes,
+  bindOsmToRailScenes,
+  orphanOsmSegments,
+} from './data/osmUtil.js';
+import { officialLineColor } from './data/officialLineColors.js';
 import { CHINA_RAIL_SCENES } from './data/chinaRail.js';
 import { bindOsmToBeijingScenes } from './data/beijingMetro.js';
 import {
@@ -59,6 +66,7 @@ const state = {
   playing: false,
   speed: 0.75,
   revealed: new Set(),
+  osmOrphans: [],
   retired: new Set(),
   cityLit: new Set(),
   timer: null,
@@ -138,11 +146,22 @@ async function boot() {
     ]);
     state.busCities = busCities;
     if (osmMap.beijing) bindOsmToBeijingScenes(osmMap.beijing);
+    const orphans = [];
     for (const { id, scenes: cityScenes } of DETAILED_CITIES) {
       if (id === 'beijing') continue;
-      if (osmMap[id]) bindOsmToScenes(cityScenes, osmMap[id]);
+      if (osmMap[id]) {
+        bindOsmToScenes(cityScenes, osmMap[id]);
+        orphans.push(...orphanOsmSegments(id, osmMap[id], cityScenes));
+      }
     }
-    if (railOsm) bindOsmToRailScenes(CHINA_RAIL_SCENES, railOsm);
+    if (osmMap.beijing) {
+      const bj = DETAILED_CITIES.find((c) => c.id === 'beijing');
+      if (bj) orphans.push(...orphanOsmSegments('beijing', osmMap.beijing, bj.scenes));
+    }
+    for (const seg of orphans) {
+      seg.color = officialLineColor(seg.cityId, seg.line) || seg.color || '#E67E22';
+    }
+    state.osmOrphans = orphans;
   } catch (e) {
     console.warn('OSM 线位加载失败，回退站序折线', e);
   }
@@ -216,6 +235,10 @@ function buildApp() {
           <button type="button" data-mode="hsr">高铁</button>
           <button type="button" data-mode="bus">公交</button>
           <button type="button" class="bus-full-btn" id="layer-full-btn" title="开启后切换地铁/高铁/公交都会全量加载">全量</button>
+        </div>
+        <div class="label-filter" id="label-filter" title="地图文字标签">
+          <button type="button" data-label="station" class="active" aria-pressed="true">站名</button>
+          <button type="button" data-label="line" class="active" aria-pressed="true">线路</button>
         </div>
         <div class="atlas-count" id="atlas-count"></div>
       </header>
@@ -429,6 +452,19 @@ function bindEvents() {
     if (!badge || !state.atlasCityId) return;
     flyAtlasLine(badge);
   });
+
+  document.getElementById('label-filter')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-label]');
+    if (!btn) return;
+    const kind = btn.dataset.label;
+    const next = !btn.classList.contains('active');
+    btn.classList.toggle('active', next);
+    btn.setAttribute('aria-pressed', next ? 'true' : 'false');
+    const stationOn = !!document.querySelector('#label-filter [data-label="station"].active');
+    const lineOn = !!document.querySelector('#label-filter [data-label="line"].active');
+    state.view?.setLabelVisibility?.({ station: stationOn, line: lineOn });
+  });
+
 
   document.getElementById('mode-filter')?.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-mode]');
@@ -800,11 +836,11 @@ async function loadViewportMetros() {
   }
   const chunks = await Promise.all([...ids].map((id) => ensureWorldMetro(id)));
   paintWorldSegs(chunks.flat());
-  // 视口国家 ORM 城轨轨位（地铁/轻轨/有轨）
+  // 视口国家 ORM 城轨轨位（地铁/轻轨/有轨；含中国 cn-orm-rails）
   const bounds = state.view.getBounds?.();
   if (bounds && z >= 7.2) {
     let cids = countriesIntersectingView(bounds, { pad: 0.6 });
-    if (state.atlasCountryId && state.atlasCountryId !== 'cn') {
+    if (state.atlasCountryId) {
       cids = [state.atlasCountryId, ...cids.filter((x) => x !== state.atlasCountryId)];
     }
     if (cids.length > 8) cids = cids.slice(0, 8);
@@ -1376,6 +1412,7 @@ async function openAtlas() {
   state.sceneIndex = list.length - 1;
   state.atlasReady = true;
   paintWorldSegs(allBoundWorldSegments());
+  paintWorldSegs(state.osmOrphans);
   setAtlasLoading(false);
   state.view?.setModeFilter?.([...state.modeFilters]);
   syncModeFilterUi();

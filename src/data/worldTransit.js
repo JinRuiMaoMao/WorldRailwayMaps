@@ -228,6 +228,7 @@ export async function ensureWorldRail(regionId) {
 }
 
 export async function ensureWorldRailNetwork(countryId) {
+  // 中国干线仍走 chinaRailNetwork；此处仅非中国国别网
   if (!countryId || countryId === 'cn') return [];
   if (networkBound.has(countryId)) return networkSegs.get(countryId) || [];
   const key = `n:${countryId}`;
@@ -248,7 +249,8 @@ export async function ensureWorldRailNetwork(countryId) {
 }
 
 async function loadOrmBundle(countryId) {
-  if (!countryId || countryId === 'cn') return { rail: [], urban: [] };
+  if (!countryId) return { rail: [], urban: [] };
+  // 中国也可用 cn-orm-rails.json（地铁/轻轨/有轨轨位）；无文件则空
   if (ormBound.has(countryId)) {
     return {
       rail: ormRailSegs.get(countryId) || [],
@@ -313,7 +315,7 @@ export function countriesIntersectingView(bounds, { pad = 0.5 } = {}) {
   const e = bounds.getEast() + pad;
   const out = [];
   for (const c of WORLD_COUNTRIES) {
-    if (c.id === 'cn' || !c.bbox) continue;
+    if (!c.bbox) continue;
     const [cw, cs, ce, cn] = c.bbox;
     if (ce < w || cw > e || cn < s || cs > n) continue;
     out.push(c.id);

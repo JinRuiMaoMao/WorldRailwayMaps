@@ -461,8 +461,17 @@ export function normalizeOsmLineName(name) {
     .replace(/^地铁|^轨道交通/, '')
     .split(/[：:]/)[0]
     .trim();
-  if (/临港|有轨|导轨|捷运/.test(String(name)) && !/地铁/.test(String(name))) {
-    return String(name).replace(/^上海|^天津/, '').trim();
+  if (/临港|有轨|导轨|捷运|tram/i.test(String(name)) && !/地铁|地鐵/.test(String(name))) {
+    let t = String(name).replace(/（.*?）|\(.*?\)/g, '').trim();
+    t = t.replace(
+      /^(苏州|上海|天津|北京|南京|珠海|武汉|成都|青岛|深圳|淮安|佛山|沈阳|大连|长春|高明|南海|高新)?(有轨电车|有軌電車|现代有轨电车)?/i,
+      ''
+    );
+    const numbered = t.match(/(\d+)\s*号线/);
+    if (numbered) return `有轨电车${numbered[1]}号线`;
+    const tref = t.match(/\bT\s*(\d+)\b/i);
+    if (tref) return `有轨电车T${tref[1]}`;
+    return t.trim() || String(name).replace(/^上海|^天津|^苏州/, '').trim();
   }
   const specialName = s.match(/(S\d+线?|金义东|机场捷运|郑许线?|滁宁|杭海|宁马|氹仔|横琴|石排湾|资阳线|绿线)/i);
   if (specialName) return specialName[1].replace(/^(S\d+)$/i, (m) => `${m.toUpperCase()}线`);
@@ -567,6 +576,53 @@ export function pickOsmLine(osmData, lineName, from, to) {
   if (bestScore > 0.022) return null;
   memo.set(want, best);
   return best;
+}
+
+/** 简办分镜未收录、但 OSM 有的线（如有轨）→ 独立线段，避免图上缺线 */
+export function orphanOsmSegments(cityId, osmData, scenes) {
+  const lines = osmData?.lines;
+  if (!lines || !cityId) return [];
+  const used = new Set();
+  const eat = (name) => {
+    if (!name) return;
+    used.add(String(name));
+    const n = normalizeOsmLineName(name);
+    if (n) used.add(n);
+  };
+  for (const sc of scenes || []) {
+    for (const seg of sc.segments || []) {
+      eat(seg.line);
+      eat(seg.osmKey);
+    }
+    eat(sc.lineHandoff?.segment?.line);
+    eat(sc.lineHandoff?.alsoGrow?.line);
+  }
+  const out = [];
+  for (const [key, line] of Object.entries(lines)) {
+    if (!line?.path?.length || line.path.length < 2) continue;
+    if (line.status && line.status !== 'open') continue;
+    const blob = `${key} ${line.name || ''} ${line.routeName || ''}`;
+    const isTram =
+      line.route === 'tram' ||
+      line.routeKind === 'tram' ||
+      /有轨|tram|导轨|云巴|APM|西郊|浑南|光谷|城阳|黄埔|THZ|蓉2|都江堰|麒麟|河西|亦庄/i.test(blob);
+    if (!isTram) continue;
+    const name = normalizeOsmLineName(line.name || line.routeName || key) || key;
+    if (used.has(name) || used.has(key) || used.has(line.name) || used.has(line.routeName)) continue;
+    out.push({
+      id: `cn-osm-extra-${cityId}-${key}`,
+      line: name,
+      color: line.color || '',
+      osmFull: true,
+      path: line.path,
+      cityId,
+      routeKind: 'tram',
+      railway: 'tram',
+      stations: [],
+      skipLabels: true,
+    });
+  }
+  return out;
 }
 
 /**

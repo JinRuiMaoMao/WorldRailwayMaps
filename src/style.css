@@ -258,6 +258,54 @@ body {
   margin: 0 auto;
 }
 
+.label-filter {
+  display: flex;
+  gap: 0.28rem;
+  flex-shrink: 0;
+}
+
+.label-filter button {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.85);
+  color: #5a6a72;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  padding: 0.32rem 0.62rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+  white-space: nowrap;
+  border-radius: 999px;
+}
+
+.label-filter button.active {
+  color: #fff;
+  border-color: #2f5d6a;
+  background: #2f5d6a;
+}
+
+.label-filter button:not(.active) {
+  opacity: 0.72;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+
+.leaflet-host.hide-station-names .st-label .st-name,
+.leaflet-host.hide-station-names .bus-end-label .st-name {
+  display: none !important;
+}
+
+.leaflet-host.hide-line-names .line-end-tag {
+  display: none !important;
+}
+
+@media (max-width: 800px) {
+  .label-filter {
+    order: 3;
+  }
+}
+
 .mode-tabs button,
 .mode-filter button {
   border: 1px solid rgba(0, 0, 0, 0.1);

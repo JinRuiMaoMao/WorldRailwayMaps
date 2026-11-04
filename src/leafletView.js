@@ -369,6 +369,9 @@ export function createLeafletView(container) {
   const NAME_MIN_ZOOM = 11;
   /** 再矮一档：连圆点也不建（全国总览几千个 DOM 站标会卡死） */
   const DOT_MIN_ZOOM = 10;
+  /** 用户开关：站名文字 / 线路名端标 */
+  let showStationNames = true;
+  let showLineNames = true;
   let growCancel = false;
   let renameTimer = null;
   let editEnabled = false;
@@ -1915,7 +1918,7 @@ export function createLeafletView(container) {
     const markers = [];
     const placed = []; // {x,y} in container pixels
     const minDist = thinLabels ? 28 : 36;
-    const showNames = namesVisibleAtZoom();
+    const showNames = showStationNames && namesVisibleAtZoom();
     const cull = !exportFast && segments.size >= 18;
     const bounds = cull ? map.getBounds().pad(0.22) : null;
     const zoom = map.getZoom();
@@ -2189,7 +2192,7 @@ export function createLeafletView(container) {
   }
 
   function paintLineEndTags() {
-    if (!dotsVisibleAtZoom()) return;
+    if (!showLineNames || !dotsVisibleAtZoom()) return;
     const groups = new Map();
     for (const rec of segments.values()) {
       if (!recModeVisible(rec) || !rec.labelLayer) continue;
@@ -3533,6 +3536,7 @@ export function createLeafletView(container) {
 
   function paintBusTermini() {
     busEndLayer.clearLayers();
+    if (!showStationNames) return;
     if (map.getZoom() < busMinZoom()) return;
     if (modeFilters.size && !modeAllows('bus')) return;
     if (!namesVisibleAtZoom() && !hasLineFocus()) return;
@@ -4649,6 +4653,23 @@ export function createLeafletView(container) {
     setRailFullLoad,
     isBusFullLoad: () => busFullLoad,
     isRailFullLoad: () => railFullLoad,
+    setLabelVisibility({ station, line } = {}) {
+      let changed = false;
+      if (station != null && !!station !== showStationNames) {
+        showStationNames = !!station;
+        changed = true;
+      }
+      if (line != null && !!line !== showLineNames) {
+        showLineNames = !!line;
+        changed = true;
+      }
+      if (!changed) return { station: showStationNames, line: showLineNames };
+      container.classList.toggle('hide-station-names', !showStationNames);
+      container.classList.toggle('hide-line-names', !showLineNames);
+      scheduleRelayoutDebounced(40);
+      return { station: showStationNames, line: showLineNames };
+    },
+    getLabelVisibility: () => ({ station: showStationNames, line: showLineNames }),
     registerRails,
     syncViewportRails,
     onViewportChange: (fn) => {
